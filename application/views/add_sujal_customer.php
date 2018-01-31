@@ -47,13 +47,13 @@
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Name</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="scust_name" name="scust_name" onkeyup="this.value=this.value.replace(/[^A-Z a-z,]/g,'')" placeholder="Name" value="<?php echo (isset($ObjCustomer->name) && !empty($ObjCustomer->name)) ? $ObjCustomer->name : ''; ?>">
+								<input type="text" class="form-control" id="scust_name" name="scust_name" required="" onkeyup="this.value=this.value.replace(/[^A-Z a-z . ,]/g,'')" placeholder="Name" value="<?php echo (isset($ObjCustomer->name) && !empty($ObjCustomer->name)) ? $ObjCustomer->name : ''; ?>">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Contact No.</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="scust_contact" name="scust_contact" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Contact No." value="<?php echo (isset($ObjCustomer->contact_no) && !empty($ObjCustomer->contact_no)) ? $ObjCustomer->contact_no : ''; ?>">
+								<input type="text" class="form-control" id="scust_contact" name="scust_contact" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Contact No." value="<?php echo (isset($ObjCustomer->contact_no) && !empty($ObjCustomer->contact_no)) ? $ObjCustomer->contact_no : ''; ?>">
 							</div>
 							<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 							<div class="col-sm-4">
@@ -63,7 +63,7 @@
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Address</label>
 							<div class="col-sm-10">
-								<textarea rows="5" class="form-control" id="scust_address" name="scust_address" placeholder="Address"><?php echo (isset($ObjCustomer->address) && !empty($ObjCustomer->address)) ? $ObjCustomer->address : ''; ?></textarea>
+								<textarea rows="5" class="form-control" id="scust_address" name="scust_address" required="" placeholder="Address"><?php echo (isset($ObjCustomer->address) && !empty($ObjCustomer->address)) ? $ObjCustomer->address : ''; ?></textarea>
 							</div>
 						</div>
 					</div>

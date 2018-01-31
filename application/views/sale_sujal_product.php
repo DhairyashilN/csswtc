@@ -50,7 +50,7 @@
 						<div class="form-group">
 							<label for="inputCustomers" class="col-sm-2 control-label">Select Customer</label>
 							<div class="col-sm-10">
-								<select class="form-control chosen-select" data-placeholder="Choose Customer" name="customer" id="customer">
+								<select class="form-control chosen-select" data-placeholder="Choose Customer" name="customer" id="customer" required="">
 									<option value="">Select Customer </option>
 									<?php 
 										if (isset($ArrCustomers) && !empty($ArrCustomers)) {
@@ -64,7 +64,7 @@
 						<div class="form-group">
 							<label for="inputCustomers" class="col-sm-2 control-label">Select Product</label>
 							<div class="col-sm-10">
-								<select class="form-control chosen-select" data-placeholder="Choose Product" name="product" id="product">
+								<select class="form-control chosen-select" data-placeholder="Choose Product" name="product" id="product" required="">
 									<option value="">Select Product </option>
 									<?php 
 										if (isset($ArrProducts) && !empty($ArrProducts)) {
@@ -78,63 +78,63 @@
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Product Price</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="sproduct_price" name="sproduct_price" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Price" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : ''; ?>">
+								<input type="text" class="form-control" id="sproduct_price" name="sproduct_price" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Price" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('sproduct_price'); ?>">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Quantity</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="sproduct_quantity" name="sproduct_quantity" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Quantity" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : ''; ?>">
+								<input type="text" class="form-control" id="sproduct_quantity" required="" name="sproduct_quantity" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Quantity" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('sproduct_quantity'); ?>">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Amount</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="total_amount" name="total_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : ''; ?>">
+								<input type="text" class="form-control" id="total_amount" name="total_amount" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('total_amount'); ?>">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Amount Paid</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="paid_amount" name="paid_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount Paid">
+								<input type="text" class="form-control" id="paid_amount" required="" name="paid_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount Paid" value="<?php echo set_value('paid_amount'); ?>">
 							</div>
 							<label for="inputEmail3" class="col-sm-2 control-label">Amount Paid Date</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="amount_paid_date" name="amount_paid_date" value="<?php echo (isset($ObjProduct->payment_date) && !empty($ObjProduct->payment_date)) ? $ObjProduct->payment_date : ''; ?>" readonly>
+								<input type="text" class="form-control" id="amount_paid_date" name="amount_paid_date" required="" value="<?php echo (isset($ObjProduct->payment_date) && !empty($ObjProduct->payment_date)) ? $ObjProduct->payment_date : set_value('amount_paid_date'); ?>" >
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">GST %</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="gst_rate" name="gst_rate" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="GST Rate" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : ''; ?>">
+								<input type="text" class="form-control" id="gst_rate" name="gst_rate" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="GST Rate" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('gst_rate'); ?>">
 							</div>
 							<label for="inputEmail3" class="col-sm-2 control-label">GST Amount</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="gst_amount" name="gst_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="GST Amount" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : ''; ?>">
+								<input type="text" class="form-control" id="gst_amount" name="gst_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="GST Amount" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('gst_amount'); ?>">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Net Amount</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="net_amount" name="net_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : ''; ?>">
+								<input type="text" class="form-control" id="net_amount" name="net_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('net_amount'); ?>">
 							</div>
 							<label for="inputEmail3" class="col-sm-2 control-label">Amount Due</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="due_amount" name="due_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount Due" value="<?php echo (isset($ObjProduct->due_amount) && !empty($ObjProduct->due_amount)) ? round($ObjProduct->due_amount, 2) : ''; ?>" readonly>
+								<input type="text" class="form-control" id="due_amount" name="due_amount" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount Due" value="<?php echo (isset($ObjProduct->due_amount) && !empty($ObjProduct->due_amount)) ? round($ObjProduct->due_amount, 2) : set_value('due_amount'); ?>" readonly>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Installation Date</label>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" id="install_date" name="install_date">
+								<input type="text" class="form-control" id="install_date" name="install_date" value="<?php echo set_value('install_date'); ?>" required="">
 							</div>
 							<label for="inputEmail3" class="col-sm-2 control-label">Next AMC Date</label>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" id="amc_date" name="amc_date" readonly="">
+								<input type="text" class="form-control" id="amc_date" name="amc_date" value="<?php echo set_value('amc_date'); ?>" readonly="" required="">
 							</div>
 							<label for="inputEmail3" class="col-sm-2 control-label">AMC  Reminder Date</label>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" id="amc_reminder_date" name="amc_reminder_date" readonly="">
+								<input type="text" class="form-control" id="amc_reminder_date" name="amc_reminder_date" value="<?php echo set_value('amc_reminder_date'); ?>" readonly="" required="">
 							</div>
 						</div>
 					</div>
@@ -199,7 +199,13 @@
 			});
 			$('#paid_amount').on('keyup', function() {
 				var total_amount = $('#total_amount').val();
-				$('#due_amount').val(total_amount - $('#paid_amount').val());
+				if ((parseInt($('#paid_amount').val())) > parseInt(total_amount)) {
+					alert('Amount Paid value should not be greater than Amount value.');
+					$('#due_amount').val('0');
+					return false;
+				} else{
+					$('#due_amount').val(total_amount - $('#paid_amount').val());
+				}
 			});
 
 			$('#amount_paid_date,#install_date').datepicker({

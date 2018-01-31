@@ -47,13 +47,13 @@
 						<div class="form-group">
 							<label for="inputName" class="col-sm-2 control-label">Product Name</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="sproduct_name" name="sproduct_name" onkeyup="this.value=this.value.replace(/[^A-Z a-z,]/g,'')" placeholder="Product Name" value="<?php echo (isset($ObjProduct->name) && !empty($ObjProduct->name)) ? $ObjProduct->name : ''; ?>">
+								<input type="text" class="form-control" id="sproduct_name" name="sproduct_name" required="" onkeyup="this.value=this.value.replace(/[^A-Z a-z,]/g,'')" placeholder="Product Name" value="<?php echo (isset($ObjProduct->name) && !empty($ObjProduct->name)) ? $ObjProduct->name : ''; ?>">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Product Price</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="sproduct_price" name="sproduct_price" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Price" value="<?php echo (isset($ObjProduct->price) && !empty($ObjProduct->price)) ? round($ObjProduct->price, 2) : ''; ?>">
+								<input type="text" class="form-control" id="sproduct_price" name="sproduct_price" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Price" value="<?php echo (isset($ObjProduct->price) && !empty($ObjProduct->price)) ? round($ObjProduct->price, 2) : ''; ?>">
 							</div>
 						</div>
 					</div>
