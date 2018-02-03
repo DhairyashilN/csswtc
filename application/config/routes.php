@@ -83,5 +83,9 @@ $route['delete_sujal_customer/(:num)'] = 'SujalCustomersController/destroy/$1';
 $route['sujals_amcs'] = 'SujalAmcController/index';
 $route['edit_sujal_amc/(:num)'] = 'SujalAmcController/create/$1';
 $route['save_sujal_amc/(:num)'] = 'SujalAmcController/store/$1';
+
+/*User Routes*/
+$route['user'] = 'UserController/index';
+$route['save_user/(:num)'] = 'UserController/store/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
