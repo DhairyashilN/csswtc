@@ -51,7 +51,7 @@ class UserController extends CI_Controller {
 		}
 	}
 
-}
+} 
 
 /* End of file UserController.php */
 /* Location: ./application/controllers/UserController.php */ 

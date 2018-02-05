@@ -12,7 +12,7 @@ class SujalCustomersController extends CI_Controller {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
-			$this->db->select('id,name,contact_no,email,cust_id');
+			$this->db->select('id,name,contact_no,email,cust_id,gstin');
 			$this->db->from('sujal_customers');
 			$this->db->where('deleted', 0);
 			$this->db->order_by('id','desc');
@@ -27,8 +27,9 @@ class SujalCustomersController extends CI_Controller {
 			redirect(base_url());
 		} else {
 			if (isset($id) && !empty($id)) {
-				$this->db->select('id,name,contact_no,email,cust_id,address');
+				$this->db->select('id,name,contact_no,email,cust_id,address,gstin');
 				$this->db->from('sujal_customers');
+				$this->db->where('id', $id);
 				$this->db->where('deleted', 0);
 				$page_data['ObjCustomer'] = $this->db->get()->row();
 			}
@@ -55,6 +56,7 @@ class SujalCustomersController extends CI_Controller {
 				$page_data['contact_no'] = $this->input->post('scust_contact');
 				$page_data['email'] = $this->input->post('scust_email');
 				$page_data['address'] = $this->input->post('scust_address');
+				$page_data['gstin'] = $this->input->post('scust_gstin');
 				if (isset($id) && !empty($id)) {
 					$this->db->select('cust_id');
 					$this->db->where('id', $id);

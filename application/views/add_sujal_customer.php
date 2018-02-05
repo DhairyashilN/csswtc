@@ -66,6 +66,12 @@
 								<textarea rows="5" class="form-control" id="scust_address" name="scust_address" required="" placeholder="Address"><?php echo (isset($ObjCustomer->address) && !empty($ObjCustomer->address)) ? $ObjCustomer->address : ''; ?></textarea>
 							</div>
 						</div>
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">GSTIN</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="scust_gstin" name="scust_gstin"  placeholder="GSTIN" value="<?php echo (isset($ObjCustomer->gstin) && !empty($ObjCustomer->gstin)) ? $ObjCustomer->gstin : ''; ?>">
+							</div>
+						</div>
 					</div>
 					<div class="box-footer">
 						<div class="form-group">

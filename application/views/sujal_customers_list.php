@@ -70,7 +70,7 @@
 										<td><?php echo $row['contact_no'];?></td>
 										<td><?php echo empty($row['email'])? 'NA' : $row['email']; ?></td>
 										<td>
-											<a href="<?php echo site_url('view_sujal_product/'.$row['id']); ?>" title="View"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+											<a href="#" data-toggle="modal" data-target="#view_<?php echo $row['id'];?>" title="View"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
 											<a href="<?php echo site_url('edit_sujal_customer/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
 											<a href="" data-toggle="modal" data-target="#<?php echo $row['id'];?>" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
 											<div class="modal fade" id="<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -83,6 +83,27 @@
 						                              		<a href="<?php echo site_url('delete_sujal_customer/'.$row['id']);?>"><button type="button" class="btn btn-danger" >Yes</button></a>&nbsp;&nbsp;
 						                              		<button type="button" class="btn btn-warning" data-dismiss="modal">No</button> 
 						                            	</div>
+						                          	</div>
+						                        </div>
+						                    </div>
+						                    <div class="modal fade" id="view_<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						                        <div class="modal-dialog" role="document">
+						                        	<div class="modal-content">
+						                        		<div class="modal-header">
+						                        			<h4 class="modal-title">Sale Details</h4>
+						                        		</div>
+						                            	<div class="modal-body ">
+						                              		<ul class="list-group">
+																<li class="list-group-item"><b>Customer ID :</b> <?php echo $row['cust_id'] ?></li>
+																<li class="list-group-item"><b>Customer Name :</b> <?php echo $row['name'] ?></li>
+																<li class="list-group-item"><b>Contact No :</b> <?php echo $row['contact_no'] ?></li>
+																<li class="list-group-item"><b>Email :</b> <?php echo empty($row['email'])? 'NA' : $row['email']; ?></li>
+																<li class="list-group-item"><b>GSTIN :</b> <?php echo empty($row['gstin'])? 'NA' : $row['gstin']; ?></li>
+															</ul>
+						                            	</div>
+						                            	<div class="modal-footer">
+						                        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						                        		</div>
 						                          	</div>
 						                        </div>
 						                    </div>
