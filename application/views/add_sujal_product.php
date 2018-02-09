@@ -56,6 +56,12 @@
 								<input type="text" class="form-control" id="sproduct_price" name="sproduct_price" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Price" value="<?php echo (isset($ObjProduct->price) && !empty($ObjProduct->price)) ? round($ObjProduct->price, 2) : ''; ?>">
 							</div>
 						</div>
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">Product HSN Code</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="sproduct_hsn" name="sproduct_hsn" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product HSN Code" value="<?php echo (isset($ObjProduct->hsn_code) && !empty($ObjProduct->hsn_code)) ? $ObjProduct->hsn_code : ''; ?>">
+							</div>
+						</div>
 					</div>
 					<div class="box-footer">
 						<div class="form-group">

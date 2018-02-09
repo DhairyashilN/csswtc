@@ -12,7 +12,7 @@ class SujalProductsController extends CI_Controller {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
-			$this->db->select('id,name,price');
+			$this->db->select('id,name,price,hsn_code');
 			$this->db->from('sujal_products');
 			$this->db->where('deleted', 0);
 			$this->db->order_by('id','desc');
@@ -28,7 +28,7 @@ class SujalProductsController extends CI_Controller {
 			redirect(base_url());
 		} else {
 			if (isset($id) && !empty($id)) {
-				$this->db->select('id,name,price');
+				$this->db->select('id,name,price,hsn_code');
 				$this->db->from('sujal_products');
 				$this->db->where('id', $id);
 				$this->db->where('deleted', 0);
@@ -46,6 +46,7 @@ class SujalProductsController extends CI_Controller {
 		} else {
 			$this->form_validation->set_rules('sproduct_name','Product Name','required');
 			$this->form_validation->set_rules('sproduct_price','Product Price','required|numeric');
+			$this->form_validation->set_rules('sproduct_hsn','Product HSN Code','required|numeric');
 			if ($this->form_validation->run() == FALSE) {
 				$page_data['active_menu'] = 'products';
 				$page_data['sub_active_menu'] = 'sproducts';
@@ -53,6 +54,7 @@ class SujalProductsController extends CI_Controller {
 			} else {
 				$page_data['name']  = $this->input->post('sproduct_name');
 				$page_data['price'] = $this->input->post('sproduct_price');
+				$page_data['hsn_code'] = $this->input->post('sproduct_hsn');
 				if (isset($id) && !empty($id)) {
 					$this->db->where('id',$id);
 					$this->db->update('sujal_products',$page_data);
@@ -71,7 +73,7 @@ class SujalProductsController extends CI_Controller {
 			redirect(base_url());
 		} else {
 			if (isset($id) && !empty($id)) {
-				$this->db->select('name,price');
+				$this->db->select('name,price,hsn_code');
 				$this->db->from('sujal_products');
 				$this->db->where('deleted', 0);
 				$page_data['ObjProduct'] = $this->db->get()->row();

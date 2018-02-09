@@ -52,6 +52,7 @@
 										<th>Sr. No.</th>
 										<th>Product Name</th>
 										<th>Product Price</th>
+										<th>HSN Code</th>
 										<th>Action</th>
 									</tr>
 								</thead>
@@ -65,6 +66,7 @@
 										<td><?php echo $count++; ?></td>
 										<td><?php echo $row['name'];?></td>
 										<td><?php echo $row['price']; ?></td>
+										<td><?php echo $row['hsn_code']; ?></td>
 										<td>
 											<a href="<?php echo site_url('view_sujal_product/'.$row['id']); ?>" title="View"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
 											<a href="<?php echo site_url('edit_sujal_product/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
