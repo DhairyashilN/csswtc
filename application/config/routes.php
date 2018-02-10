@@ -79,10 +79,25 @@ $route['save_sujal_customer'] = 'SujalCustomersController/store';
 $route['edit_sujal_customer/(:num)'] = 'SujalCustomersController/create/$1';
 $route['save_sujal_customer/(:num)'] = 'SujalCustomersController/store/$1';
 $route['delete_sujal_customer/(:num)'] = 'SujalCustomersController/destroy/$1';
+/*Other (Non Sujal) Customers Routes*/
+$route['non_sujal_customers'] = 'NonSujalCustomersController/index';
+$route['add_non_sujal_customer'] = 'NonSujalCustomersController/create';
+$route['save_non_sujal_customer'] = 'NonSujalCustomersController/store';
+$route['edit_non_sujal_customer/(:num)'] = 'NonSujalCustomersController/create/$1';
+$route['save_non_sujal_customer/(:num)'] = 'NonSujalCustomersController/store/$1';
+$route['delete_non_sujal_customer/(:num)'] = 'NonSujalCustomersController/destroy/$1';
+
 /*Sujal AMC Routes*/
 $route['sujals_amcs'] = 'SujalAmcController/index';
 $route['edit_sujal_amc/(:num)'] = 'SujalAmcController/create/$1';
 $route['save_sujal_amc/(:num)'] = 'SujalAmcController/store/$1';
+
+/*Non Sujal AMC Routes*/
+$route['non_sujals_amcs'] = 'NonSujalAmcController/index';
+$route['view_non_sujal_amc/(:num)'] = 'NonSujalAmcController/create/$1';
+$route['save_amc_data'] = 'NonSujalAmcController/store';
+$route['save_amc_data/(:num)'] = 'NonSujalAmcController/store/$1';
+$route['remove_amc/(:num)'] = 'NonSujalAmcController/destroy_history/$1';
 
 /*User Routes*/
 $route['user'] = 'UserController/index';

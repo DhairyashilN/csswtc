@@ -38,6 +38,7 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="<?php echo site_url('sujal_customers'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal Customers</a></li>
+          <li><a href="<?php echo site_url('non_sujal_customers'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) Customers</a></li>
         </ul>
       </li>
       <li class="treeview <?php if($active_menu == 'products_sold') { ?>active<?php } ?>">
@@ -56,6 +57,18 @@
       </li>
       <li class="treeview <?php if($active_menu == 'samc') { ?>active<?php } ?>">
         <a href="#">
+          <i class="fa fa-file"></i>
+          <span>Invoices</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="<?php echo site_url('sujal_invoices'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) Invoices</a></li>
+        </ul>
+      </li>
+      <li class="treeview <?php if($active_menu == 'samc') { ?>active<?php } ?>">
+        <a href="#">
           <i class="fa fa-calendar" aria-hidden="true"></i>
           <span>AMC</span>
           <span class="pull-right-container">
@@ -64,6 +77,7 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="<?php echo site_url('sujals_amcs'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal AMC</a></li>
+          <li><a href="<?php echo site_url('non_sujals_amcs'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) AMC</a></li>
         </ul>
       </li>
     </ul>
