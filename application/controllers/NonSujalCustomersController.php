@@ -64,7 +64,11 @@ class NonSujalCustomersController extends CI_Controller {
 					$this->db->update('non_sujal_customers',$page_data);
 					$this->session->set_flashdata('success','Customer Information Updated successfully.');
 				} else {
-					$this->db->insert('non_sujal_customers',$page_data);
+					if($this->db->insert('non_sujal_customers',$page_data)){
+						$amc_data['cust_id'] = $this->db->insert_id();
+						$amc_data['customer_name'] = $this->input->post('scust_name');
+						$this->db->insert('non_sujal_amcs',$amc_data);
+					}
 					$this->session->set_flashdata('success','Customer Saved successfully.');
 				}
 				redirect('non_sujal_customers');

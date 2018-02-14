@@ -55,7 +55,7 @@
           <li><a href="<?php echo site_url('sujal_dues_payments'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Payment Dues List</a></li>
         </ul>
       </li>
-      <li class="treeview <?php if($active_menu == 'samc') { ?>active<?php } ?>">
+      <li class="treeview <?php if($active_menu == 'sinvc') { ?>active<?php } ?>">
         <a href="#">
           <i class="fa fa-file"></i>
           <span>Invoices</span>
@@ -64,7 +64,7 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="<?php echo site_url('sujal_invoices'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) Invoices</a></li>
+          <li><a href="<?php echo site_url('non_sujal_invoices'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) Invoices</a></li>
         </ul>
       </li>
       <li class="treeview <?php if($active_menu == 'samc') { ?>active<?php } ?>">

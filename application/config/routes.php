@@ -99,6 +99,14 @@ $route['save_amc_data'] = 'NonSujalAmcController/store';
 $route['save_amc_data/(:num)'] = 'NonSujalAmcController/store/$1';
 $route['remove_amc/(:num)'] = 'NonSujalAmcController/destroy_history/$1';
 
+/*Invoices Routes*/
+$route['non_sujal_invoices'] = 'InvoiceController/index';
+$route['create_non_sujal_invoice'] = 'InvoiceController/create';
+$route['save_non_sujal_invoice'] = 'InvoiceController/store';
+$route['edit_non_sujal_invoice/(:num)'] = 'InvoiceController/edit/$1';
+$route['save_non_sujal_invoice/(:num)'] = 'InvoiceController/update_invoice/$1';
+$route['view_non_sujal_invoice/(:num)'] = 'InvoiceController/show_invoice/$1';
+
 /*User Routes*/
 $route['user'] = 'UserController/index';
 $route['save_user/(:num)'] = 'UserController/store/$1';

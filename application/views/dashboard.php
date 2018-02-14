@@ -35,7 +35,15 @@
 							<span class="info-box-icon bg-aqua"><i class="fa fa-users" aria-hidden="true"></i></span>
 							<div class="info-box-content">
 								<span class="info-box-text">Total Customers</span>
-								<span class="info-box-number"><h3><?php echo $this->db->where('deleted',0)->from("sujal_customers")->count_all_results(); ?></h3></span>
+								<span class="info-box-number">
+									<h3>
+										<?php 
+										$Sujalcnt = $this->db->where('deleted',0)->from("sujal_customers")->count_all_results();
+										$NonSujalcnt = $this->db->where('deleted',0)->from("non_sujal_customers")->count_all_results();
+										echo $Sujalcnt + $NonSujalcnt;
+										?>
+									</h3>
+								</span>
 							</div>
 							<div class="info-box-footer">
 								<a href="<?php echo site_url('#') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
@@ -59,11 +67,11 @@
 						<div class="info-box">
 							<span class="info-box-icon bg-green"><i class="fa fa-users" aria-hidden="true"></i></span>
 							<div class="info-box-content">
-								<span class="info-box-text">Water Tank Cleaning Customers</span>
-								<span class="info-box-number"><h3>0</h3></span>
+								<span class="info-box-text">Other (Non Sujal) Customers</span>
+								<span class="info-box-number"><h3><?php echo $this->db->where('deleted',0)->from("non_sujal_customers")->count_all_results(); ?></h3></span>
 							</div>
 							<div class="info-box-footer">
-								<a href="<?php echo site_url('#') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+								<a href="<?php echo site_url('non_sujal_customers') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>

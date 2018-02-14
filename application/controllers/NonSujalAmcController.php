@@ -70,7 +70,7 @@ class NonSujalAmcController extends CI_Controller {
 					$this->db->insert('non_sujal_amc_items', $page_data);
 					$this->session->set_flashdata('success','AMC data added successfully.');
 				}
-				redirect('edit_non_sujal_amc/'.$this->input->post('amc_id'));
+				redirect('non_sujals_amcs');
 			}
 		}
 	}
