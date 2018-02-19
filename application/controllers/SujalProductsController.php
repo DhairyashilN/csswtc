@@ -101,19 +101,12 @@ class SujalProductsController extends CI_Controller {
 		if ($this->session->userdata('login')!=1) {
 			redirect(base_url());
 		} else {
-			$this->db->select('id,cust_id,product_id,total_amount,payment_date');
-			$this->db->from('sujal_invoices');
+			$this->db->select('id,customer_name,order_date,order_net_amount,order_paid_amount,
+				order_due_amount,order_status,invoice_id');
+			$this->db->from('sujal_orders');
 			$this->db->where('deleted', 0);
 			$this->db->order_by('id','desc');
-			$page_data['ArrInvoices'] = $this->db->get()->result_array();
-			$this->db->select('id,name');
-			$this->db->from('sujal_customers');
-			$this->db->where('deleted', 0);
-			$page_data['ArrCustomers'] = $this->db->get()->result_array();
-			$this->db->select('id,name');
-			$this->db->from('sujal_products');
-			$this->db->where('deleted', 0);
-			$page_data['ArrProducts'] = $this->db->get()->result_array();
+			$page_data['ArrOrders'] = $this->db->get()->result_array();
 			$page_data['active_menu'] = 'products_sold';
 			$page_data['sub_active_menu'] = 'sproducts_sold';
 			$this->load->view('sujal_sold_products_list',$page_data);
@@ -148,49 +141,120 @@ class SujalProductsController extends CI_Controller {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
-			$this->form_validation->set_rules('customer','Customer','required');
+			// echo '<pre>';print_r($_POST);die;
+			$this->form_validation->set_rules('sale_date','Sale Date','required');
+			$this->form_validation->set_rules('customer_name','Customer','required');
 			$this->form_validation->set_rules('product','Product','required');
-			$this->form_validation->set_rules('sproduct_price','Product Price','required|numeric');
-			$this->form_validation->set_rules('paid_amount','Paid Amount','required|numeric');
-			$this->form_validation->set_rules('due_amount','Due Amount','required|numeric');
-			$this->form_validation->set_rules('amount_paid_date','Amount Paid Date','required');
-			$this->form_validation->set_rules('install_date','Installation Date','required');
-			$this->form_validation->set_rules('amc_date','AMC Date','required');
-			$this->form_validation->set_rules('amc_reminder_date','AMC Reminder Date','required');
+			$this->form_validation->set_rules('order_total','Order Total','required|numeric');
+			$this->form_validation->set_rules('order_net_amount','Order Net Amount','required|numeric');
+			$this->form_validation->set_rules('order_paid_amount','Order Paid Amount','required|numeric');
+			$this->form_validation->set_rules('order_due_amount','Order Due Amount','required|numeric');
 			if ($this->form_validation->run() == FALSE) {
 				$page_data['active_menu'] = 'products_sold';
 				$page_data['sub_active_menu'] = 'sproducts_sold';
 				$this->load->view('sale_sujal_product',$page_data);
 			} else {
-				$invoice_data['cust_id'] = $this->input->post('customer');
-				$invoice_data['product_id'] = $this->input->post('product');
-				$invoice_data['quantity'] = $this->input->post('sproduct_quantity');
-				$invoice_data['total_amount'] = $this->input->post('paid_amount');
-				$invoice_data['tax_amount'] = $this->input->post('gst_amount');
-				$invoice_data['net_amount'] = $this->input->post('net_amount');
-				$invoice_data['payment_date'] = $this->input->post('amount_paid_date');
-				$amc_data['cust_id'] = $this->input->post('customer');
-				$amc_data['product_id'] = $this->input->post('product');
-				$amc_data['installation_date'] = $this->input->post('install_date');
-				$amc_data['amc_date'] = $this->input->post('amc_date');
-				$amc_data['amc_reminder_date'] = $this->input->post('amc_reminder_date');				if (isset($id) && !empty($id)) {
-					$this->db->where('id',$id);
-					$this->db->update('sujal_products',$page_data);
-					$this->session->set_flashdata('success','Product updated successfully.');
-				} else {
-					$this->db->insert('sujal_invoices',$invoice_data);
-					$this->db->insert('sujal_amc',$amc_data);
-					if (($this->input->post('due_amount')!='') && ($this->input->post('due_amount') > 0))
-					{
-						$dues_data['cust_id'] = $this->input->post('customer');
-						$dues_data['product_id'] = $this->input->post('product');
-						$dues_data['quantity'] = $this->input->post('sproduct_quantity');
-						$dues_data['due_amount'] = $this->input->post('due_amount');	
-						$this->db->insert('sujal_payment_dues',$dues_data);
-					}
-					$this->session->set_flashdata('success','Product Sale added successfully.');
+				$page_data['order_date'] = $this->input->post('sale_date');
+				$page_data['sujal_cust_id'] = $this->input->post('customer');
+				$page_data['customer_name'] = $this->input->post('customer_name');
+				$page_data['order_amount'] = $this->input->post('order_total');
+				$page_data['order_tax_rate'] = $this->input->post('tax_rate');
+				$page_data['order_tax_amount'] = $this->input->post('order_tax');
+				$page_data['order_net_amount'] = $this->input->post('order_net_amount');
+				$page_data['order_paid_amount'] = $this->input->post('order_paid_amount');
+				$page_data['order_due_amount'] = $this->input->post('order_due_amount');
+				if ($page_data['order_due_amount'] == 0) {
+					$page_data['order_status'] = 'payment_paid';
+				}else {
+					$page_data['order_status'] = 'payment_due';
 				}
-				redirect('sujal_invoices');
+				if ($this->db->insert('sujal_orders', $page_data)) {
+					$invoice_id = $this->db->insert_id();
+					$num = $this->input->post('icnt');
+					for($i=1; $i <= $num ; $i++) {
+						$order_item['sujal_order_id'] = $invoice_id;
+						$order_item['item_desc'] = $this->input->post('item_desc_'.$i);
+						$order_item['item_quantity'] = $this->input->post('item_qty_'.$i);
+						$order_item['item_rate'] = $this->input->post('item_rate_'.$i);
+						$order_item['item_amount'] = $this->input->post('item_amount_'.$i);
+						$this->db->insert('sujal_order_items', $order_item);
+					}
+					$this->session->set_flashdata('success','Order Saved successfully.');
+					redirect('sale_product');
+				}
+			}
+		}
+	}
+
+	public function edit_sale($id=''){
+		if ($this->session->userdata('login')!=1){
+			redirect(base_url());
+		} else {
+			$this->db->select('*');
+			$this->db->from('sujal_orders');
+			$this->db->where('id', $id);
+			$this->db->where('deleted', 0);
+			$page_data['ObjOrder'] = $this->db->get()->row();
+			$this->db->select('*');
+			$this->db->from('sujal_order_items');
+			$this->db->where('sujal_order_id', $id);
+			$this->db->where('deleted', 0);
+			$page_data['ArrItems'] = $this->db->get()->result_array();
+			$this->db->select('id,name');
+			$this->db->from('sujal_products');
+			$this->db->where('deleted', 0);
+			$page_data['ArrProducts'] = $this->db->get()->result_array();
+			$page_data['active_menu'] = 'products_sold';
+			$this->load->view('edit_sale_sujal_product',$page_data);
+		}
+	}
+
+	public function update_sale($id='') {
+		if ($this->session->userdata('login')!=1){
+			redirect(base_url());
+		} else {
+			$this->form_validation->set_rules('sale_date','Sale Date','required');
+			$this->form_validation->set_rules('customer_name','Customer','required');
+			$this->form_validation->set_rules('order_total','Order Total','required|numeric');
+			$this->form_validation->set_rules('order_net_amount','Order Net Amount','required|numeric');
+			$this->form_validation->set_rules('order_paid_amount','Order Paid Amount','required|numeric');
+			$this->form_validation->set_rules('order_due_amount','Order Due Amount','required|numeric');
+			if ($this->form_validation->run() == FALSE) {
+				$page_data['active_menu'] = 'products_sold';
+				$page_data['sub_active_menu'] = 'sproducts_sold';
+				$this->load->view('sale_sujal_product',$page_data);
+			} else {
+				$page_data['order_date'] = $this->input->post('sale_date');
+				$page_data['sujal_cust_id'] = $this->input->post('customer');
+				$page_data['customer_name'] = $this->input->post('customer_name');
+				$page_data['order_amount'] = $this->input->post('order_total');
+				$page_data['order_tax_rate'] = $this->input->post('tax_rate');
+				$page_data['order_tax_amount'] = $this->input->post('order_tax');
+				$page_data['order_net_amount'] = $this->input->post('order_net_amount');
+				$page_data['order_paid_amount'] = $this->input->post('order_paid_amount');
+				$page_data['order_due_amount'] = $this->input->post('order_due_amount');
+				if ($page_data['order_due_amount'] == 0) {
+					$page_data['order_status'] = 'payment_paid';
+				}else {
+					$page_data['order_status'] = 'payment_due';
+				}
+				$this->db->where('id',$id);
+				$query = $this->db->update('sujal_orders', $page_data);
+				if ($query) {
+					$this->db->where('sujal_order_id', $id);
+					$this->db->delete('sujal_order_items');
+					$num = $this->input->post('icnt');
+					for($i=1; $i <= $num ; $i++) {
+						$order_item['sujal_order_id'] = $id;
+						$order_item['item_desc'] = $this->input->post('item_desc_'.$i);
+						$order_item['item_quantity'] = $this->input->post('item_qty_'.$i);
+						$order_item['item_rate'] = $this->input->post('item_rate_'.$i);
+						$order_item['item_amount'] = $this->input->post('item_amount_'.$i);
+						$this->db->insert('sujal_order_items', $order_item);
+					}
+					$this->session->set_flashdata('success','Order Saved successfully.');
+					redirect('sale_product');
+				}
 			}
 		}
 	}

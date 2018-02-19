@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Chintamani Services | Create Sujal Invoices</title>
+	<title>Chintamani Services | Create Non Sujal Invoices</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="icon" href="<?php echo base_url();?>assets/icons/favicon.png">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
@@ -47,7 +47,7 @@
 					<div class="box-body">
 						<?php echo form_open('save_non_sujal_invoice', array('method'=>'post','class'=>'form-horizontal', 'autocomplete'=>'off')); ?>
 						<div class="form-group">
-							<label class="control-label col-lg-2"> To </label>
+							<label class="control-label col-lg-1"> To </label>
 							<div class="col-lg-3">
 							 	<select class="form-control" name="customer_name" id="customer_name" required="">
 							 		<option value="">Select Name</option>
@@ -61,12 +61,12 @@
 							 	<input type="hidden" name="cust_name" id="cust_name">
 							 </div>
 							 <label class="control-label col-lg-2">Invoice No.</label>
-							 <div class="col-lg-1">
-							 	<input type="text" name="invoice_no" id="invoice_no" class="form-control" required="">
+							 <div class="col-lg-2">
+							 	<input type="text" name="invoice_no" id="invoice_no" class="form-control" required="" value="<?php echo (isset($invoice_no) && !empty($invoice_no)) ? $invoice_prefix.$invoice_no : ''; ?>" readonly>
 							 </div>
 							 <label class="control-label col-lg-2">Invoice Date</label>
 							 <div class="col-lg-2">
-							 	<input type="text" name="invoice_date" id="invoice_date" class="form-control" required="">
+							 	<input type="text" name="invoice_date" id="invoice_date" class="form-control" required="" readonly="">
 							 </div>
 						</div>
 						<div class="form-group">
@@ -76,7 +76,7 @@
 							</div>
 							<label class="control-label col-lg-2">Mobile No.</label>
 							<div class="col-lg-4">
-							 	<input type="text" name="mobile_no" id="mobile_no" class="form-control">
+							 	<input type="text" name="mobile_no" id="mobile_no" class="form-control" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')">
 							 	<br>
 							 </div><br>
 							 <label class="control-label col-lg-2">GSTIN</label>

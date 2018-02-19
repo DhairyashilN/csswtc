@@ -51,45 +51,42 @@
 									<tr>
 										<th>Sr. No.</th>
 										<th>Customer Name</th>
-										<th>Product</th>
-										<th>Sale (Payment) Date</th>
+										<th>Sale Date</th>
+										<th>Total Amount</th>
+										<th>Paid Amount</th>
+										<th>Due Amount</th>
+										<th>Status</th>
 										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php 
 										$count = 1;
-										if (isset($ArrInvoices) && !empty($ArrInvoices)) {
-										foreach ($ArrInvoices as $row) {
+										if (isset($ArrOrders) && !empty($ArrOrders)) {
+										foreach ($ArrOrders as $row) {
 									?>
 									<tr>
 										<td><?php echo $count++; ?></td>
+										<td><?php echo $row['customer_name']; ?></td>
+										<td><?php echo $row['order_date']; ?></td>
+										<td><?php echo $row['order_net_amount']; ?></td>
+										<td><?php echo $row['order_paid_amount']; ?></td>
+										<td><?php echo $row['order_due_amount']; ?></td>
 										<td>
-											<?php 
-												if (isset($ArrCustomers) && !empty($ArrCustomers)) {
-													foreach ($ArrCustomers as $crow) {
-														if ($crow['id'] == $row['cust_id']) {
-															echo $crow['name'];
-														}
-													}
-												}	
-											?>			
+											<?php if($row['order_status'] == 'payment_due'): ?>
+												<a href="<?php echo site_url('edit_sujal_product_sale/'.$row['id']); ?>" title="Make Invoice"><button class="btn btn-warning btn-sm">Payment Due</button></a>
+											<?php endif; ?>
+											<?php if($row['order_status'] == 'payment_paid'): ?>
+												<a href="<?php echo site_url('create_sujal_invoice/'.$row['id']); ?>" title="Make Invoice"><button class="btn btn-primary btn-sm">Generate Invoice</button></a>
+											<?php endif; ?>
+											<?php if($row['order_status'] == 'invoice_generated'): ?>
+												<a href="<?php echo site_url('view_sujal_invoice/'.$row['invoice_id']); ?>" title="View Invoice" target="_blank"><button class="btn btn-success btn-sm">Invoice Generated</button></a>
+											<?php endif; ?>
 										</td>
 										<td>
-											<?php 
-												if (isset($ArrProducts) && !empty($ArrProducts)) {
-													foreach ($ArrProducts as $prow) {
-														if ($prow['id'] == $row['product_id']) {
-															echo $prow['name'];
-														}
-													}
-												}	
-											?>
-										</td>
-										<td><?php echo $row['payment_date']; ?></td>
-										<td>
-											<a href="#" data-toggle="modal" data-target="#view_<?php echo $row['id'];?>" title="View"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-											<!-- <a href="<?php //echo site_url('edit_sujal_product_sale/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a> -->
+											<?php if($row['order_status'] != 'invoice_generated'): ?>
+												<a href="<?php echo site_url('edit_sujal_product_sale/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
+											<?php endif; ?>
 											<a href="" data-toggle="modal" data-target="#<?php echo $row['id'];?>" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
 											<div class="modal fade" id="<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						                        <div class="modal-dialog" role="document">
@@ -101,25 +98,6 @@
 						                              		<a href="<?php echo site_url('delete_sujal_product/'.$row['id']);?>"><button type="button" class="btn btn-danger" >Yes</button></a>&nbsp;&nbsp;
 						                              		<button type="button" class="btn btn-warning" data-dismiss="modal">No</button> 
 						                            	</div>
-						                          	</div>
-						                        </div>
-						                    </div>
-						                    <div class="modal fade" id="view_<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						                        <div class="modal-dialog" role="document">
-						                        	<div class="modal-content">
-						                        		<div class="modal-header">
-						                        			<h4 class="modal-title">Sale Details</h4>
-						                        		</div>
-						                            	<div class="modal-body ">
-						                              		<ul class="list-group">
-																<li class="list-group-item"><b>Customer Name :</b> <?php echo $crow['name'] ?></li>
-																<li class="list-group-item"><b>Product Name :</b> <?php echo $prow['name'] ?></li>
-																<li class="list-group-item"><b>Payment Date :</b> <?php echo $row['payment_date'] ?></li>
-															</ul>
-						                            	</div>
-						                            	<div class="modal-footer">
-						                        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						                        		</div>
 						                          	</div>
 						                        </div>
 						                    </div>

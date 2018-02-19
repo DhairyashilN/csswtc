@@ -44,14 +44,14 @@
 						<span class="box-title">Invoices</span>
 					</div>
 					<div class="box-body">
-						<!-- <pre><?php //print_r($ArrProducts); ?></pre> -->
 						<div class="table-responsive">
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th>Sr. No.</th>
+										<th>Invoice No.</th>
 										<th>Invoice Date</th>
-										<th>Invoice To</th>
+										<th>Customer Name</th>
 										<th>Invoice Amount</th>
 										<th>Action</th>
 									</tr>
@@ -64,21 +64,28 @@
 									?>
 									<tr>
 										<td><?php echo $count++; ?></td>
-										<td><?php echo $row['payment_date']; ?></td>
-										<td>
-											<?php 
-												if (isset($ArrCustomers) && !empty($ArrCustomers)) {
-													foreach ($ArrCustomers as $crow) {
-														if ($crow['id'] == $row['cust_id']) {
-															echo $crow['name'];
-														}
-													}
-												}	
-											?>			
-										</td>
-										<td> <?php echo $row['net_amount']; ?> </td>
+										<td><?php echo $row['invoice_no'];?></td>
+										<td><?php echo $row['invoice_date']; ?></td>
+										<td><?php echo $row['customer_name']; ?></td>
+										<td><?php echo $row['invoice_net_amount']; ?></td>
 										<td>
 											<a href="<?php echo site_url('view_sujal_invoice/'.$row['id']); ?>" title="View" target="_blank"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+											<!-- <a href="<?php// echo site_url('generate_pdf/'.$row['id']); ?>" title="PDF" target="_blank"><button class="btn btn-info btn-sm"><i class="fa fa-pdf" aria-hidden="true"></i></button></a> -->
+											<a href="<?php echo site_url('edit_sujal_invoice/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
+											<a href="" data-toggle="modal" data-target="#<?php echo $row['id'];?>" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
+											<div class="modal fade" id="<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						                        <div class="modal-dialog" role="document">
+						                        	<div class="modal-content">
+						                            	<div class="modal-body text-center">
+						                              		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+						                              		<br>
+						                              		<h3>Are you want to delete?</h3><br/>
+						                              		<a href="<?php echo site_url('delete_sujal_product/'.$row['id']);?>"><button type="button" class="btn btn-danger" >Yes</button></a>&nbsp;&nbsp;
+						                              		<button type="button" class="btn btn-warning" data-dismiss="modal">No</button> 
+						                            	</div>
+						                          	</div>
+						                        </div>
+						                    </div>
 										</td>
 									</tr>
 									<?php }} ?>

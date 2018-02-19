@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Chintamani Services | Create Sujal Invoices</title>
+	<title>Chintamani Services | Edit Non Sujal Invoice</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="icon" href="<?php echo base_url();?>assets/icons/favicon.png">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
@@ -47,13 +47,13 @@
 					<div class="box-body">
 						<?php echo form_open('save_non_sujal_invoice/'.$ObjInvoice->id, array('method'=>'post','class'=>'form-horizontal','autocomplete'=>'off')); ?>
 						<div class="form-group">
-							<label class="control-label col-lg-2"> To </label>
+							<label class="control-label col-lg-1"> To </label>
 							<div class="col-lg-3">
 							 	<input type="hidden" class="form-control" name="customer_name" id="customer_name" required="" value="<?php echo $ObjInvoice->non_sujal_cust_id ?>">
 							 	<input type="text" name="cust_name" class="form-control" id="cust_name" readonly="" value="<?php echo $ObjInvoice->customer_name; ?>">
 							 </div>
 							 <label class="control-label col-lg-2">Invoice No.</label>
-							 <div class="col-lg-1">
+							 <div class="col-lg-2">
 							 	<input type="text" name="invoice_no" id="invoice_no" class="form-control" value="<?php echo $ObjInvoice->invoice_no; ?>" required="" readonly>
 							 </div>
 							 <label class="control-label col-lg-2">Invoice Date</label>

@@ -51,8 +51,6 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="<?php echo site_url('sale_product'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal Products</a></li>
-          <li><a href="<?php echo site_url('sujal_invoices'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal Invoices</a></li>
-          <li><a href="<?php echo site_url('sujal_dues_payments'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Payment Dues List</a></li>
         </ul>
       </li>
       <li class="treeview <?php if($active_menu == 'sinvc') { ?>active<?php } ?>">
@@ -64,6 +62,7 @@
           </span>
         </a>
         <ul class="treeview-menu">
+          <li><a href="<?php echo site_url('sujal_invoices'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal Invoices</a></li>
           <li><a href="<?php echo site_url('non_sujal_invoices'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) Invoices</a></li>
         </ul>
       </li>
@@ -78,6 +77,18 @@
         <ul class="treeview-menu">
           <li><a href="<?php echo site_url('sujals_amcs'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal AMC</a></li>
           <li><a href="<?php echo site_url('non_sujals_amcs'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) AMC</a></li>
+        </ul>
+      </li>
+      <li class="treeview <?php if($active_menu == 'settings') { ?>active<?php } ?>">
+        <a href="#">
+          <i class="fa fa-cogs" aria-hidden="true"></i>
+          <span>Settings</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="<?php echo site_url('invoice_prefix'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Invoice Prefix</a></li>
         </ul>
       </li>
     </ul>

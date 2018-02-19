@@ -3,15 +3,20 @@ body{ font-family: 'Open Sans'; }
 .user-header{height: 100px !important;}
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{ font-family: 'Open Sans' !important;  }
 .message-box { margin: 15px 15px; }
-.invoice-box{ margin: 10px auto; width: 750px; padding: 5px 10px; border: 1px solid #dddddd; }
+.invoice-box{ margin: 10px auto; width: 800px; padding: 5px 10px; /*border: 1px solid #dddddd;*/ }
 .tc-box p {margin-bottom: 2px;}
 .info-box-footer{ margin: 4px 0px; border-top: 1px solid #f1f1f1; padding: 5px 5px; text-align: center; }
-.invoice-header-top{border: 1px solid #000;}
-.invoice-header-bottom{border: 1px solid #000;margin-top: -1px;}
-@page {
+.invoice-header-top{border: 1px solid #ddd;}
+.invoice-header-bottom{border: 1px solid #ddd;margin-top: -1px;}
+/*.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { border: 1px solid #000; }*/
+.table-customer-info { margin-top: -1px; margin-bottom: 0px; }
+.table-item-info { margin-top: -1px; }
+/*@page {
 	size: A4 landscape;
-}
+}*/
 @media print {
     .print-btn { display: none; }
     body{color:#000;}
+    .invoice-header-top ,.invoice-header-bottom{border-color: #000;}
+    .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { border: 1px solid #000 !important; }
 }

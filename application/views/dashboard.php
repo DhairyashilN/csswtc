@@ -106,11 +106,11 @@
 						<div class="info-box">
 							<span class="info-box-icon bg-green"><i class="fa fa-calendar" aria-hidden="true"></i></span>
 							<div class="info-box-content">
-								<span class="info-box-text">Water Tank Cleaning AMC'</span>
-								<span class="info-box-number"><h3>0</h3></span>
+								<span class="info-box-text">Other (Non Sujal) AMC's</span>
+								<span class="info-box-number"><h3><?php echo $this->db->where('deleted',0)->from("non_sujal_amcs")->count_all_results(); ?></h3></span>
 							</div>
 							<div class="info-box-footer">
-								<a href="<?php echo site_url('#') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+								<a href="<?php echo site_url('non_sujals_amcs') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>

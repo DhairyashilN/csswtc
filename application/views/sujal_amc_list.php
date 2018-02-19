@@ -52,9 +52,6 @@
 										<th>Sr. No.</th>
 										<th>Customer Name</th>
 										<th>Product</th>
-										<th>Installation Date</th>
-										<th>AMC Date</th>
-										<th>AMC Reminder Date</th>
 										<th>Action</th>
 									</tr>
 								</thead>
@@ -66,34 +63,10 @@
 									?>
 									<tr>
 										<td><?php echo $count++; ?></td>
+										<td><?php echo $row['customer_name']; ?></td>
+										<td><?php echo $row['product_name']; ?></td>
 										<td>
-											<?php 
-												if (isset($ArrCustomers) && !empty($ArrCustomers)) {
-													foreach ($ArrCustomers as $crow) {
-														if ($crow['id'] == $row['cust_id']) {
-															echo $crow['name'];
-														}
-													}
-												}	
-											?>			
-										</td>
-										<td>
-											<?php 
-												if (isset($ArrProducts) && !empty($ArrProducts)) {
-													foreach ($ArrProducts as $prow) {
-														if ($prow['id'] == $row['product_id']) {
-															echo $prow['name'];
-														}
-													}
-												}	
-											?>
-										</td>
-										<td><?php echo $row['installation_date']; ?></td>
-										<td><?php echo $row['amc_date']; ?></td>
-										<td><?php echo $row['amc_reminder_date']; ?></td>
-										<td>
-											<a href="#" data-toggle="modal" data-target="#view_<?php echo $row['id'];?>" title="View"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-											<a href="<?php echo site_url('edit_sujal_amc/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
+											<a href="<?php echo site_url('view_sujal_amc/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
 											<a href="#" data-toggle="modal" data-target="#<?php echo $row['id'];?>" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
 											<div class="modal fade" id="<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						                        <div class="modal-dialog" role="document">
@@ -105,27 +78,6 @@
 						                              		<a href="<?php echo site_url('delete_sujal_product/'.$row['id']);?>"><button type="button" class="btn btn-danger" >Yes</button></a>&nbsp;&nbsp;
 						                              		<button type="button" class="btn btn-warning" data-dismiss="modal">No</button> 
 						                            	</div>
-						                          	</div>
-						                        </div>
-						                    </div>
-						                    <div class="modal fade" id="view_<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						                        <div class="modal-dialog" role="document">
-						                        	<div class="modal-content">
-						                        		<div class="modal-header">
-						                        			<h4 class="modal-title">AMC Details</h4>
-						                        		</div>
-						                            	<div class="modal-body ">
-						                              		<ul class="list-group">
-																<li class="list-group-item"><b>Customer Name :</b> <?php echo $crow['name'] ?></li>
-																<li class="list-group-item"><b>Product Name :</b> <?php echo $prow['name'] ?></li>
-																<li class="list-group-item"><b>Installation Date :</b> <?php echo $row['installation_date'] ?></li>
-																<li class="list-group-item"><b>AMC Date :</b> <?php echo $row['amc_date'] ?></li>
-																<li class="list-group-item"><b>AMC Reminder Date :</b> <?php echo $row['amc_reminder_date'] ?></li>
-															</ul>
-						                            	</div>
-						                            	<div class="modal-footer">
-						                        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						                        		</div>
 						                          	</div>
 						                        </div>
 						                    </div>

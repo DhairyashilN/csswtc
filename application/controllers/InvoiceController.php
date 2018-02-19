@@ -14,7 +14,7 @@ class InvoiceController extends CI_Controller {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
-			$this->db->select('id,invoice_no,customer_name,invoice_date,invoice_net_amount');
+			$this->db->select('id,invoice_no,customer_name,invoice_date,invoice_net_amount,payment_mode');
 			$this->db->from('non_sujal_invoices');
 			$this->db->where('deleted', 0);
 			$this->db->order_by('id','desc');
@@ -28,6 +28,23 @@ class InvoiceController extends CI_Controller {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
+			$invoice_no = 0;
+			$this->db->select('prefix');
+			$this->db->from('invoice_prefix');
+			$this->db->where('id',2);
+			$page_data['invoice_prefix'] = $this->db->get()->row()->prefix;
+			$this->db->select('id');
+			$this->db->from('non_sujal_invoices');
+			$ArrInvoiceNum = $this->db->get()->result_array();
+			// print_r($ArrInvoiceNum);die;
+			foreach ($ArrInvoiceNum as $row) {
+				$invoice_no = $row['id'];
+			}
+			if(count($ArrInvoiceNum) < 0){
+				$page_data['invoice_no'] = 1;
+			} else {
+				$page_data['invoice_no'] = $invoice_no + 1;
+			}
 			$this->db->select('id,name');
 			$this->db->from('non_sujal_customers');
 			$this->db->where('deleted', 0);
@@ -39,7 +56,7 @@ class InvoiceController extends CI_Controller {
 	}
 
 	public function store() {
-		// echo '<pre/>'; print_r($_POST);
+		// echo '<pre/>'; print_r($_POST);die;
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
@@ -57,6 +74,7 @@ class InvoiceController extends CI_Controller {
 				$page_data['customer_name'] = $this->input->post('cust_name');
 				$page_data['address'] = $this->input->post('caddress');
 				$page_data['contact_no'] = $this->input->post('mobile_no');
+				$page_data['customer_gstin'] = $this->input->post('cgstin');
 				$page_data['invoice_no'] = $this->input->post('invoice_no');
 				$page_data['invoice_date'] = $this->input->post('invoice_date');
 				$page_data['invoice_amount'] = $this->input->post('invoice_total');
@@ -65,9 +83,10 @@ class InvoiceController extends CI_Controller {
 				$page_data['invoice_net_amount'] = $this->input->post('invoice_net_amount');
 				$page_data['payment_mode'] = $this->input->post('payment_mode');
 				if ($this->db->insert('non_sujal_invoices', $page_data)) {
+					$invoice_id = $this->db->insert_id();
 					$num = $this->input->post('icnt');
 					for($i=1; $i <= $num ; $i++) {
-						$invoice_item['non_sujal_invoice_id'] = $this->db->insert_id();
+						$invoice_item['non_sujal_invoice_id'] = $invoice_id;
 						$invoice_item['item_desc'] = $this->input->post('item_desc_'.$i);
 						$invoice_item['item_quantity'] = $this->input->post('item_qty_'.$i);
 						$invoice_item['item_rate'] = $this->input->post('item_rate_'.$i);
@@ -98,7 +117,6 @@ class InvoiceController extends CI_Controller {
 			$page_data['active_menu'] = 'sinvc';
 			$this->load->view('edit_non_sujal_invoice',$page_data);
 		}
-
 	}
 
 	public function update_invoice($id='') {
@@ -120,6 +138,7 @@ class InvoiceController extends CI_Controller {
 				$page_data['customer_name'] = $this->input->post('cust_name');
 				$page_data['address'] = $this->input->post('caddress');
 				$page_data['contact_no'] = $this->input->post('mobile_no');
+				$page_data['customer_gstin'] = $this->input->post('cgstin');
 				$page_data['invoice_no'] = $this->input->post('invoice_no');
 				$page_data['invoice_date'] = $this->input->post('invoice_date');
 				$page_data['invoice_amount'] = $this->input->post('invoice_total');
@@ -152,11 +171,12 @@ class InvoiceController extends CI_Controller {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
-			$this->db->select('id,invoice_no,customer_name,address,contact_no,customer_gstin,invoice_date,invoice_amount,invoice_tax_rate,invoice_net_amount,payment_mode');
+			$this->db->select('id,invoice_no,customer_name,address,contact_no,customer_gstin,invoice_date,invoice_amount,invoice_tax_rate,invoice_tax_amount,invoice_net_amount,payment_mode');
 			$this->db->from('non_sujal_invoices');
 			$this->db->where('id', $id);
 			$this->db->where('deleted', 0);
 			$page_data['ObjInvoice'] = $this->db->get()->row();
+			$page_data['Amount_in_words'] = $this->displaywords($page_data['ObjInvoice']->invoice_net_amount);
 			$this->db->select('item_desc,item_quantity,item_rate,item_amount');
 			$this->db->from('non_sujal_invoice_items');
 			$this->db->where('non_sujal_invoice_id', $id);
@@ -166,7 +186,28 @@ class InvoiceController extends CI_Controller {
 		}
 	}
 
-
+	// public function generate_pdf($id='') {
+	// 	$this->db->select('id,invoice_no,customer_name,address,contact_no,customer_gstin,invoice_date,invoice_amount,invoice_tax_rate,invoice_tax_amount,invoice_net_amount,payment_mode');
+	// 	$this->db->from('non_sujal_invoices');
+	// 	$this->db->where('id', $id);
+	// 	$this->db->where('deleted', 0);
+	// 	$page_data['ObjInvoice'] = $this->db->get()->row();
+	// 	$page_data['Amount_in_words'] = $this->displaywords($page_data['ObjInvoice']->invoice_net_amount);
+	// 	$this->db->select('item_desc,item_quantity,item_rate,item_amount');
+	// 	$this->db->from('non_sujal_invoice_items');
+	// 	$this->db->where('non_sujal_invoice_id', $id);
+	// 	$this->db->where('deleted', 0);
+	// 	$page_data['ArrInvoiceItems'] = $this->db->get()->result_array();
+	// 	$html = $this->load->view('non_sujal_invoice', $page_data);
+	// 	//this the the PDF filename that user will get to download
+	// 	$pdfFilePath = "output_pdf_name.pdf";
+ //        //load mPDF library
+	// 	$this->load->library('m_pdf');
+ //       //generate the PDF from the given html
+	// 	$this->m_pdf->pdf->WriteHTML($html);
+ //        //download it.
+	// 	$this->m_pdf->pdf->Output($pdfFilePath, "D");
+	// }
 
 	public function getCustomerinfo() {
 		if ($this->session->userdata('login')!=1){
@@ -181,6 +222,37 @@ class InvoiceController extends CI_Controller {
 		}	
 	}
 
+	public function displaywords($number){
+		$decimal = round($number - ($no = floor($number)), 2) * 100;
+		$hundred = null;
+		$digits_length = strlen($no);
+		$i = 0;
+		$str = array();
+		$words = array(0 => '', 1 => 'One', 2 => 'Two',
+			3 => 'Three', 4 => 'Four', 5 => 'Five', 6 => 'Six',
+			7 => 'Seven', 8 => 'Eight', 9 => 'Nine',
+			10 => 'Ten', 11 => 'Eleven', 12 => 'Twelve',
+			13 => 'Thirteen', 14 => 'Fourteen', 15 => 'Fifteen',
+			16 => 'Sixteen', 17 => 'Seventeen', 18 => 'Eighteen',
+			19 => 'Nineteen', 20 => 'Twenty', 30 => 'Thirty',
+			40 => 'Forty', 50 => 'Fifty', 60 => 'Sixty',
+			70 => 'Seventy', 80 => 'Eighty', 90 => 'Ninety');
+		$digits = array('', 'Hundred','Thousand','Lakh', 'Crore');
+		while( $i < $digits_length ) {
+			$divider = ($i == 2) ? 10 : 100;
+			$number = floor($no % $divider);
+			$no = floor($no / $divider);
+			$i += $divider == 10 ? 1 : 2;
+			if ($number) {
+				$plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+				$hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+				$str [] = ($number < 21) ? $words[$number].' '. $digits[$counter]. $plural.' '.$hundred:$words[floor($number / 10) * 10].' '.$words[$number % 10]. ' '.$digits[$counter].$plural.' '.$hundred;
+			} else $str[] = null;
+		}
+		$Rupees = implode('', array_reverse($str));
+		$paise = ($decimal) ? "and " . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
+		return ($Rupees ? 'Rupees '. $Rupees : '') . $paise .' Only';
+	}
 
 }
 

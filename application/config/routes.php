@@ -65,12 +65,20 @@ $route['delete_sujal_product/(:num)'] = 'SujalProductsController/destroy/$1';
 $route['sale_product'] = 'SujalProductsController/sold_products_list';
 $route['sale_new_sujal_product'] = 'SujalProductsController/create_sale';
 $route['save_sujal_product_sale'] = 'SujalProductsController/store_sale';
+$route['edit_sujal_product_sale/(:num)'] = 'SujalProductsController/edit_sale/$1';
+$route['save_sujal_product_sale/(:num)'] = 'SujalProductsController/update_sale/$1';
 /*Sujal Invoices Routes*/
 $route['sujal_invoices'] = 'SujalInvoiceController/index';
 $route['sujal_dues_payments'] = 'SujalInvoiceController/dues_payments_list';
 $route['view_sujal_invoice/(:num)'] = 'SujalInvoiceController/show/$1';
 $route['pay_sujal_due_payment/(:num)'] = 'SujalInvoiceController/pay_dues/$1';
 $route['save_payment'] = 'SujalInvoiceController/store_payments';
+
+$route['create_sujal_invoice/(:num)'] = 'SujalInvoiceController/create/$1';
+$route['save_sujal_invoice'] = 'SujalInvoiceController/store';
+$route['edit_sujal_invoice/(:num)'] = 'SujalInvoiceController/edit/$1';
+$route['save_sujal_invoice/(:num)'] = 'SujalInvoiceController/update_invoice/$1';
+$route['view_sujal_invoice/(:num)'] = 'SujalInvoiceController/show_invoice/$1';
 
 /*Sujal Customers Routes*/
 $route['sujal_customers'] = 'SujalCustomersController/index';
@@ -89,8 +97,10 @@ $route['delete_non_sujal_customer/(:num)'] = 'NonSujalCustomersController/destro
 
 /*Sujal AMC Routes*/
 $route['sujals_amcs'] = 'SujalAmcController/index';
-$route['edit_sujal_amc/(:num)'] = 'SujalAmcController/create/$1';
 $route['save_sujal_amc/(:num)'] = 'SujalAmcController/store/$1';
+$route['view_sujal_amc/(:num)'] = 'SujalAmcController/create/$1';
+$route['save_sujal_amc_data'] = 'SujalAmcController/store';
+$route['delete_amc_history/(:num)'] = 'SujalAmcController/destroy_history/$1';
 
 /*Non Sujal AMC Routes*/
 $route['non_sujals_amcs'] = 'NonSujalAmcController/index';
@@ -106,6 +116,7 @@ $route['save_non_sujal_invoice'] = 'InvoiceController/store';
 $route['edit_non_sujal_invoice/(:num)'] = 'InvoiceController/edit/$1';
 $route['save_non_sujal_invoice/(:num)'] = 'InvoiceController/update_invoice/$1';
 $route['view_non_sujal_invoice/(:num)'] = 'InvoiceController/show_invoice/$1';
+$route['generate_pdf/(:num)'] = 'InvoiceController/generate_pdf/$1';
 
 /*User Routes*/
 $route['user'] = 'UserController/index';

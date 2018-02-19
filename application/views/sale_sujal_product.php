@@ -12,8 +12,8 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom.css">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/icons/font-awesome/css/font-awesome.min.css">
 	<link href="<?php echo base_url();?>assets/plugins/chosen/docsupport/prism.css" rel="stylesheet">
-    <link href="<?php echo base_url();?>assets/plugins/chosen/chosen.css" rel="stylesheet">
-    <link href="<?php echo base_url();?>assets/plugins/datepicker/datepicker.css" rel="stylesheet">
+	<link href="<?php echo base_url();?>assets/plugins/chosen/chosen.css" rel="stylesheet">
+	<link href="<?php echo base_url();?>assets/plugins/datepicker/datepicker.css" rel="stylesheet">
 	<link rel="icon" href="<?php echo base_url();?>assets/icons/favicon.png">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -42,99 +42,140 @@
 						<span class="box-title"><a href="<?php echo site_url('sale_product'); ?>"><button class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to List</button></a></span>
 					</div>
 					<div class="box-body">
-						<?php if (isset($ObjProduct->id) && !empty($ObjProduct->id)): ?>
-							<?php echo form_open('save_sujal_product_sale/'.$ObjProduct->id, array('method'=>'post','class'=>'form-horizontal')); ?>
-						<?php else: ?>
-							<?php echo form_open('save_sujal_product_sale', array('method'=>'post','class'=>'form-horizontal')); ?>
-						<?php endif ?>
+						<?php echo form_open('save_sujal_product_sale', array('method'=>'post','class'=>'form-horizontal')); ?>
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">Sale Date</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="sale_date" name="sale_date" placeholder="Sale Date">
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="inputCustomers" class="col-sm-2 control-label">Select Customer</label>
 							<div class="col-sm-10">
 								<select class="form-control chosen-select" data-placeholder="Choose Customer" name="customer" id="customer" required="">
 									<option value="">Select Customer </option>
 									<?php 
-										if (isset($ArrCustomers) && !empty($ArrCustomers)) {
-											foreach ($ArrCustomers as $crow) {
-									?>
-										<option value="<?php echo $crow['id']; ?>"><?php echo $crow['name']; ?></option>
-									<?php }	} ?>
-								</select>
+									if (isset($ArrCustomers) && !empty($ArrCustomers)) {
+										foreach ($ArrCustomers as $crow) {
+											?>
+											<option value="<?php echo $crow['id']; ?>"><?php echo $crow['name']; ?></option>
+											<?php }	} ?>
+										</select>
+										<input type="hidden" name="customer_name" id="customer_name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputCustomers" class="col-sm-2 control-label">Select Product</label>
+									<div class="col-sm-10">
+										<select class="form-control chosen-select" data-placeholder="Choose Product" name="product" id="product">
+											<option value="">Select Product </option>
+											<?php 
+											if (isset($ArrProducts) && !empty($ArrProducts)) {
+												foreach ($ArrProducts as $crow) {
+													?>
+													<option value="<?php echo $crow['id']; ?>"><?php echo $crow['name']; ?></option>
+													<?php }	} ?>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-2 control-label">Product Price</label>
+											<div class="col-sm-10">
+												<input type="hidden"  id="sproduct_name">
+												<input type="text" class="form-control" id="sproduct_price" name="sproduct_price" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Price">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-2 control-label">Rate</label>
+											<div class="col-sm-2">
+												<input type="text" class="form-control price" id="sproduct_rate" name="sproduct_rate" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Rate">
+											</div>
+											<label for="inputEmail3" class="col-sm-2 control-label">Quantity</label>
+											<div class="col-sm-2">
+												<input type="text" class="form-control price" id="sproduct_quantity" name="sproduct_quantity" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Quantity">
+											</div>
+											<label for="inputEmail3" class="col-sm-2 control-label">Amount</label>
+											<div class="col-sm-2">
+												<input type="text" class="form-control" id="sproduct_amount" name="sproduct_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-lg-10">
+												<button type="button" class="btn btn-primary btn-add-row" id="">Add Item</button>
+											</div>
+										</div>
+										<h4>Order Items</h4>
+										<hr>
+										<table class="table table-bordered" id="order_items_table">
+											<tr>
+												<th><input id="check_all" type="checkbox"></th>
+												<!-- <th style="width: 6%;">Sr.No</th> -->
+												<th>Particulars</th>
+												<th style="width: 7%;">Quantity</th>
+												<th style="width: 18%;">Rate</th>
+												<th style="width: 18%;">Amount</th>
+											</tr>
+							<!-- <tr>
+								<td><input type="checkbox" class="case"></td>
+								<td><input type="text" class="form-control" id="sr_no"></td>
+								<td><input type="text" class="form-control" name="item_desc_1" id="itemdesc_1"></td>
+								<td><input type="text" class="itemrate form-control" name="item_qty_1" id="itemqty_1"></td>
+								<td><input type="text" class="itemrate form-control" name="item_rate_1" id="itemrate_1"></td>
+								<td><input type="text" class="totalLinePrice form-control" name="item_amount_1" id="itemamount_1"></td>
+							</tr> -->
+						</table>
+						<button type="button" class="btn btn-danger delete btn-sm">- Remove</button>
+						<div class="form-group">
+							<label class="control-label col-lg-offset-8 col-lg-2">Total</label>
+							<div class="col-lg-2">
+								<input type="text" name="order_total" id="order_total" class="form-control" required="">
+							</div>
+						</div>
+						<div class="pull-right">
+							<input type="checkbox" name="add_tax" id="add_tax" onchange="valueChanged()"> Add Tax
+						</div><br>
+						<div id="tax_div" style="display: none;">
+							<div class="form-group">
+								<label class="control-label col-lg-offset-8 col-lg-2">Tax Rate</label>
+								<div class="col-lg-2">
+									<input type="text" name="tax_rate" id="tax_rate" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-lg-offset-8 col-lg-2">CGST</label>
+								<div class="col-lg-2">
+									<input type="text" name="cgst" id="cgst" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-lg-offset-8 col-lg-2">SGST</label>
+								<div class="col-lg-2">
+									<input type="text" name="sgst" id="sgst" class="taxnos form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-lg-offset-8 col-lg-2">Tax Amount</label>
+								<div class="col-lg-2">
+									<input type="text" name="order_tax" id="order_tax" class=" taxnos form-control">
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputCustomers" class="col-sm-2 control-label">Select Product</label>
-							<div class="col-sm-10">
-								<select class="form-control chosen-select" data-placeholder="Choose Product" name="product" id="product" required="">
-									<option value="">Select Product </option>
-									<?php 
-										if (isset($ArrProducts) && !empty($ArrProducts)) {
-											foreach ($ArrProducts as $crow) {
-									?>
-										<option value="<?php echo $crow['id']; ?>"><?php echo $crow['name']; ?></option>
-									<?php }	} ?>
-								</select>
+							<label class="control-label col-lg-offset-8 col-lg-2">Net Amount</label>
+							<div class="col-lg-2">
+								<input type="text" name="order_net_amount" id="order_net_amount" class="form-control" required="">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Product Price</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="sproduct_price" name="sproduct_price" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Price" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('sproduct_price'); ?>">
+							<label class="control-label col-lg-offset-8 col-lg-2">Paid Amount</label>
+							<div class="col-lg-2">
+								<input type="text" name="order_paid_amount" id="order_paid_amount" class="form-control" required="">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Quantity</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="sproduct_quantity" required="" name="sproduct_quantity" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Quantity" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('sproduct_quantity'); ?>">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Amount</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="total_amount" name="total_amount" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('total_amount'); ?>">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Amount Paid</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="paid_amount" required="" name="paid_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount Paid" value="<?php echo set_value('paid_amount'); ?>">
-							</div>
-							<label for="inputEmail3" class="col-sm-2 control-label">Amount Paid Date</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="amount_paid_date" name="amount_paid_date" required="" value="<?php echo (isset($ObjProduct->payment_date) && !empty($ObjProduct->payment_date)) ? $ObjProduct->payment_date : set_value('amount_paid_date'); ?>" >
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">GST %</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="gst_rate" name="gst_rate" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="GST Rate" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('gst_rate'); ?>">
-							</div>
-							<label for="inputEmail3" class="col-sm-2 control-label">GST Amount</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="gst_amount" name="gst_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="GST Amount" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('gst_amount'); ?>">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Net Amount</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="net_amount" name="net_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount" value="<?php echo (isset($ObjProduct->total_amount) && !empty($ObjProduct->total_amount)) ? round($ObjProduct->total_amount, 2) : set_value('net_amount'); ?>">
-							</div>
-							<label for="inputEmail3" class="col-sm-2 control-label">Amount Due</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="due_amount" name="due_amount" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount Due" value="<?php echo (isset($ObjProduct->due_amount) && !empty($ObjProduct->due_amount)) ? round($ObjProduct->due_amount, 2) : set_value('due_amount'); ?>" readonly>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Installation Date</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control" id="install_date" name="install_date" value="<?php echo set_value('install_date'); ?>" required="">
-							</div>
-							<label for="inputEmail3" class="col-sm-2 control-label">Next AMC Date</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control" id="amc_date" name="amc_date" value="<?php echo set_value('amc_date'); ?>" readonly="" required="">
-							</div>
-							<label for="inputEmail3" class="col-sm-2 control-label">AMC  Reminder Date</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control" id="amc_reminder_date" name="amc_reminder_date" value="<?php echo set_value('amc_reminder_date'); ?>" readonly="" required="">
+							<label class="control-label col-lg-offset-8 col-lg-2">Due Amount</label>
+							<div class="col-lg-2">
+								<input type="text" name="order_due_amount" id="order_due_amount" class="form-control" required="">
 							</div>
 						</div>
 					</div>
@@ -142,10 +183,11 @@
 						<div class="form-group">
 							<div class=" col-sm-offset-2 col-sm-10">
 								<button type="reset" class="btn btn-default">Cancel</button>	
-								<button type="submit" class="btn btn-primary"><?php echo (isset($ObjProduct->id) && !empty($ObjProduct->id)) ? 'Update' : 'Add'; ?></button>	
+								<button type="submit" class="btn btn-primary">Save Order</button>	
 							</div>
 						</div>					
 					</div>
+					<input type="hidden" name="icnt" id="icnt" />
 					<?php form_close(); ?>
 				</div>
 			</section>
@@ -170,7 +212,11 @@
 			for (var selector in config) {
 				$(selector).chosen(config[selector]);
 			}
-
+			$('#customer').on('change', function() {
+				if ($('#customer').val() != '') {
+					$('#customer_name').val(($("#customer option:selected").text()));
+				}
+			});
 			$('#product').on('change', function() {
 				var product = $('#product').val();
 				if (product != '') {
@@ -182,55 +228,127 @@
 							var result = $.parseJSON(data);
 							if (result){
 								result = parseFloat(result);
+								$('#sproduct_name').val($("#product option:selected").text());
 								$('#sproduct_price').val(result.toFixed(0));
 							} 
 						}
 					});
 				}
 			});
-			$('#sproduct_quantity').on('keyup', function() {
-				var product_price = $('#sproduct_price').val();
-				$('#total_amount').val(product_price * $('#sproduct_quantity').val());
+			$('.price').on('keyup', function() {
+				var sproduct_rate = $('#sproduct_rate').val();
+				$('#sproduct_amount').val(sproduct_rate * $('#sproduct_quantity').val());
 			});
-			$('#gst_rate').on('keyup', function() {
-				var paid_amount = $('#paid_amount').val();
-				$('#gst_amount').val((paid_amount * $('#gst_rate').val()) / 100);
-				$('#net_amount').val(parseInt($('#gst_amount').val()) + parseInt($('#paid_amount').val()));
+
+			var i = 1;
+			$('.btn-add-row').on('click', function(){
+				var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control" name="item_desc_'+i+'" value="'+$('#sproduct_name').val()+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="item_qty_'+i+'" value="'+$('#sproduct_quantity').val()+'"></td><td><input type="text" class="itemrate form-control" name="item_rate_'+i+'" id="itemrate_'+i+'" value="'+$('#sproduct_rate').val()+'"></td><td><input type="text" class="totalLinePrice form-control" id="itemamount_'+i+'" name="item_amount_'+i+'" value="'+$('#sproduct_amount').val()+'"></td></tr>';
+				$('#order_items_table').append(row);
+				i++;
+				$('#icnt').val(i-1);
+				calculateTotal();
+				$('#sproduct_name').val('');
+				$('#sproduct_price').val('');
+				$('#sproduct_quantity').val('');
+				$('#sproduct_rate').val('');
+				$('#sproduct_amount').val('');
 			});
-			$('#paid_amount').on('keyup', function() {
-				var total_amount = $('#total_amount').val();
-				if ((parseInt($('#paid_amount').val())) > parseInt(total_amount)) {
+
+			$("#order_items_table").on("keyup", ".itemrate", function () {
+				id = $(this).attr('id').split("_");
+				quantity = $('#itemqty_'+id[1]).val();
+				price = $('#itemrate_'+id[1]).val();
+				if( quantity!='' && price !='' )
+					$('#itemamount_'+id[1]).val( (parseFloat(price)*parseFloat(quantity)).toFixed(2) );
+				calculateTotal();
+			});
+			//to check all checkboxes
+			$("#order_items_table").on("change", "#check_all", function () {
+				$('input[class=case]:checkbox').prop("checked", $(this).is(':checked'));
+			});
+			//deletes the selected table rows
+			$(".delete").on("click", function () {
+				var items = 0;
+				$('.case:checkbox:checked').parents("tr").remove();
+				$('#check_all').prop("checked", false);
+				$('.totalLinePrice').each(function(){
+					items++;
+				});
+				$('#icnt').val(items);
+				calculateTotal();
+			});
+			$('#tax_rate').on('keyup', function(){
+				var order_total = $('#order_total').val();
+				var tax_rate = $('#tax_rate').val();
+				var total_tax = ((parseFloat(order_total) * parseFloat(tax_rate))/100);
+				$('#order_tax').val(total_tax.toFixed(2));
+				$('#cgst,#sgst').val((parseFloat(total_tax)/2).toFixed(2));
+				var net_total = (parseFloat($('#order_tax').val()) + parseFloat($('#order_total').val()));
+				$('#order_net_amount').val(net_total.toFixed(2));
+			})
+			$('#order_paid_amount').on('keyup', function() {
+				var order_net_amount = $('#order_net_amount').val();
+				if ((parseInt($('#order_paid_amount').val())) > parseInt(order_net_amount)) {
 					alert('Amount Paid value should not be greater than Amount value.');
-					$('#due_amount').val('0');
+					$('#order_due_amount').val('0');
 					return false;
 				} else{
-					$('#due_amount').val(total_amount - $('#paid_amount').val());
+					$('#order_due_amount').val(order_net_amount - $('#order_paid_amount').val());
 				}
 			});
 
-			$('#amount_paid_date,#install_date').datepicker({
+			$('#sale_date').datepicker({
 				format: "dd-mm-yyyy",
 				// startDate: "+0d"
 			});
-
-			$('#install_date').on('change', function() {
-				var install_date = $('#install_date').val();
-				if (install_date != '') {
-					$.post({
-						type : 'POST',
-						url  : '<?php echo site_url('SujalProductsController/getAmcDate'); ?>',
-						data : {install_date:install_date,<?php echo $this->security->get_csrf_token_name(); ?>:'<?php echo $this->security->get_csrf_hash();?>'},
-						success:function(data) {
-							var result = $.parseJSON(data);
-							if (result){
-								$('#amc_date').val(result.amc_date);
-								$('#amc_reminder_date').val(result.amc_reminder_date);
-							} 
-						}
-					});
-				}
-			});
+			
 		});
-	</script>
-</body>
-</html>
+function valueChanged() {
+	if($('#add_tax').is(":checked"))   
+		$("#tax_div").css('display','block');
+	else{
+		$("#tax_div").css('display','none');
+		$('#tax_rate').val(0);
+		$('#cgst').val(0);
+		$('#sgst').val(0);
+		$('#order_tax').val(0);
+		calculateTotal();
+	}
+}
+			//total price calculation
+			function calculateTotal(){
+				subTotal = 0 ; total = 0; items=0;
+				$('.totalLinePrice').each(function(){
+					if($(this).val() != '')
+						subTotal += parseFloat($(this).val());
+					items++;
+				});
+				$('#order_total').val(subTotal.toFixed(2));
+				if($('#add_tax').is(":checked")){
+					tax = $('#order_tax').val();
+					if(tax != '' && typeof(tax) != "undefined" ){
+						if (items == 0) {
+							$('#tax_rate').val(0);
+							$('#cgst').val(0);
+							$('#sgst').val(0);
+							$('#order_tax').val(0);
+							$('#order_net_amount').val(0);
+							total = 0;	
+						} else {
+							var order_total = $('#order_total').val();
+							var tax_rate = $('#tax_rate').val();
+							var taxAmount = ((parseFloat(order_total) * parseFloat(tax_rate))/100);
+							$('#order_tax').val(taxAmount.toFixed(2));
+							$('#cgst,#sgst').val((parseFloat(taxAmount)/2).toFixed(2));
+							total = subTotal + taxAmount;
+						}
+					}
+				}else{
+					$('#order_tax').val(0);
+					total = subTotal;
+				}
+				$('#order_net_amount').val(total.toFixed(2) );
+			}
+		</script>
+	</body>
+	</html>
