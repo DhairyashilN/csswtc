@@ -50,6 +50,7 @@ class LoginController extends CI_Controller {
 	}
 
 	public function logout(){
+		#AAA;
 		$this->session->unset_userdata($this->session->userdata('id'));
 		$this->session->sess_destroy();
 		redirect(base_url());
