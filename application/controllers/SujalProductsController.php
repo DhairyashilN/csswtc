@@ -259,6 +259,21 @@ class SujalProductsController extends CI_Controller {
 		}
 	}
 
+	public function destroy_sale($id='') {
+		if ($this->session->userdata('login')!=1) {
+			redirect(base_url());
+		} else {
+			if (isset($id) && !empty($id)) {
+				$this->db->where('id', $id);
+				$this->db->update('sujal_orders', ['deleted' => 1]);
+				$this->db->where('sujal_order_id', $id);
+				$this->db->update('sujal_order_items', ['deleted' => 1]);
+				$this->session->set_flashdata('success','Product Sale Deleted successfully.');
+				redirect('sale_product');
+			}
+		}
+	}
+
 	//For AJAX from views.
 	public function getProductPrice() {
 		$this->db->select('price');

@@ -67,6 +67,7 @@ $route['sale_new_sujal_product'] = 'SujalProductsController/create_sale';
 $route['save_sujal_product_sale'] = 'SujalProductsController/store_sale';
 $route['edit_sujal_product_sale/(:num)'] = 'SujalProductsController/edit_sale/$1';
 $route['save_sujal_product_sale/(:num)'] = 'SujalProductsController/update_sale/$1';
+$route['delete_sujal_sale/(:num)'] = 'SujalProductsController/destroy_sale/$1';
 /*Sujal Invoices Routes*/
 $route['sujal_invoices'] = 'SujalInvoiceController/index';
 $route['sujal_dues_payments'] = 'SujalInvoiceController/dues_payments_list';
@@ -117,6 +118,9 @@ $route['edit_non_sujal_invoice/(:num)'] = 'InvoiceController/edit/$1';
 $route['save_non_sujal_invoice/(:num)'] = 'InvoiceController/update_invoice/$1';
 $route['view_non_sujal_invoice/(:num)'] = 'InvoiceController/show_invoice/$1';
 $route['generate_pdf/(:num)'] = 'InvoiceController/generate_pdf/$1';
+
+$route['invoice_prefix'] = 'SettingsController/index';
+$route['save_invoice_prefix'] = 'SettingsController/store';
 
 /*User Routes*/
 $route['user'] = 'UserController/index';

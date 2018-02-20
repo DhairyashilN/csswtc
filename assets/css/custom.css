@@ -13,10 +13,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{ font-family: 'Open Sans' !
 .table-item-info { margin-top: -1px; }
 /*@page {
 	size: A4 landscape;
-}*/
-@media print {
-    .print-btn { display: none; }
-    body{color:#000;}
-    .invoice-header-top ,.invoice-header-bottom{border-color: #000;}
-    .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { border: 1px solid #000 !important; }
-}
+	}*/
+	@media print {
+		.print-btn { display: none; }
+		body{color:#000;}
+		.invoice-box{ margin: 10px auto; padding: 5px 5px; width: 100% !important;  }
+		.invoice-header-top ,.invoice-header-bottom{border-color: #000;}
+		.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { border: 1px solid #000 !important; }
+	}

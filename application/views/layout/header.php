@@ -44,7 +44,7 @@
                   <a href="#">
                     <p><i class="fa fa-users text-aqua"></i> <?php echo $row['notification_title']; ?></p> 
                     <p><?php echo $row['customer_name']; ?></p>
-                    <p>AMC Date - 31/01/2019</p> 
+                    <p>AMC Date - <?php echo $row['amc_date']; ?></p> 
                   </a>
                 </li>
                 <?php }}} ?>

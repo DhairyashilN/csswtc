@@ -10,10 +10,18 @@ class SettingsController extends CI_Controller {
 	}
 
 	public function index() {	
-		
-		
+		$this->db->select('id,prefix');
+		$this->db->from('invoice_prefix');
+		$this->db->where('deleted',0);
+		$page_data['ArrPrefix'] = $this->db->get()->result_array();
+		$page_data['active_menu'] = '';
+		$this->load->view('invoice_settings', $page_data);
 	}
 
+	public function store(){
+		echo '<pre/>'; print_r($_POST);
+	}
+ 
 }
 
 /* End of file SettingsController.php */
