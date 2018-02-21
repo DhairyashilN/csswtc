@@ -108,6 +108,7 @@ $route['non_sujals_amcs'] = 'NonSujalAmcController/index';
 $route['view_non_sujal_amc/(:num)'] = 'NonSujalAmcController/create/$1';
 $route['save_amc_data'] = 'NonSujalAmcController/store';
 $route['save_amc_data/(:num)'] = 'NonSujalAmcController/store/$1';
+$route['delete_non_sujal_amc/(:num)'] = 'NonSujalAmcController/destroy/$1';
 $route['remove_amc/(:num)'] = 'NonSujalAmcController/destroy_history/$1';
 
 /*Invoices Routes*/

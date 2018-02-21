@@ -81,6 +81,19 @@ class NonSujalAmcController extends CI_Controller {
 		echo json_encode(['amc_date'=>$amc_date, 'amc_reminder_date'=>$amc_reminder_date]);
 	}
 
+	public function destroy($id='') {
+		if ($this->session->userdata('login')!=1) {
+			redirect(base_url());
+		} else {
+			if (isset($id) && !empty($id)) {
+				$this->db->where('id', $id);
+				$this->db->update('non_sujal_amcs', ['deleted' => 1]);
+				$this->session->set_flashdata('success','AMC Deleted successfully.');
+			}
+			redirect('non_sujals_amcs');
+		}
+	}
+
 	public function destroy_history($id='') {
 		if ($this->session->userdata('login')!=1) {
 			redirect(base_url());
@@ -90,7 +103,7 @@ class NonSujalAmcController extends CI_Controller {
 				$this->db->update('non_sujal_amc_items', ['deleted' => 1]);
 				$this->session->set_flashdata('success','AMC Data Deleted successfully.');
 			}
-				redirect('non_sujal_amcs');
+			redirect('non_sujals_amcs');
 		}
 	}
 }
