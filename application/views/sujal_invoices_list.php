@@ -53,6 +53,7 @@
 										<th>Invoice Date</th>
 										<th>Customer Name</th>
 										<th>Invoice Amount</th>
+										<th>Payment Mode</th>
 										<th>Action</th>
 									</tr>
 								</thead>
@@ -67,6 +68,7 @@
 										<td><?php echo $row['invoice_no'];?></td>
 										<td><?php echo $row['invoice_date']; ?></td>
 										<td><?php echo $row['customer_name']; ?></td>
+										<td><?php echo $row['payment_mode']; ?></td>
 										<td><?php echo $row['invoice_net_amount']; ?></td>
 										<td>
 											<a href="<?php echo site_url('view_sujal_invoice/'.$row['id']); ?>" title="View" target="_blank"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>

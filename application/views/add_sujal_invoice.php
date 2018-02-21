@@ -42,7 +42,7 @@
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
-						<span class="box-title"><a href="<?php echo site_url('non_sujal_invoices'); ?>"><button class="btn btn-warning"><i class="fa fa-plus" aria-hidden="true"></i> Back to List</button></a></span>
+						<span class="box-title"><a href="<?php echo site_url('sujal_invoices'); ?>"><button class="btn btn-warning"><i class="fa fa-plus" aria-hidden="true"></i> Back to List</button></a></span>
 					</div>
 					<div class="box-body">
 						<?php echo form_open('save_sujal_invoice', array('method'=>'post','class'=>'form-horizontal','autocomplete'=>'off')); ?>

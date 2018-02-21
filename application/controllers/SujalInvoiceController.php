@@ -12,7 +12,7 @@ class SujalInvoiceController extends CI_Controller {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
-			$this->db->select('id,invoice_no,customer_name,invoice_date,invoice_net_amount');
+			$this->db->select('id,invoice_no,customer_name,invoice_date,invoice_net_amount,payment_mode');
 			$this->db->from('sujal_invoices');
 			$this->db->where('deleted', 0);
 			$this->db->order_by('id','desc');
