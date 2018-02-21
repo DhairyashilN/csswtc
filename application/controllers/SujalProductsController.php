@@ -75,6 +75,7 @@ class SujalProductsController extends CI_Controller {
 			if (isset($id) && !empty($id)) {
 				$this->db->select('name,price,hsn_code');
 				$this->db->from('sujal_products');
+				$this->db->where('id', $id);
 				$this->db->where('deleted', 0);
 				$page_data['ObjProduct'] = $this->db->get()->row();
 				$page_data['active_menu'] = 'products';
