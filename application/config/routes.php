@@ -101,6 +101,7 @@ $route['sujals_amcs'] = 'SujalAmcController/index';
 $route['save_sujal_amc/(:num)'] = 'SujalAmcController/store/$1';
 $route['view_sujal_amc/(:num)'] = 'SujalAmcController/create/$1';
 $route['save_sujal_amc_data'] = 'SujalAmcController/store';
+$route['delete_sujal_amc/(:num)'] = 'SujalAmcController/destroy/$1';
 $route['delete_amc_history/(:num)'] = 'SujalAmcController/destroy_history/$1';
 
 /*Non Sujal AMC Routes*/

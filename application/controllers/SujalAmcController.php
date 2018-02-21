@@ -75,6 +75,19 @@ class SujalAmcController extends CI_Controller {
 		}
 	}
 
+	public function destroy($id='') {
+		if ($this->session->userdata('login')!=1) {
+			redirect(base_url());
+		} else {
+			if (isset($id) && !empty($id)) {
+				$this->db->where('id', $id);
+				$this->db->update('sujal_amc', ['deleted' => 1]);
+				$this->session->set_flashdata('success','Sujal AMC Deleted successfully.');
+			}
+			redirect('sujals_amcs');
+		}
+	}
+
 	public function destroy_history($id='') {
 		if ($this->session->userdata('login')!=1) {
 			redirect(base_url());

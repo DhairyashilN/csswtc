@@ -75,7 +75,7 @@
 						                              		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
 						                              		<br>
 						                              		<h3>Are you want to delete?</h3><br/>
-						                              		<a href="<?php echo site_url('delete_sujal_product/'.$row['id']);?>"><button type="button" class="btn btn-danger" >Yes</button></a>&nbsp;&nbsp;
+						                              		<a href="<?php echo site_url('delete_sujal_amc/'.$row['id']);?>"><button type="button" class="btn btn-danger" >Yes</button></a>&nbsp;&nbsp;
 						                              		<button type="button" class="btn btn-warning" data-dismiss="modal">No</button> 
 						                            	</div>
 						                          	</div>

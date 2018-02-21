@@ -212,19 +212,6 @@ class SujalInvoiceController extends CI_Controller {
 		}
 	}
 
-	public function destroy($id='') {
-		if ($this->session->userdata('login')!=1) {
-			redirect(base_url());
-		} else {
-			if (isset($id) && !empty($id)) {
-				$this->db->where('id', $id);
-				$this->db->update('sujal_products', ['deleted' => 1]);
-				$this->session->set_flashdata('success','Product Deleted successfully.');
-				redirect('sujal_products');
-			}
-		}
-	}
-
 	public function displaywords($number){
 		$decimal = round($number - ($no = floor($number)), 2) * 100;
 		$hundred = null;
