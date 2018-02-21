@@ -40,9 +40,9 @@
 					</div>
 					<div class="box-body">
 						<?php if (isset($ObjProduct->id) && !empty($ObjProduct->id)): ?>
-							<?php echo form_open('save_sujal_product/'.$ObjProduct->id, array('method'=>'post','class'=>'form-horizontal')); ?>
+							<?php echo form_open('save_sujal_product/'.$ObjProduct->id, array('method'=>'post','class'=>'form-horizontal','autocomplete'=>'off')); ?>
 						<?php else: ?>
-							<?php echo form_open('save_sujal_product', array('method'=>'post','class'=>'form-horizontal')); ?>
+							<?php echo form_open('save_sujal_product', array('method'=>'post','class'=>'form-horizontal','autocomplete'=>'off')); ?>
 						<?php endif ?>
 						<div class="form-group">
 							<label for="inputName" class="col-sm-2 control-label">Product Name</label>

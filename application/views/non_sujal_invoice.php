@@ -15,9 +15,9 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="invoice-box">
-					<div class="invoice-header text-center">
+					<!-- <div class="invoice-header text-center">
 						<div class="invoice-header-top">
-							<h5><?php echo isset($ObjInvoice->invoice_tax_rate) && ($ObjInvoice->invoice_tax_rate!=0) ? 'TAX INVOICE' : ''; ?></h5>
+							<h5><?php //echo isset($ObjInvoice->invoice_tax_rate) && ($ObjInvoice->invoice_tax_rate!=0) ? 'TAX INVOICE' : ''; ?></h5>
 							<h3 style="margin-top:10px;"><b>SHREE CHINTAMANI SERVICES</b></h3>
 							<h4 style="font-size:16px;"><b>Water Tank Cleaning Solutions</b></h4>
 						</div>
@@ -26,25 +26,37 @@
 							<h5>Contact: (+91) 9168096161 | Email : chintamani1937@gmail.com | Website : www.shreechintamaniservices.in</h5>
 							<h5>GSTIN: 27ABCDE2292F1ZJ</h5>
 						</div>
-					</div>
+					</div> -->
 					<div class="invoice-body">					
 						<div class="table-responsive">
-							<table class="table table-bordered table-customer-info">
+							<table class="table table-bordered table-customer-info" style="margin-bottom: 5px">
+								<tr class="text-center">
+									<td colspan="5">
+										<h5><?php echo isset($ObjInvoice->invoice_tax_rate) && ($ObjInvoice->invoice_tax_rate!=0) ? 'TAX INVOICE' : ''; ?></h5>
+										<h3 style="margin-top:10px;"><b>SHREE CHINTAMANI SERVICES</b></h3>
+										<h4 style="font-size:16px;"><b>Water Tank Cleaning Solutions</b></h4>
+									</td>
+								</tr>
+								<tr class="text-center">
+									<td colspan="5">
+										<h4 style="font-size:16px;">Rahatani, Pune – 411017.</h4>
+										<h5>Contact: (+91) 9168096161 | Email : chintamani1937@gmail.com | Website : www.shreechintamaniservices.in</h5>
+										<h5>GSTIN: 27ABCDE2292F1ZJ</h5>
+									</td>
+								</tr>
 								<tr>
-									<td colspan="2">
+									<td colspan="3">
 										<b>To,</b><br>
-										<?php echo $ObjInvoice->customer_name; ?><br>
-										<?php echo $ObjInvoice->address; ?><br>
-										<?php echo 'Contact : '.$ObjInvoice->contact_no; ?><br>
-										<?php echo 'GSTIN : '.$ObjInvoice->customer_gstin; ?>
+										<p><?php echo $ObjInvoice->customer_name; ?></br>
+										<?php echo $ObjInvoice->address; ?></p>
+										<p><?php echo 'Contact : '.$ObjInvoice->contact_no; ?><br>
+										<?php echo 'GSTIN : '.$ObjInvoice->customer_gstin; ?></p>
 									</td>
 									<td colspan="2">
 										<p><b>Bill No. :</b><?php echo $ObjInvoice->invoice_no; ?></p>
 										<p><b>Date :</b> <?php echo $ObjInvoice->invoice_date; ?></p>
 									</td>
 								</tr>
-							</table>
-							<table class="table table-bordered table-item-info" style="margin-bottom: 5px">
 								<tr>
 									<th style="width: 9%;" class="text-center">Sr. No.</th>
 									<th class="text-center">Item Details</th>

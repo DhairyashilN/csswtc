@@ -42,7 +42,7 @@
 						<span class="box-title"><a href="<?php echo site_url('sale_product'); ?>"><button class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to List</button></a></span>
 					</div>
 					<div class="box-body">
-						<?php echo form_open('save_sujal_product_sale/'.$ObjOrder->id, array('method'=>'post','class'=>'form-horizontal')); ?>
+						<?php echo form_open('save_sujal_product_sale/'.$ObjOrder->id, array('method'=>'post','class'=>'form-horizontal','autocomplete'=>'off')); ?>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Sale Date</label>
 							<div class="col-sm-10">

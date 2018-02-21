@@ -79,7 +79,7 @@
 																<h4 class="modal-title" id="myModalLabel">Edit AMC Details</h4>
 															</div>
 															<div class="modal-body">
-																<form class="form-horizontal" method="POST" action="<?php echo site_url('save_amc_data/'.$row['id']) ?>">
+																<form class="form-horizontal" method="POST" autocomplete = "off" action="<?php echo site_url('save_amc_data/'.$row['id']) ?>">
 																	<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 																	<input type="hidden" name="amc_id" value="<?php echo (isset($ObjAmc) && !empty($ObjAmc) ? $ObjAmc->id : '' ) ?>">
 																	<div class="form-group">
@@ -157,7 +157,7 @@
 						<h4 class="modal-title" id="myModalLabel">Add AMC Details</h4>
 					</div>
 					<div class="modal-body">
-						<?php echo form_open('save_amc_data', array('method'=>'post','class'=>'form-horizontal')); ?>
+						<?php echo form_open('save_amc_data', array('method'=>'post','class'=>'form-horizontal','autocomplete'=>'off')); ?>
 						<input type="hidden" name="amc_id" value="<?php echo (isset($ObjAmc) && !empty($ObjAmc) ? $ObjAmc->id : '' ) ?>">
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">AMC Date</label>
