@@ -16,7 +16,7 @@ if ($this->session->userdata('login')!=1){}else{redirect('dashboard');}
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<a href="<?php echo base_url(); ?>"><b>Chintamani Services</b> </a>
+			<a href="<?php echo base_url(); ?>"><b> Shree Chintamani Services</b> </a>
 		</div>
 		<div class="login-box-body">
 			<?php if($this->session->flashdata('loginfail')){?>
