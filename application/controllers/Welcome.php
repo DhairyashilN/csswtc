@@ -22,4 +22,16 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('index');
 	}
+
+	public function test() {
+		$data['active_menu'] = 'test';
+		$this->load->view('test',$data);
+	}
+
+	public function getAmcDate() {
+		echo $next_amc_date = date("d-m-Y", strtotime("+3 months", strtotime($this->input->post('amc_date'))));
+		echo $next_amc_date1 = date("d-m-Y", strtotime("+3 months", strtotime($next_amc_date)));
+		echo $next_amc_date2 = date("d-m-Y", strtotime("+3 months", strtotime($next_amc_date1)));
+		echo $next_amc_date3 = date("d-m-Y", strtotime("+3 months", strtotime($next_amc_date2)));
+	}
 }

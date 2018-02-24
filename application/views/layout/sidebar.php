@@ -26,6 +26,8 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="<?php echo site_url('sujal_products'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal Products</a></li>
+          <li><a href="<?php echo site_url('water_tank_types'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Water Tank Types</a></li>
+          <li><a href="<?php echo site_url('water_tanks'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Water Tanks</a></li>
         </ul>
       </li>
       <li class="treeview <?php if($active_menu == 'customers') { ?>active<?php } ?>">
@@ -78,6 +80,11 @@
           <li><a href="<?php echo site_url('sujals_amcs'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal AMC</a></li>
           <li><a href="<?php echo site_url('non_sujals_amcs'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) AMC</a></li>
         </ul>
+      </li>
+      <li class="<?php if($active_menu == 'test') { ?> active <?php } ?>">
+        <a href="<?php echo site_url('test_amc_dates'); ?>">
+          <i class="fa fa-dashboard"></i> <span>Test AMC Dates</span>
+        </a>
       </li>
       <!-- <li class="treeview <?php if($active_menu == 'settings') { ?>active<?php } ?>">
         <a href="#">

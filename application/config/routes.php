@@ -50,6 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'welcome';
+// $route['test_amc_dates'] = 'Welcome/test';
+// $route['get_dates'] = 'Welcome/getAmcDate';
 /*Login and Dashboard Routes*/
 $route['login'] = 'LoginController/validate_login';
 $route['dashboard'] = 'LoginController/dashboard';
@@ -121,6 +123,7 @@ $route['save_non_sujal_invoice/(:num)'] = 'InvoiceController/update_invoice/$1';
 $route['view_non_sujal_invoice/(:num)'] = 'InvoiceController/show_invoice/$1';
 $route['generate_pdf/(:num)'] = 'InvoiceController/generate_pdf/$1';
 
+/*Settings Routes*/
 $route['invoice_prefix'] = 'SettingsController/index';
 $route['save_invoice_prefix'] = 'SettingsController/store';
 
