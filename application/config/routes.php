@@ -123,6 +123,17 @@ $route['save_non_sujal_invoice/(:num)'] = 'InvoiceController/update_invoice/$1';
 $route['view_non_sujal_invoice/(:num)'] = 'InvoiceController/show_invoice/$1';
 $route['generate_pdf/(:num)'] = 'InvoiceController/generate_pdf/$1';
 
+
+/*======================== Water Tanks Modules Routes ========================*/
+
+/*Water Tanks types and capacity routes*/
+$route['water_tank_types']  = 'WatertanksController/index';
+$route['add_water_tank_type'] = 'WatertanksController/create';
+$route['save_water_tank_type'] = 'WatertanksController/store';
+$route['edit_water_tank_types/(:num)'] = 'WatertanksController/create/$1';
+$route['save_water_tank_type/(:num)'] = 'WatertanksController/store/$1';
+$route['delete_water_tank_types/(:num)'] = 'WatertanksController/destroy/$1';
+
 /*Settings Routes*/
 $route['invoice_prefix'] = 'SettingsController/index';
 $route['save_invoice_prefix'] = 'SettingsController/store';
