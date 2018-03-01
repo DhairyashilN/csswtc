@@ -41,6 +41,7 @@
         <ul class="treeview-menu">
           <li><a href="<?php echo site_url('sujal_customers'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal Customers</a></li>
           <li><a href="<?php echo site_url('non_sujal_customers'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) Customers</a></li>
+          <li><a href="<?php echo site_url('water_tank_cleaning_customers'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Water Tank Cleaning<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Customers</a></li>
         </ul>
       </li>
       <li class="treeview <?php if($active_menu == 'products_sold') { ?>active<?php } ?>">
