@@ -50,155 +50,264 @@
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Name</label>
 							<div class="col-sm-5">
-								<input type="text" class="form-control" id="cust_name" name="scust_name" required="" onkeyup="this.value=this.value.replace(/[^A-Z a-z . ,]/g,'')" placeholder="Name" value="">
+								<input type="text" class="form-control" id="cust_name" name="cust_name" required="" onkeyup="this.value=this.value.replace(/[^A-Z a-z . ,]/g,'')" placeholder="Name" value="">
 							</div>
 							<label for="inputEmail3" class="col-sm-1 control-label">GSTIN</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="cust_gstin" name="scust_gstin"  placeholder="GSTIN" value="">
+								<input type="text" class="form-control" id="cust_gstin" name="cust_gstin"  placeholder="GSTIN" value="">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Contact No.</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="cust_contact" name="scust_contact" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Contact No." value="">
+								<input type="text" class="form-control" id="cust_contact" name="cust_contact" required="" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Contact No." value="">
 							</div>
 							<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 							<div class="col-sm-4">
-								<input type="email" class="form-control" id="cust_email" name="scust_email"  placeholder="Email" value="">
+								<input type="email" class="form-control" id="cust_email" name="cust_email"  placeholder="Email" value="">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Address</label>
 							<div class="col-sm-10">
-								<textarea rows="5" class="form-control" id="scust_address" name="scust_address" required="" placeholder="Address"></textarea>
+								<textarea rows="5" class="form-control" id="cust_address" name="cust_address" required="" placeholder="Address"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputCustomers" class="col-sm-2 control-label">Select Water Tank Type</label>
 							<div class="col-sm-4">
-								<select class="form-control chosen-select" data-placeholder="Choose Product" id="wtank_type">
+								<select class="form-control" data-placeholder="Choose Tank Type" id="wtank_type">
 									<option value="">Select Type </option>
 									<?php if (isset($ArrTankTypes) && !empty($ArrTankTypes)) {
 										foreach ($ArrTankTypes as $trow) {
-									?>
-									<option value="<?php echo $trow['id']; ?>"><?php echo $trow['name']; ?></option>
-									<?php }	} ?>
-								</select>
+											?>
+											<option value="<?php echo $trow['id']; ?>"><?php echo $trow['name']; ?></option>
+											<?php }	} ?>
+										</select>
+									</div>
+									<label for="inputCustomers" class="col-sm-2 control-label">Select Water Tank</label>
+									<div class="col-sm-4">
+										<select class="form-control" data-placeholder="Choose Water " id="wtank">
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputCustomers" class="col-sm-2 control-label">Quantity</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="wtank_quantity" placeholder="Enter Quantity">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-2">
+										<button type="button" class="btn btn-primary btn-add-row">Add Item</button>
+									</div>
+								</div>
+								<hr>
+								<h4>Water Tanks Information </h4>
+								<hr>
+								<table class="table table-bordered" id="tanks_info_table">
+									<tr>
+										<th><input id="check_all" type="checkbox"></th>
+										<!-- <th style="width: 6%;">Sr.No</th> -->
+										<th>Tank Type</th>
+										<th>Capacity</th>
+										<th style="width: 10%;">Quantity</th>
+									</tr>
+								</table>
+								<button type="button" class="btn btn-danger delete btn-sm">- Remove</button>
+								<hr>
+								<h4>AMC Information </h4>
+								<hr>
+								<div class="form-group">
+									<label for="inputCustomers" class="col-sm-2 control-label">Select AMC Type</label>
+									<div class="col-sm-4">
+										<select class="form-control" id="amc_type" data-placeholder="Choose AMC Type">
+											<option value="">Select</option>
+											<option value="1">AMC1</option>
+											<option value="2">AMC2</option>
+											<option value="3">AMC3</option>
+											<option value="4">AMC4</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group" id="date_block_1" style="display:none;">
+									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="amc_date" onchange="getAmcDate(this.value);" name="amc_date_1" placeholder="Enter AMC Date">
+									</div>
+								</div>
+								<div class="form-group" id="date_block_2" style="display:none;">
+									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 1</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="amc_date1" name="amc_date_1" onchange="getAmcDate(this.value);" placeholder="Enter AMC Date">
+									</div>
+									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 2</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="amc_date2" name="amc_date_2" placeholder="Enter AMC Date">
+									</div>
+								</div>
+								<div class="form-group" id="date_block_3" style="display:none;">
+									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 1</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="amc_date3" name="amc_date_1" onchange="getAmcDate(this.value);" placeholder="Enter AMC Date">
+									</div>
+									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 2</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="amc_date4" name="amc_date_2" placeholder="Enter AMC Date">
+									</div>
+									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 3</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="amc_date5" name="amc_date_3" placeholder="Enter AMC Date">
+									</div>
+								</div>
+								<div class="form-group" id="date_block_4" style="display:none;">
+									<label for="inputCustomers" class="col-sm-1 control-label">AMC Date 1</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="amc_date6" name="amc_date_1" onchange="getAmcDate(this.value);" placeholder="Enter AMC Date">
+									</div>
+									<label for="inputCustomers" class="col-sm-1 control-label">AMC Date 2</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="amc_date7" name="amc_date_2" placeholder="Enter AMC Date">
+									</div>
+									<label for="inputCustomers" class="col-sm-1 control-label">AMC Date 3</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="amc_date8" name="amc_date_3" placeholder="Enter AMC Date">
+									</div>
+									<label for="inputCustomers" class="col-sm-1 control-label">AMC Date 4</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" id="amc_date9" name="amc_date_4" placeholder="Enter AMC Date">
+									</div>
+								</div>
 							</div>
-							<label for="inputCustomers" class="col-sm-2 control-label">Select Water Tank</label>
-							<div class="col-sm-4">
-								<select class="form-control" data-placeholder="Choose Water " id="wtank">
-								</select>
+							<div class="box-footer">
+								<div class="form-group">
+									<div class=" col-sm-offset-2 col-sm-10">
+										<input type="hidden" name="icnt" id="icnt" />
+										<button type="reset" class="btn btn-default">Cancel</button>	
+										<button type="submit" class="btn btn-primary">Add</button>	
+									</div>
+								</div>					
 							</div>
+							<?php form_close(); ?>
 						</div>
-						<div class="form-group">
-							<label for="inputCustomers" class="col-sm-2 control-label">Quantity</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control" id="wtank_quantity" placeholder="Enter Quantity">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-2">
-								<button type="button" class="btn btn-primary btn-add-row">Add Item</button>
-							</div>
-						</div>
-						<hr>
-						<h4>Water Tanks Information </h4>
-						<hr>
-						<table class="table table-bordered" id="tanks_info_table">
-							<tr>
-								<th><input id="check_all" type="checkbox"></th>
-								<!-- <th style="width: 6%;">Sr.No</th> -->
-								<th>Tank Type</th>
-								<th>Capacity</th>
-								<th style="width: 10%;">Quantity</th>
-							</tr>
-						</table>
-						<button type="button" class="btn btn-danger delete btn-sm">- Remove</button>
-						<hr>
-						<h4>AMC Information </h4>
-						<hr>
-						<div class="form-group">
-							<label for="inputCustomers" class="col-sm-2 control-label">Select AMC Type</label>
-							<div class="col-sm-4">
-								<select class="form-control chosen-select" data-placeholder="Choose AMC Type">
-									<option value="">Select</option>
-									<option value="1">AMC1</option>
-									<option value="2">AMC2</option>
-									<option value="3">AMC3</option>
-									<option value="4">AMC4</option>
-								</select>
-							</div>
-							<label for="inputCustomers" class="col-sm-2 control-label">AMC Date</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" name="amc_date" id="amc_date">
-							</div>
-						</div>
-					</div>
-					<div class="box-footer">
-						<div class="form-group">
-							<div class=" col-sm-offset-2 col-sm-10">
-								<button type="reset" class="btn btn-default">Cancel</button>	
-								<button type="submit" class="btn btn-primary">Add</button>	
-							</div>
-						</div>					
-					</div>
-					<?php form_close(); ?>
+					</section>
 				</div>
-			</section>
-		</div>
-		<?php $this->load->view('layout/footer'); ?>
-	</div><!-- /.wrapper -->
-	<script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/adminlte.min.js"></script>
-	<script src="<?php echo base_url();?>assets/plugins/chosen/chosen.jquery.js" type="text/javascript"></script>
-	<script src="<?php echo base_url();?>assets/plugins/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
-	<script src="<?php echo base_url();?>assets/plugins/datepicker/datepicker.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			var config = {
-				'.chosen-select'           : {},
-				'.chosen-select-deselect'  : {allow_single_deselect:true},
-				'.chosen-select-no-single' : {disable_search_threshold:10},
-				'.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-				'.chosen-select-width'     : {width:"95%"}
-			}
-			for (var selector in config) {
-				$(selector).chosen(config[selector]);
-			}
-			$('#amc_date').datepicker({
-				format: "dd-mm-yyyy",
+				<?php $this->load->view('layout/footer'); ?>
+			</div><!-- /.wrapper -->
+			<script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
+			<script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+			<script src="<?php echo base_url();?>assets/js/adminlte.min.js"></script>
+			<script src="<?php echo base_url();?>assets/plugins/chosen/chosen.jquery.js" type="text/javascript"></script>
+			<script src="<?php echo base_url();?>assets/plugins/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+			<script src="<?php echo base_url();?>assets/plugins/datepicker/datepicker.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				function getAmcDate(value) {
+					var amc_date = value;
+					var amc_type = $('#amc_type').val();
+					if ((amc_date != '') && (amc_type != '')) {
+						$.post({
+							type : 'POST',
+							url  : '<?php echo site_url('getAmcDate'); ?>',
+							data : {amc_date:amc_date,amc_type:amc_type,<?php echo $this->security->get_csrf_token_name(); ?>:'<?php echo $this->security->get_csrf_hash();?>'},
+							success:function(data) {
+								var result = $.parseJSON(data);
+								if (result){
+									if (result.amc_type == 2) {
+										$('#amc_date2').val(result.next_amc_date);
+									} if (result.amc_type == 3) {
+										$('#amc_date4').val(result.next_amc_date1);
+										$('#amc_date5').val(result.next_amc_date2);
+									} if (result.amc_type == 4) {
+									 	$('#amc_date7').val(result.next_amc_date1);
+									 	$('#amc_date8').val(result.next_amc_date2);
+									 	$('#amc_date9').val(result.next_amc_date3);
+									}
+								} 
+							}
+						});
+					} else { $("#wtank").html(''); }
+				}
+				$(document).ready(function() {
+					var config = {
+						'.chosen-select'           : {},
+						'.chosen-select-deselect'  : {allow_single_deselect:true},
+						'.chosen-select-no-single' : {disable_search_threshold:10},
+						'.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+						'.chosen-select-width'     : {width:"95%"}
+					}
+					for (var selector in config) {
+						$(selector).chosen(config[selector]);
+					}
+					$('#amc_date,#amc_date1,#amc_date3,#amc_date6').datepicker({
+						format: "dd-mm-yyyy",
 				// startDate: "+0d"
 			});
-			$('#wtank_type').on('change', function() {
-				var tank_type = $('#wtank_type').val();
-				if (tank_type != '') {
-					$.post({
-						type : 'POST',
-						url  : '<?php echo site_url('getTankbyType'); ?>',
-						data : {tank_type:tank_type,<?php echo $this->security->get_csrf_token_name(); ?>:'<?php echo $this->security->get_csrf_hash();?>'},
-						success:function(data) {
-							var result = $.parseJSON(data);
-							if (result){
-								var options = "";
-							    for (var i = 0; i < result.length; i++) {
-							        options +="<option value="+result[i].id+">"+result[i].capacity+"</option>";
-							    }
-							    $("#wtank").html(options);
-							} 
-						}
+					$('#wtank_type').on('change', function() {
+						var tank_type = $('#wtank_type').val();
+						if (tank_type != '') {
+							$.post({
+								type : 'POST',
+								url  : '<?php echo site_url('getTankbyType'); ?>',
+								data : {tank_type:tank_type,<?php echo $this->security->get_csrf_token_name(); ?>:'<?php echo $this->security->get_csrf_hash();?>'},
+								success:function(data) {
+									var result = $.parseJSON(data);
+									if (result){
+										var options = "";
+										for (var i = 0; i < result.length; i++) {
+											options +="<option value="+result[i].id+">"+result[i].capacity+"</option>";
+										}
+										$("#wtank").html(options);
+									} 
+								}
+							});
+						} else { $("#wtank").html(''); }
 					});
-				}
+
+					var i = 1;
+					$('.btn-add-row').on('click', function(){
+						var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control" name="tank_type_'+i+'" value="'+$('#wtank_type option:selected').text()+'"></td><td><input type="text" class="itemrate form-control" name="tank_capacity_'+i+'" value="'+$('#wtank option:selected').text()+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="tank_qty_'+i+'" value="'+$('#wtank_quantity').val()+'"></td></td></tr>';
+						$('#tanks_info_table').append(row);
+						i++;
+						$('#icnt').val(i-1);
+						$('#wtank_type,#wtank_quantity,#wtank').val('');
+					});
+			//to check all checkboxes
+			$("#tanks_info_table").on("change", "#check_all", function () {
+				$('input[class=case]:checkbox').prop("checked", $(this).is(':checked'));
+			});
+			//deletes the selected table rows
+			$(".delete").on("click", function () {
+				var items = 0;
+				$('.case:checkbox:checked').parents("tr").remove();
+				$('#check_all').prop("checked", false);
+				$('.totalLinePrice').each(function(){
+					items++;
+				});
+				$('#icnt').val(items);
 			});
 
-			var i = 1;
-			$('.btn-add-row').on('click', function(){
-				var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control" name="tank_type_'+i+'" value="'+$('#wtank_type option:selected').text()+'"></td><td><input type="text" class="itemrate form-control" name="tank_capacity_'+i+'" value="'+$('#wtank option:selected').text()+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="item_qty_'+i+'" value="'+$('#wtank_quantity').val()+'"></td></td></tr>';
-				$('#tanks_info_table').append(row);
-				i++;
-				// $('#icnt').val(i-1);
-				$('#wtank_type,#wtank_quantity,#wtank').val('');
+			$('#amc_type').on('change', function() {
+				if ($('#amc_type').val() != '') {
+					if($('#amc_type').val() == 1) {
+						$('#date_block_1').css('display','block');
+						$('#date_block_2,#date_block_3,#date_block_4').css('display','none');
+						$('#amc_date1,#amc_date2,#amc_date3,#amc_date4,#amc_date5,#amc_date6,#amc_date7,#amc_date8,#amc_date9').val('');
+					} if ($('#amc_type').val() == 2) {
+						$('#date_block_2').css('display','block');
+						$('#date_block_1,#date_block_3,#date_block_4').css('display','none');
+						$('#amc_date,#amc_date3,#amc_date4,#amc_date5,#amc_date6,#amc_date7,#amc_date8,#amc_date9').val('');
+					} if ($('#amc_type').val() == 3) {
+						$('#date_block_3').css('display','block');
+						$('#date_block_1,#date_block_2,#date_block_4').css('display','none');
+						$('#amc_date,amc_date1,#amc_date2,#amc_date6,#amc_date7,#amc_date8,#amc_date9').val('');
+					} if ($('#amc_type').val() == 4) {
+						$('#date_block_4').css('display','block');
+						$('#date_block_1,#date_block_2,#date_block_3').css('display','none');
+						$('#amc_date,amc_date1,#amc_date2,#amc_date3,#amc_date4,#amc_date5').val('');
+					}
+				} else {
+					$('#date_block_1,#date_block_2,#date_block_3,#date_block_4').css('display','none');
+				}
 			});
 		});
 	</script>

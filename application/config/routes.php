@@ -144,6 +144,8 @@ $route['delete_water_tank/(:num)'] = 'WatertanksController/destroy_water_tanks/$
 $route['water_tank_cleaning_customers'] = 'WTCustomerController/index';
 $route['add_water_tank_cleaning_customer'] = 'WTCustomerController/create';
 $route['getTankbyType'] = 'WTCustomerController/getTankbyType';
+$route['save_water_tank_cleaning_customer'] = 'WTCustomerController/store';
+$route['getAmcDate'] = 'WTCustomerController/getAmcDate';
 
 /*Settings Routes*/
 $route['invoice_prefix'] = 'SettingsController/index';
