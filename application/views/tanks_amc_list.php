@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Chintamani Services | Water Tank Customers</title>
+	<title>Chintamani Services | Water Tanks AMC List</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="icon" href="<?php echo base_url();?>assets/icons/favicon.png">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
@@ -21,12 +21,12 @@
 		<div class="content-wrapper">
 			<section class="content-header">
 				<h1>
-					Water Tank Cleaning
-					<small>Customers</small>
+					Water Tanks  
+					<small> Annual Maintainance Contract</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Water Tank Cleaning Customers</li>
+					<li class="active">Water Tank AMCs</li>
 				</ol>
 			</section>
 			<section class="message-box">
@@ -41,7 +41,7 @@
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
-						<span class="box-title"><a href="<?php echo site_url('add_water_tank_cleaning_customer'); ?>"><button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add New</button></a></span>
+						<span class="box-title">AMCs List</span>
 					</div>
 					<div class="box-body">
 						<!-- <pre><?php //print_r($ArrProducts); ?></pre> -->
@@ -51,26 +51,21 @@
 									<tr>
 										<th>Sr. No.</th>
 										<th>Customer Name</th>
-										<th>Contact</th>
-										<th>Email</th>
 										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php 
 										$count = 1;
-										if (isset($ArrCustomer) && !empty($ArrCustomer)) {
-										foreach ($ArrCustomer as $row) {
+										if (isset($ArrAmc) && !empty($ArrAmc)) {
+										foreach ($ArrAmc as $row) {
 									?>
 									<tr>
 										<td><?php echo $count++; ?></td>
-										<td><?php echo $row['name'];?></td>
-										<td><?php echo $row['contact_no'];?></td>
-										<td><?php echo !empty($row['email']) ? $row['email'] : 'NA' ;?></td>
+										<td><?php echo $row['customer_name']; ?></td>
 										<td>
-											<a href="#" data-toggle="modal" data-target="#view_<?php echo $row['id'];?>" title="View"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-											<a href="<?php echo site_url('edit_water_tank_customer/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
-											<a href="" data-toggle="modal" data-target="#<?php echo $row['id'];?>" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
+											<a href="<?php echo site_url('view_water_tank_amc/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
+											<a href="#" data-toggle="modal" data-target="#<?php echo $row['id'];?>" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
 											<div class="modal fade" id="<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						                        <div class="modal-dialog" role="document">
 						                        	<div class="modal-content">
@@ -78,26 +73,9 @@
 						                              		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
 						                              		<br>
 						                              		<h3>Are you want to delete?</h3><br/>
-						                              		<a href="<?php echo site_url('delete_water_tank_types/'.$row['id']);?>"><button type="button" class="btn btn-danger" >Yes</button></a>&nbsp;&nbsp;
+						                              		<a href="<?php echo site_url('delete_tanks_amc/'.$row['id']);?>"><button type="button" class="btn btn-danger" >Yes</button></a>&nbsp;&nbsp;
 						                              		<button type="button" class="btn btn-warning" data-dismiss="modal">No</button> 
 						                            	</div>
-						                          	</div>
-						                        </div>
-						                    </div>
-						                    <div class="modal fade" id="view_<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						                        <div class="modal-dialog" role="document">
-						                        	<div class="modal-content">
-						                        		<div class="modal-header">
-						                        			<h4 class="modal-title">Water Tank Types</h4>
-						                        		</div>
-						                            	<div class="modal-body ">
-						                              		<ul class="list-group">
-																<li class="list-group-item"><b>Type Name :</b> <?php echo $row['name'] ?></li>
-															</ul>
-						                            	</div>
-						                            	<div class="modal-footer">
-						                        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						                        		</div>
 						                          	</div>
 						                        </div>
 						                    </div>
@@ -106,13 +84,13 @@
 									<?php }} ?>
 								</tbody>
 								<tfoot>
-
 								</tfoot>
 							</table>
 						</div>
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
+
 					</div>
 					<!-- /.box-footer-->
 				</div>

@@ -14,11 +14,11 @@ class WTCustomerController extends CI_Controller {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
-			$this->db->select('id,name');
-			$this->db->from('water_tanks_types');
+			$this->db->select('id,name,contact_no,email');
+			$this->db->from('water_tanks_customers');
 			$this->db->where('deleted', 0);
 			$this->db->order_by('id','desc');
-			$page_data['ArrTankTypes'] = $this->db->get()->result_array();
+			$page_data['ArrCustomer'] = $this->db->get()->result_array();
 			$page_data['active_menu']  = 'customers';
 			$this->load->view('tanks_customers_list',$page_data);
 		}	
@@ -58,11 +58,11 @@ class WTCustomerController extends CI_Controller {
 		}
 	}
 
-	public function store($id='') {
+	public function store() {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
-			echo '<pre>';print_r($_POST);die;
+			// echo '<pre>';print_r($_POST);die;
 			$this->form_validation->set_rules('cust_name','Customer Name','required');
 			$this->form_validation->set_rules('cust_contact','Contact Number','required|numeric');
 			$this->form_validation->set_rules('cust_address','Address','required');
@@ -86,7 +86,109 @@ class WTCustomerController extends CI_Controller {
 						$tanks_data['tank_quantity'] = $this->input->post('tank_qty_'.$i);
 						$this->db->insert('customers_tanks', $tanks_data);
 					}
+					$amc_data['cust_id'] = $customer_id;
+					$amc_data['customer_name'] = $this->input->post('cust_name');
+					if ($this->db->insert('water_tanks_amcs', $amc_data)) {
+						$amc_id = $this->db->insert_id();
+						if (!empty($this->input->post('amc_type1')) && ($this->input->post('amc_type1') == 1)) {
+							$amc_item['amc_id'] = $amc_id;	
+							$amc_item['amc_date'] = $this->input->post('amc_date_1');	
+							$amc_item['amc_reminder_date'] = $this->input->post('amc_rem_date_1');	
+							$amc_item['next_amc_date'] = $this->input->post('next_amc_date_1');
+							$amc_item['amc_note'] = $this->input->post('amc_note_1');
+							$this->db->insert('water_tanks_amc_items', $amc_item);	
+						} if (!empty($this->input->post('amc_type2')) && ($this->input->post('amc_type2') == 2)) {
+							for($i=1; $i<=2; $i++) {
+								$amc_item['amc_id'] = $amc_id;	
+								$amc_item['amc_date'] = $this->input->post('amc_date1_'.$i);	
+								$amc_item['amc_reminder_date'] = $this->input->post('amc_rem_date1_'.$i);
+								$amc_item['next_amc_date'] = $this->input->post('next_amc_date1_'.$i);
+								$amc_item['amc_note'] = $this->input->post('amc_note1_'.$i);
+								$this->db->insert('water_tanks_amc_items', $amc_item);
+							}	
+						} if (!empty($this->input->post('amc_type3')) && ($this->input->post('amc_type3') == 3)) {
+							for($i=1; $i<=3; $i++) {
+								$amc_item['amc_id'] = $amc_id;	
+								$amc_item['amc_date'] = $this->input->post('amc_date2_'.$i);	
+								$amc_item['amc_reminder_date'] = $this->input->post('amc_rem_date2_'.$i);
+								$amc_item['next_amc_date'] = $this->input->post('next_amc_date2_'.$i);
+								$amc_item['amc_note'] = $this->input->post('amc_note2_'.$i);
+								$this->db->insert('water_tanks_amc_items', $amc_item);
+							}	
+						} if (!empty($this->input->post('amc_type4')) && ($this->input->post('amc_type4') == 4)) {
+							for($i=1; $i<=4; $i++) {
+								$amc_item['amc_id'] = $amc_id;	
+								$amc_item['amc_date'] = $this->input->post('amc_date3_'.$i);	
+								$amc_item['amc_reminder_date'] = $this->input->post('amc_rem_date3_'.$i);
+								$amc_item['next_amc_date'] = $this->input->post('next_amc_date3_'.$i);
+								$amc_item['amc_note'] = $this->input->post('amc_note3_'.$i);
+								$this->db->insert('water_tanks_amc_items', $amc_item);
+							}	
+						}
+					}
 					$this->session->set_flashdata('success','Customer Saved successfully.');
+					redirect('water_tank_cleaning_customers');
+				}
+			}
+		}
+	}
+
+	public function edit($id=''){
+		if ($this->session->userdata('login')!=1){
+			redirect(base_url());
+		} else {
+			$this->db->select('id,name');
+			$this->db->from('water_tanks_types');
+			$this->db->where('deleted', 0);
+			$page_data['ArrTankTypes'] = $this->db->get()->result_array();
+			$this->db->select('id,name,contact_no,email,address,gstin');
+			$this->db->from('water_tanks_customers');
+			$this->db->where('id', $id);
+			$page_data['ObjCustomer'] = $this->db->get()->row();
+			$this->db->select('*');
+			$this->db->from('customers_tanks');
+			$this->db->where('cust_id', $id);
+			$page_data['ArrItems'] = $this->db->get()->result_array();
+			$page_data['active_menu'] = 'customers';
+			$this->load->view('edit_water_tank_customer', $page_data);
+		}
+	}
+
+	public function update($id='') {
+		if ($this->session->userdata('login')!=1){
+			redirect(base_url());
+		} else {
+			// echo '<pre>';print_r($_POST);die;
+			$this->form_validation->set_rules('cust_name','Customer Name','required');
+			$this->form_validation->set_rules('cust_contact','Contact Number','required|numeric');
+			$this->form_validation->set_rules('cust_address','Address','required');
+			if ($this->form_validation->run() == FALSE) {
+				$page_data['active_menu'] = 'customers';
+				$this->load->view('edit_tank_customer',$page_data);
+			} else {
+				$page_data['name'] = $this->input->post('cust_name');
+				$page_data['contact_no'] = $this->input->post('cust_contact');
+				$page_data['email'] = $this->input->post('cust_email');
+				$page_data['address'] = $this->input->post('cust_address');
+				$this->db->select('cust_unique_id');
+				$this->db->where('id', $id);
+				$this->db->from('water_tanks_customers');
+				$page_data['cust_unique_id'] = $this->db->get()->row()->cust_unique_id; 
+				$page_data['gstin'] = $this->input->post('cust_gstin');
+				$this->db->where('id',$id);
+				$query = $this->db->update('water_tanks_customers', $page_data);
+				if ($query) {
+					$this->db->where('cust_id', $id);
+					$this->db->delete('customers_tanks');
+					$num = $this->input->post('icnt');
+					for($i=1; $i <= $num ; $i++) {
+						$tanks_data['cust_id'] = $id;
+						$tanks_data['tank_type'] = $this->input->post('tank_type_'.$i);
+						$tanks_data['tank_capacity'] = $this->input->post('tank_capacity_'.$i);
+						$tanks_data['tank_quantity'] = $this->input->post('tank_qty_'.$i);
+						$this->db->insert('customers_tanks', $tanks_data);
+					}
+					$this->session->set_flashdata('success','Customer data updated successfully.');
 					redirect('water_tank_cleaning_customers');
 				}
 			}
@@ -99,20 +201,34 @@ class WTCustomerController extends CI_Controller {
 		} else {
 			if (($this->input->post('amc_date') !='') && ($this->input->post('amc_type') !='')) {
 				if ($this->input->post('amc_type') == 1) {
-					echo $next_amc_date = date("d-m-Y", strtotime("+1 year", strtotime($this->input->post('amc_date'))));
-					echo json_encode(['next_amc_date'=>$next_amc_date]);
+					$next_amc_date = date("d-m-Y", strtotime("+1 year", strtotime($this->input->post('amc_date'))));
+					$amc_rem_date = date("d-m-Y", strtotime("-7 days", strtotime($next_amc_date)));
+					echo json_encode(['next_amc_date'=>$next_amc_date, 'amc_rem_date'=>$amc_rem_date, 'amc_type'=>1]);
 				} if ($this->input->post('amc_type') == 2) {
-					$next_amc_date = date("d-m-Y", strtotime("+6 months", strtotime($this->input->post('amc_date'))));
-					echo json_encode(['next_amc_date'=>$next_amc_date,'amc_type'=>2]);
+					$next_amc_date1 = date("d-m-Y", strtotime("+6 months", strtotime($this->input->post('amc_date'))));
+					$amc_rem_date1 = date("d-m-Y", strtotime("-7 days", strtotime($next_amc_date1)));
+					$next_amc_date2 = date("d-m-Y", strtotime("+6 months", strtotime($next_amc_date1)));
+					$amc_rem_date2 = date("d-m-Y", strtotime("-7 days", strtotime($next_amc_date2)));
+					echo json_encode(['next_amc_date1'=>$next_amc_date1, 'amc_rem_date1'=>$amc_rem_date1, 'next_amc_date2'=>$next_amc_date2, 'amc_rem_date2'=>$amc_rem_date2, 'amc_type'=>2]);
 				} if ($this->input->post('amc_type') == 3) {
 					$next_amc_date1 = date("d-m-Y", strtotime("+4 months", strtotime($this->input->post('amc_date'))));
+					$amc_rem_date1 = date("d-m-Y", strtotime("-7 days", strtotime($next_amc_date1)));
 					$next_amc_date2 = date("d-m-Y", strtotime("+4 months", strtotime($next_amc_date1)));
-					echo json_encode(['next_amc_date1'=>$next_amc_date1,'next_amc_date2'=>$next_amc_date2,'amc_type'=>3]);
+					$amc_rem_date2 = date("d-m-Y", strtotime("-7 days", strtotime($next_amc_date2)));
+					$next_amc_date3 = date("d-m-Y", strtotime("+4 months", strtotime($next_amc_date2)));
+					$amc_rem_date3 = date("d-m-Y", strtotime("-7 days", strtotime($next_amc_date3)));
+					echo json_encode(['next_amc_date1'=>$next_amc_date1,'next_amc_date2'=>$next_amc_date2, 'next_amc_date3'=>$next_amc_date3, 'amc_rem_date1'=>$amc_rem_date1, 'amc_rem_date2'=>$amc_rem_date2, 'amc_rem_date3'=>$amc_rem_date3, 'amc_type'=>3]);
 				} if ($this->input->post('amc_type') == 4) {
 					$next_amc_date1 = date("d-m-Y", strtotime("+3 months", strtotime($this->input->post('amc_date'))));
+					$amc_rem_date1 = date("d-m-Y", strtotime("-7 days", strtotime($next_amc_date1)));
 					$next_amc_date2 = date("d-m-Y", strtotime("+3 months", strtotime($next_amc_date1)));
+					$amc_rem_date2 = date("d-m-Y", strtotime("-7 days", strtotime($next_amc_date2)));
 					$next_amc_date3 = date("d-m-Y", strtotime("+3 months", strtotime($next_amc_date2)));
-					echo json_encode(['next_amc_date1'=>$next_amc_date1,'next_amc_date2'=>$next_amc_date2,'next_amc_date3'=>$next_amc_date3,'amc_type'=>4]);
+					$amc_rem_date3 = date("d-m-Y", strtotime("-7 days", strtotime($next_amc_date3)));
+					$next_amc_date4 = date("d-m-Y", strtotime("+3 months", strtotime($next_amc_date3)));
+					$amc_rem_date4 = date("d-m-Y", strtotime("-7 days", strtotime($next_amc_date4)));
+					echo json_encode(['next_amc_date1'=>$next_amc_date1,'next_amc_date2'=>$next_amc_date2,'next_amc_date3'=>$next_amc_date3, 'amc_rem_date1'=>$amc_rem_date1, 
+						'amc_rem_date2'=>$amc_rem_date2, 'amc_rem_date3'=>$amc_rem_date3, 'next_amc_date4'=>$next_amc_date4, 'amc_rem_date4'=>$amc_rem_date4, 'amc_type'=>4]);
 				}
 			}
 		}

@@ -94,7 +94,7 @@
 								<div class="form-group">
 									<label for="inputCustomers" class="col-sm-2 control-label">Quantity</label>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" id="wtank_quantity" placeholder="Enter Quantity">
+										<input type="text" class="form-control" id="wtank_quantity" placeholder="Enter Quantity" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')">
 									</div>
 								</div>
 								<div class="form-group">
@@ -129,53 +129,217 @@
 											<option value="4">AMC4</option>
 										</select>
 									</div>
-								</div>
-								<div class="form-group" id="date_block_1" style="display:none;">
-									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="amc_date" onchange="getAmcDate(this.value);" name="amc_date_1" placeholder="Enter AMC Date">
+								</div><hr>
+								<div id="date_block_1" style="display:none;">	
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_date" onchange="getAmcDate(this.value);" name="amc_date_1" placeholder="Enter AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">Next AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="next_amc_date" name="next_amc_date_1" placeholder="Next AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Reminder Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_rem_date" name="amc_rem_date_1" placeholder="AMC Reminder Date">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Note</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="amc_note" name="amc_note_1" rows="3" placeholder="AMC Note"></textarea>
+											<input type="hidden" name="amc_type1" id="amc_type1">
+										</div>
 									</div>
 								</div>
-								<div class="form-group" id="date_block_2" style="display:none;">
-									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 1</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="amc_date1" name="amc_date_1" onchange="getAmcDate(this.value);" placeholder="Enter AMC Date">
+								<div id="date_block_2" style="display:none;">
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 1</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_date1" name="amc_date1_1" onchange="getAmcDate(this.value);" placeholder="Enter AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">Next AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="next_amc_date1" name="next_amc_date1_1" placeholder="Next AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Reminder Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_rem_date1" name="amc_rem_date1_1" placeholder="AMC Reminder Date">
+										</div>
 									</div>
-									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 2</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="amc_date2" name="amc_date_2" placeholder="Enter AMC Date">
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC 1 Note</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="amc_note1_1" name="amc_note1_1" rows="3" placeholder="AMC Note"></textarea>
+										</div>
+									</div><hr>
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 2</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_date2" name="amc_date1_2" placeholder="Enter AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">Next AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="next_amc_date2" name="next_amc_date1_2" >
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Reminder Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_rem_date2" name="amc_rem_date1_2">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC 2 Note</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="amc_note1_2" name="amc_note1_2" rows="3" placeholder="AMC Note"></textarea>
+											<input type="hidden" name="amc_type2" id="amc_type2">
+										</div>
 									</div>
 								</div>
-								<div class="form-group" id="date_block_3" style="display:none;">
-									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 1</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="amc_date3" name="amc_date_1" onchange="getAmcDate(this.value);" placeholder="Enter AMC Date">
+								<div id="date_block_3" style="display:none;">
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 1</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_date3" name="amc_date2_1" onchange="getAmcDate(this.value);" placeholder="Enter AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">Next AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="next_amc_date2_1" name="next_amc_date2_1" >
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Reminder Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_rem_date2_1" name="amc_rem_date2_1" >
+										</div>
 									</div>
-									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 2</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="amc_date4" name="amc_date_2" placeholder="Enter AMC Date">
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC 1 Note</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="amc_note2_1" name="amc_note2_1" rows="3" placeholder="AMC Note"></textarea>
+										</div>
+									</div><hr>
+									<div class="form-group">	
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 2</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_date4" name="amc_date2_2" placeholder="Enter AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">Next AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="next_amc_date2_2" name="next_amc_date2_2" >
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Reminder Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_rem_date2_2" name="amc_rem_date2_2" >
+										</div>
 									</div>
-									<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 3</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="amc_date5" name="amc_date_3" placeholder="Enter AMC Date">
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC 2 Note</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="amc_note2_2" name="amc_note2_2" rows="3" placeholder="AMC Note"></textarea>
+										</div>
+									</div><hr>
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 3</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_date5" name="amc_date2_3" placeholder="Enter AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">Next AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="next_amc_date2_3" name="next_amc_date2_3" >
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Reminder Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_rem_date2_3" name="amc_rem_date2_3">
+											<input type="hidden" name="amc_type3" id="amc_type3">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC 3 Note</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="amc_note2_3" name="amc_note2_3" rows="3" placeholder="AMC Note"></textarea>
+										</div>
 									</div>
 								</div>
-								<div class="form-group" id="date_block_4" style="display:none;">
-									<label for="inputCustomers" class="col-sm-1 control-label">AMC Date 1</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="amc_date6" name="amc_date_1" onchange="getAmcDate(this.value);" placeholder="Enter AMC Date">
+								<div id="date_block_4" style="display:none;">
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 1</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_date6" name="amc_date3_1" onchange="getAmcDate(this.value);" placeholder="Enter AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">Next AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="next_amc_date3_1" name="next_amc_date3_1" >
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Reminder Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_rem_date3_1" name="amc_rem_date3_1">
+										</div>
 									</div>
-									<label for="inputCustomers" class="col-sm-1 control-label">AMC Date 2</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="amc_date7" name="amc_date_2" placeholder="Enter AMC Date">
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC 1 Note</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="amc_note3_1" name="amc_note3_1" rows="3" placeholder="AMC Note"></textarea>
+										</div>
+									</div><hr>
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 2</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_date7" name="amc_date3_2" placeholder="Enter AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">Next AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="next_amc_date3_2" name="next_amc_date3_2" >
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Reminder Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_rem_date3_2" name="amc_rem_date3_2">
+										</div>
 									</div>
-									<label for="inputCustomers" class="col-sm-1 control-label">AMC Date 3</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="amc_date8" name="amc_date_3" placeholder="Enter AMC Date">
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC 2 Note</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="amc_note3_2" name="amc_note3_2" rows="3" placeholder="AMC Note"></textarea>
+										</div>
+									</div><hr>
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 3</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_date8" name="amc_date3_3" placeholder="Enter AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">Next AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="next_amc_date3_3" name="next_amc_date3_3" >
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Reminder Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_rem_date3_3" name="amc_rem_date3_3">
+										</div>
+									</div>	
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC 3 Note</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="amc_note3_3" name="amc_note3_3" rows="3" placeholder="AMC Note"></textarea>
+										</div>
+									</div><hr>
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Date 4</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_date9" name="amc_date3_4" placeholder="Enter AMC Date">
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">Next AMC Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="next_amc_date3_4" name="next_amc_date3_4" >
+										</div>
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC Reminder Date</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="amc_rem_date3_4" name="amc_rem_date3_4">
+										</div>
 									</div>
-									<label for="inputCustomers" class="col-sm-1 control-label">AMC Date 4</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="amc_date9" name="amc_date_4" placeholder="Enter AMC Date">
+									<div class="form-group">
+										<label for="inputCustomers" class="col-sm-2 control-label">AMC 4 Note</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="amc_note3_4" name="amc_note3_4" rows="3" placeholder="AMC Note"></textarea>
+											<input type="hidden" name="amc_type4" id="amc_type4">
+										</div>
 									</div>
 								</div>
 							</div>
@@ -212,15 +376,40 @@
 							success:function(data) {
 								var result = $.parseJSON(data);
 								if (result){
-									if (result.amc_type == 2) {
-										$('#amc_date2').val(result.next_amc_date);
+									if (result.amc_type == 1) {
+										$('#next_amc_date').val(result.next_amc_date);
+										$('#amc_rem_date').val(result.amc_rem_date);
+										$('#amc_type1').val(result.amc_type);
+									} if (result.amc_type == 2) {
+										$('#amc_date2').val(result.next_amc_date1);
+										$('#next_amc_date1').val(result.next_amc_date1);
+										$('#amc_rem_date1').val(result.amc_rem_date1);
+										$('#next_amc_date2').val(result.next_amc_date2);
+										$('#amc_rem_date2').val(result.amc_rem_date2);
+										$('#amc_type2').val(result.amc_type);
 									} if (result.amc_type == 3) {
 										$('#amc_date4').val(result.next_amc_date1);
 										$('#amc_date5').val(result.next_amc_date2);
+										$('#next_amc_date2_1').val(result.next_amc_date1);
+										$('#amc_rem_date2_1').val(result.amc_rem_date1);
+										$('#next_amc_date2_2').val(result.next_amc_date2);
+										$('#amc_rem_date2_2').val(result.amc_rem_date2);
+										$('#next_amc_date2_3').val(result.next_amc_date3);
+										$('#amc_rem_date2_3').val(result.amc_rem_date3);
+										$('#amc_type3').val(result.amc_type);
 									} if (result.amc_type == 4) {
-									 	$('#amc_date7').val(result.next_amc_date1);
-									 	$('#amc_date8').val(result.next_amc_date2);
-									 	$('#amc_date9').val(result.next_amc_date3);
+										$('#amc_date7').val(result.next_amc_date1);
+										$('#amc_date8').val(result.next_amc_date2);
+										$('#amc_date9').val(result.next_amc_date3);
+										$('#next_amc_date3_1').val(result.next_amc_date1);
+										$('#amc_rem_date3_1').val(result.amc_rem_date1);
+										$('#next_amc_date3_2').val(result.next_amc_date2);
+										$('#amc_rem_date3_2').val(result.amc_rem_date2);
+										$('#next_amc_date3_3').val(result.next_amc_date3);
+										$('#amc_rem_date3_3').val(result.amc_rem_date3);
+										$('#next_amc_date3_4').val(result.next_amc_date4);
+										$('#amc_rem_date3_4').val(result.amc_rem_date4);
+										$('#amc_type4').val(result.amc_type);
 									}
 								} 
 							}
@@ -228,20 +417,9 @@
 					} else { $("#wtank").html(''); }
 				}
 				$(document).ready(function() {
-					var config = {
-						'.chosen-select'           : {},
-						'.chosen-select-deselect'  : {allow_single_deselect:true},
-						'.chosen-select-no-single' : {disable_search_threshold:10},
-						'.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-						'.chosen-select-width'     : {width:"95%"}
-					}
-					for (var selector in config) {
-						$(selector).chosen(config[selector]);
-					}
 					$('#amc_date,#amc_date1,#amc_date3,#amc_date6').datepicker({
 						format: "dd-mm-yyyy",
-				// startDate: "+0d"
-			});
+					});
 					$('#wtank_type').on('change', function() {
 						var tank_type = $('#wtank_type').val();
 						if (tank_type != '') {
@@ -291,19 +469,19 @@
 					if($('#amc_type').val() == 1) {
 						$('#date_block_1').css('display','block');
 						$('#date_block_2,#date_block_3,#date_block_4').css('display','none');
-						$('#amc_date1,#amc_date2,#amc_date3,#amc_date4,#amc_date5,#amc_date6,#amc_date7,#amc_date8,#amc_date9').val('');
+						$('#amc_date1,#amc_date2,#amc_date3,#amc_date4,#amc_date5,#amc_date6,#amc_date7,#amc_date8,#amc_date9, #amc_type2, #amc_type3, #amc_type4, #next_amc_date1, #next_amc_date2, #amc_rem_date1, #amc_rem_date2, #next_amc_date2_1, #amc_rem_date2_1, #next_amc_date2_2, #amc_rem_date2_2, #next_amc_date2_3, #amc_rem_date2_3, #next_amc_date3_1, #next_amc_date3_2, #next_amc_date3_3, #next_amc_date3_4, #amc_rem_date3_1, #amc_rem_date3_2, #amc_rem_date3_3, #amc_rem_date3_4,#amc_note1_1, #amc_note1_2, #amc_note2_1, #amc_note2_2,#amc_note2_3, #amc_note3_1, #amc_note3_2, #amc_note3_3, #amc_note3_4').val('');
 					} if ($('#amc_type').val() == 2) {
 						$('#date_block_2').css('display','block');
 						$('#date_block_1,#date_block_3,#date_block_4').css('display','none');
-						$('#amc_date,#amc_date3,#amc_date4,#amc_date5,#amc_date6,#amc_date7,#amc_date8,#amc_date9').val('');
+						$('#amc_date, #amc_date3, #amc_date4, #amc_date5, #amc_date6, #amc_date7, #amc_date8, #amc_date9, #next_amc_date, #amc_rem_date, #amc_type1, #amc_type3, #amc_type4, #next_amc_date2_1, #amc_rem_date2_1, #next_amc_date2_2, #amc_rem_date2_2, #next_amc_date2_3, #amc_rem_date2_3, #next_amc_date3_1, #next_amc_date3_2, #next_amc_date3_3, #next_amc_date3_4, #amc_rem_date3_1, #amc_rem_date3_2, #amc_rem_date3_3, #amc_rem_date3_4, #amc_note, #amc_note2_1, #amc_note2_2,#amc_note2_3, #amc_note3_1, #amc_note3_2, #amc_note3_3, #amc_note3_4').val('');
 					} if ($('#amc_type').val() == 3) {
 						$('#date_block_3').css('display','block');
 						$('#date_block_1,#date_block_2,#date_block_4').css('display','none');
-						$('#amc_date,amc_date1,#amc_date2,#amc_date6,#amc_date7,#amc_date8,#amc_date9').val('');
+						$('#amc_date, #amc_date1, #amc_date2, #amc_date6, #amc_date7, #amc_date8, #amc_date9, #amc_type1, #amc_type2, #amc_type4, #next_amc_date, #amc_rem_date, #next_amc_date1, #next_amc_date2, #amc_rem_date1, #amc_rem_date2, #next_amc_date3_1, #next_amc_date3_2, #next_amc_date3_3, #next_amc_date3_4, #amc_rem_date3_1, #amc_rem_date3_2, #amc_rem_date3_3, #amc_rem_date3_4,#amc_note,#amc_note1_1,#amc_note1_2, #amc_note2_1, #amc_note2_2, #amc_note2_3, #amc_note3_1, #amc_note3_2, #amc_note3_3, #amc_note3_4').val('');
 					} if ($('#amc_type').val() == 4) {
 						$('#date_block_4').css('display','block');
 						$('#date_block_1,#date_block_2,#date_block_3').css('display','none');
-						$('#amc_date,amc_date1,#amc_date2,#amc_date3,#amc_date4,#amc_date5').val('');
+						$('#amc_date,#amc_date1,#amc_date2,#amc_date3,#amc_date4,#amc_date5, #amc_type1, #amc_type2, #amc_type3, #next_amc_date, #amc_rem_date, #next_amc_date1, #next_amc_date2, #amc_rem_date1, #amc_rem_date2, #next_amc_date2_1, #amc_rem_date2_1, #next_amc_date2_2, #amc_rem_date2_2, #next_amc_date2_3, #amc_rem_date2_3, #amc_note, #amc_note1_1, #amc_note1_2, #amc_note2_1, #amc_note2_2, #amc_note2_3').val('');
 					}
 				} else {
 					$('#date_block_1,#date_block_2,#date_block_3,#date_block_4').css('display','none');

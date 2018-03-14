@@ -67,6 +67,7 @@
         <ul class="treeview-menu">
           <li><a href="<?php echo site_url('sujal_invoices'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal Invoices</a></li>
           <li><a href="<?php echo site_url('non_sujal_invoices'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) Invoices</a></li>
+          <li><a href="<?php echo site_url('watertanks_invoices'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Water Tank Cleaning Invoices</a></li>
         </ul>
       </li>
       <li class="treeview <?php if($active_menu == 'samc') { ?>active<?php } ?>">
@@ -80,13 +81,14 @@
         <ul class="treeview-menu">
           <li><a href="<?php echo site_url('sujals_amcs'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sujal AMC</a></li>
           <li><a href="<?php echo site_url('non_sujals_amcs'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Other (Non Sujal) AMC</a></li>
+          <li><a href="<?php echo site_url('water_tank_cleaning_amcs'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Water Tank Cleaning AMC</a></li>
         </ul>
       </li>
-      <li class="<?php if($active_menu == 'test') { ?> active <?php } ?>">
+      <!-- <li class="<?php if($active_menu == 'test') { ?> active <?php } ?>">
         <a href="<?php echo site_url('test_amc_dates'); ?>">
           <i class="fa fa-dashboard"></i> <span>Test AMC Dates</span>
         </a>
-      </li>
+      </li> -->
       <!-- <li class="treeview <?php if($active_menu == 'settings') { ?>active<?php } ?>">
         <a href="#">
           <i class="fa fa-cogs" aria-hidden="true"></i>

@@ -122,6 +122,13 @@ $route['edit_non_sujal_invoice/(:num)'] = 'InvoiceController/edit/$1';
 $route['save_non_sujal_invoice/(:num)'] = 'InvoiceController/update_invoice/$1';
 $route['view_non_sujal_invoice/(:num)'] = 'InvoiceController/show_invoice/$1';
 $route['generate_pdf/(:num)'] = 'InvoiceController/generate_pdf/$1';
+$route['watertanks_invoices'] = 'InvoiceController/tanks_invoices';
+$route['create_tanks_invoice'] = 'InvoiceController/create_tanks_invoices';
+$route['getCharges'] = 'InvoiceController/getCharges';
+$route['save_tank_invoice'] = 'InvoiceController/store_tank_invoice';
+$route['view_tanks_invoice/(:num)'] = 'InvoiceController/show_tanks_invoice/$1';
+$route['edit_tanks_invoice/(:num)'] = 'InvoiceController/edit_tanks_invoice/$1';
+$route['save_tank_invoice/(:num)'] = 'InvoiceController/update_tank_invoice/$1';
 
 
 /*======================== Water Tanks Modules Routes ========================*/
@@ -146,6 +153,16 @@ $route['add_water_tank_cleaning_customer'] = 'WTCustomerController/create';
 $route['getTankbyType'] = 'WTCustomerController/getTankbyType';
 $route['save_water_tank_cleaning_customer'] = 'WTCustomerController/store';
 $route['getAmcDate'] = 'WTCustomerController/getAmcDate';
+$route['edit_water_tank_customer/(:num)'] = 'WTCustomerController/edit/$1';
+$route['save_water_tank_cleaning_customer/(:num)'] = 'WTCustomerController/update/$1';
+
+/*Water Tank cleanig AMCS*/
+$route['water_tank_cleaning_amcs'] = 'WTAmcController/index';
+$route['view_water_tank_amc/(:num)'] = 'WTAmcController/create/$1';
+$route['save_water_tank_amc_data'] = 'WTAmcController/store';
+$route['save_tank_amcn/(:num)'] = 'WTAmcController/save_amc_note/$1';
+$route['delete_tanks_amc/(:num)'] = 'WTAmcController/destroy/$1';
+
 
 /*Settings Routes*/
 $route['invoice_prefix'] = 'SettingsController/index';
