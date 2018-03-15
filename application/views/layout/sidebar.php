@@ -89,7 +89,7 @@
           <i class="fa fa-dashboard"></i> <span>Test AMC Dates</span>
         </a>
       </li> -->
-      <!-- <li class="treeview <?php if($active_menu == 'settings') { ?>active<?php } ?>">
+      <li class="treeview <?php if($active_menu == 'settings') { ?>active<?php } ?>">
         <a href="#">
           <i class="fa fa-cogs" aria-hidden="true"></i>
           <span>Settings</span>
@@ -100,7 +100,7 @@
         <ul class="treeview-menu">
           <li><a href="<?php echo site_url('invoice_prefix'); ?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Invoice Prefix</a></li>
         </ul>
-      </li> -->
+      </li>
     </ul>
   </section>
 </aside>

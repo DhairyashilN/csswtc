@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Chintamani Services | Add Sujal Product</title>
+	<title>Chintamani Services | Invoice Prefixes</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/AdminLTE.min.css">
@@ -31,6 +31,10 @@
 			<section class="message-box">
 				<?php if (validation_errors())
 				echo '<div class="alert alert-danger" role="alert">'.validation_errors().'</div>';
+				if ($this->session->flashdata('success'))
+					echo '<div class="alert alert-success alert-dismissable">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>'.$this->session->flashdata('success').'</strong></div>';
 				?>
 			</section>
 			<section class="content">
@@ -38,19 +42,60 @@
 					<div class="box-header with-border">
 					</div>
 					<div class="box-body">
-						<?php echo form_open('save_invoice_prefix', array('method'=>'post','class'=>'form-horizontal')); ?>
-						<?php 
-							if (isset($ArrPrefix) && !empty($ArrPrefix)) {
-								foreach ($ArrPrefix as $row) {
-						?>
-						<div class="form-group">
-							<label for="inputName" class="col-sm-3 control-label"><?php if($row['id']==1){ echo 'Sujal';}else{ echo 'Other (Non Sujal)'; } ?> Invoice Prefix</label>
-							<div class="col-sm-9">
-								<input type="hidden" name="prefix_id[]" value="<?php echo $row['id']; ?>">
-								<input type="text" class="form-control" id="invoice_prefix[]" name="invoice_prefix[]" required=""  placeholder="Invoice Prefix" value="<?php echo $row['prefix']; ?>">
-							</div>
+						<div class="table-responsive">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Sr. No.</th>
+										<th>Invoice Prefix</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php 
+										$count = 1;
+										$modal_id = 'pre_';
+										if (isset($ArrPrefix) && !empty($ArrPrefix)) {
+										foreach ($ArrPrefix as $row) {
+									?>
+									<tr>
+										<td><?php echo $count++; ?></td>
+										<td><?php echo $row['prefix']; ?></td>
+										<td>
+											<a href="#" data-toggle="modal" data-target="#<?php echo $modal_id.$row['id']; ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
+											<!-- Modal -->
+											<div class="modal fade" id="<?php echo $modal_id.$row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											  <div class="modal-dialog" role="document">
+											    <div class="modal-content">
+											      <div class="modal-header">
+											        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											        <h4 class="modal-title" id="myModalLabel">Update Invoice Prefix</h4>
+											      </div>
+											      <div class="modal-body">
+											        <form class="form-inline" method="POST" action="<?php echo site_url('save_invoice_prefix'); ?>">
+											        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+														<div class="form-group">
+													    	<label for="exampleInputName2">Prefix </label>
+													    	<input type="hidden" name="prefix_id" value="<?php echo $row['id']; ?>">
+													    	<input type="text" class="form-control" name="invoice_prefix" value="<?php echo $row['prefix']; ?>">
+													  	</div>
+													  	<button type="submit" class="btn btn-primary">Update</button>
+													</form>
+											      </div>
+											      <div class="modal-footer">
+											        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											      </div>
+											    </div>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<?php }} ?>
+								</tbody>
+								<tfoot>
+								</tfoot>
+							</table>
 						</div>
-						<?php }} ?>
 					</div>
 					<div class="box-footer">
 						<div class="form-group">

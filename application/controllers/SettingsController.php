@@ -14,14 +14,29 @@ class SettingsController extends CI_Controller {
 		$this->db->from('invoice_prefix');
 		$this->db->where('deleted',0);
 		$page_data['ArrPrefix'] = $this->db->get()->result_array();
-		$page_data['active_menu'] = '';
+		$page_data['active_menu'] = 'settings';
 		$this->load->view('invoice_settings', $page_data);
 	}
 
 	public function store(){
-		echo '<pre/>'; print_r($_POST);
+		// echo '<pre/>'; print_r($_POST);
+		if ($this->session->userdata('login')!=1){
+			redirect(base_url());
+		} else { 
+			$this->form_validation->set_rules('prefix_id','Invoice Prefix Id','required');
+			$this->form_validation->set_rules('invoice_prefix','Invoice Prefix','required');
+			if ($this->form_validation->run() == FALSE) {
+				$page_data['active_menu'] = 'settings';
+				$this->load->view('invoice_settings',$page_data);
+			} else {
+				$this->db->where('id',$this->input->post('prefix_id'));
+				$this->db->update('invoice_prefix', ['prefix'=> $this->input->post('invoice_prefix')]);
+				$this->session->set_flashdata('success','Invoice prefix updated successfully.');
+				redirect('invoice_prefix');
+			}
+		}
 	}
- 
+
 }
 
 /* End of file SettingsController.php */
