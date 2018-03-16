@@ -195,6 +195,32 @@ class WTCustomerController extends CI_Controller {
 		}
 	}
 
+	public function view($id='') {
+		if ($this->session->userdata('login')!=1){
+			redirect(base_url());
+		} else {
+			$this->db->select('name,contact_no,email,cust_unique_id,gstin,address');
+			$this->db->from('water_tanks_customers');
+			$this->db->where('id', $id);
+			$page_data['ObjCustomer'] = $this->db->get()->row();
+			$this->db->select('tank_type,tank_capacity,tank_quantity');
+			$this->db->from('customers_tanks');
+			$this->db->where('cust_id', $id);
+			$page_data['ArrCustTanks'] = $this->db->get()->result_array();
+			$this->db->select('id');
+			$this->db->from('water_tanks_amcs');
+			$this->db->where('cust_id', $id);
+			$ObjAMC = $this->db->get()->row();
+			$this->db->select('amc_date,amc_reminder_date,next_amc_date,amc_note');
+			$this->db->from('water_tanks_amc_items');
+			$this->db->where('amc_id', $ObjAMC->id);
+			$page_data['ArrCustAMCs'] = $this->db->get()->result_array();
+			$page_data['active_menu'] = 'customers' ;
+			$this->load->view('tanks_customer_details', $page_data);
+
+		}
+	}
+
 	public function getAmcDate() {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());

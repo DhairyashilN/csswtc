@@ -68,7 +68,7 @@
 										<td><?php echo $row['contact_no'];?></td>
 										<td><?php echo !empty($row['email']) ? $row['email'] : 'NA' ;?></td>
 										<td>
-											<a href="#" data-toggle="modal" data-target="#view_<?php echo $row['id'];?>" title="View"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+											<a href="<?php echo site_url('view_tank_customer/'.$row['id']); ?>" title="View"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
 											<a href="<?php echo site_url('edit_water_tank_customer/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
 											<a href="" data-toggle="modal" data-target="#<?php echo $row['id'];?>" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
 											<div class="modal fade" id="<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

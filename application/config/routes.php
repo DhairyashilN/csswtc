@@ -155,6 +155,7 @@ $route['save_water_tank_cleaning_customer'] = 'WTCustomerController/store';
 $route['getAmcDate'] = 'WTCustomerController/getAmcDate';
 $route['edit_water_tank_customer/(:num)'] = 'WTCustomerController/edit/$1';
 $route['save_water_tank_cleaning_customer/(:num)'] = 'WTCustomerController/update/$1';
+$route['view_tank_customer/(:num)'] = 'WTCustomerController/view/$1';
 
 /*Water Tank cleanig AMCS*/
 $route['water_tank_cleaning_amcs'] = 'WTAmcController/index';
