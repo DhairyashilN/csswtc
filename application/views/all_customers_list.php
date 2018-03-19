@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Chintamani Services | Water Tank Customers</title>
+	<title>Chintamani Services | All Customers</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="icon" href="<?php echo base_url();?>assets/icons/favicon.png">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
@@ -21,12 +21,12 @@
 		<div class="content-wrapper">
 			<section class="content-header">
 				<h1>
-					Water Tank Cleaning
+					All
 					<small>Customers</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Water Tank Cleaning Customers</li>
+					<li class="active">All Customers</li>
 				</ol>
 			</section>
 			<section class="message-box">
@@ -41,33 +41,35 @@
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
-						<span class="box-title"><a href="<?php echo site_url('add_water_tank_cleaning_customer'); ?>"><button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add New</button></a></span>
 					</div>
 					<div class="box-body">
-						<!-- <pre><?php //print_r($ArrProducts); ?></pre> -->
 						<div class="table-responsive">
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th>Sr. No.</th>
 										<th>Customer Name</th>
+										<th>Cust ID</th>
 										<th>Contact</th>
 										<th>Email</th>
-										<th>Action</th>
+										<th>GSTIN</th>
+										<!-- <th>Action</th> -->
 									</tr>
 								</thead>
 								<tbody>
 									<?php 
 										$count = 1;
-										if (isset($ArrCustomer) && !empty($ArrCustomer)) {
-										foreach ($ArrCustomer as $row) {
+										if (isset($ArrSCustomers) && !empty($ArrSCustomers)) {
+										foreach ($ArrSCustomers as $row) {
 									?>
 									<tr>
 										<td><?php echo $count++; ?></td>
 										<td><?php echo $row['name'];?></td>
+										<td><?php echo $row['cust_id'];?></td>
 										<td><?php echo $row['contact_no'];?></td>
 										<td><?php echo !empty($row['email']) ? $row['email'] : 'NA' ;?></td>
-										<td>
+										<td><?php echo !empty($row['gstin']) ? $row['gstin'] : 'NA' ;?></td>
+										<!-- <td>
 											<a href="<?php echo site_url('view_tank_customer/'.$row['id']); ?>" title="View"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
 											<a href="<?php echo site_url('edit_water_tank_customer/'.$row['id']); ?>" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
 											<a href="" data-toggle="modal" data-target="#<?php echo $row['id'];?>" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
@@ -101,7 +103,35 @@
 						                          	</div>
 						                        </div>
 						                    </div>
-										</td>
+										</td> -->
+									</tr>
+									<?php }} ?>
+									<?php 
+										$count1 = $count;
+										if (isset($ArrWTCustomers) && !empty($ArrWTCustomers)) {
+										foreach ($ArrWTCustomers as $row) {
+									?>
+									<tr>
+										<td><?php echo $count1++; ?></td>
+										<td><?php echo $row['name'];?></td>
+										<td><?php echo $row['cust_unique_id'];?></td>
+										<td><?php echo $row['contact_no'];?></td>
+										<td><?php echo !empty($row['email']) ? $row['email'] : 'NA' ;?></td>
+										<td><?php echo !empty($row['gstin']) ? $row['gstin'] : 'NA' ;?></td>
+									</tr>
+									<?php }} ?>
+									<?php 
+										$count2 = $count1;
+										if (isset($ArrNSCustomers) && !empty($ArrNSCustomers)) {
+										foreach ($ArrNSCustomers as $row) {
+									?>
+									<tr>
+										<td><?php echo $count1++; ?></td>
+										<td><?php echo $row['name'];?></td>
+										<td><?php echo $row['cust_unique_id'];?></td>
+										<td><?php echo $row['contact_no'];?></td>
+										<td><?php echo !empty($row['email']) ? $row['email'] : 'NA' ;?></td>
+										<td><?php echo !empty($row['gstin']) ? $row['gstin'] : 'NA' ;?></td>
 									</tr>
 									<?php }} ?>
 								</tbody>

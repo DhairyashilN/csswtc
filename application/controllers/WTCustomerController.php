@@ -186,8 +186,9 @@ class WTCustomerController extends CI_Controller {
 						$tanks_data['tank_type'] = $this->input->post('tank_type_'.$i);
 						$tanks_data['tank_capacity'] = $this->input->post('tank_capacity_'.$i);
 						$tanks_data['tank_quantity'] = $this->input->post('tank_qty_'.$i);
+						// print_r($tanks_data);
 						$this->db->insert('customers_tanks', $tanks_data);
-					}
+					}/*die;*/
 					$this->session->set_flashdata('success','Customer data updated successfully.');
 					redirect('water_tank_cleaning_customers');
 				}
@@ -218,6 +219,23 @@ class WTCustomerController extends CI_Controller {
 			$page_data['active_menu'] = 'customers' ;
 			$this->load->view('tanks_customer_details', $page_data);
 
+		}
+	}
+
+	public function destroy($id='') {
+		if ($this->session->userdata('login')!=1) {
+			redirect(base_url());
+		} else {
+			if (isset($id) && !empty($id)) {
+				$this->db->where('id', $id);
+				$query = $this->db->update('water_tanks_customers', ['deleted' => 1]);
+				if ($query) {
+					$this->db->where('cust_id', $id);
+					$this->db->update('water_tanks_amcs', ['deleted' => 1]);
+					$this->session->set_flashdata('success','Water tank customer deleted successfully.');
+					redirect('water_tank_cleaning_customers');
+				}
+			}
 		}
 	}
 

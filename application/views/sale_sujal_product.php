@@ -183,7 +183,7 @@
 						<div class="form-group">
 							<div class=" col-sm-offset-2 col-sm-10">
 								<button type="reset" class="btn btn-default">Cancel</button>	
-								<button type="submit" class="btn btn-primary">Save Order</button>	
+								<button type="submit" class="btn btn-primary save-btn">Save Order</button>	
 							</div>
 						</div>					
 					</div>
@@ -302,21 +302,26 @@
 				// startDate: "+0d"
 			});
 			
+			$('.save-btn').on("click" , function () {
+				if($('#icnt').val() == 0) {
+					alert('Water Tanks Information cannot be blank. Please add Water Tanks Information.');
+					return false;
+				}
+			});
 		});
-function valueChanged() {
-	if($('#add_tax').is(":checked"))   
-		$("#tax_div").css('display','block');
-	else{
-		$("#tax_div").css('display','none');
-		$('#tax_rate').val(0);
-		$('#cgst').val(0);
-		$('#sgst').val(0);
-		$('#order_tax').val(0);
-		calculateTotal();
-	}
-}
-			//total price calculation
-			function calculateTotal(){
+		function valueChanged() {
+			if($('#add_tax').is(":checked"))   
+				$("#tax_div").css('display','block');
+			else{
+				$("#tax_div").css('display','none');
+				$('#tax_rate').val(0);
+				$('#cgst').val(0);
+				$('#sgst').val(0);
+				$('#order_tax').val(0);
+				calculateTotal();
+			}
+		}
+		function calculateTotal(){
 				subTotal = 0 ; total = 0; items=0;
 				$('.totalLinePrice').each(function(){
 					if($(this).val() != '')

@@ -113,7 +113,7 @@ class WTAmcController extends CI_Controller {
 					$this->db->where('amc_id', $id);
 					$this->db->update('water_tanks_amc_items', ['deleted' => 1]);
 					$this->session->set_flashdata('success','WAter tank AMC deleted successfully.');
-					redirect('water_tanks_amcs');
+					redirect('water_tank_cleaning_amcs');
 				}
 			}
 		}

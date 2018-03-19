@@ -140,7 +140,7 @@
 									<div class=" col-sm-offset-2 col-sm-10">
 										<input type="hidden" name="icnt" id="icnt" />
 										<button type="reset" class="btn btn-default">Cancel</button>	
-										<button type="submit" class="btn btn-primary"><?php echo (isset($ObjCustomer) && !empty($ObjCustomer) ? 'Update' : 'Add'); ?></button>	
+										<button type="submit" class="btn btn-primary save-btn"><?php echo (isset($ObjCustomer) && !empty($ObjCustomer) ? 'Update' : 'Add'); ?></button>	
 									</div>
 								</div>					
 							</div>
@@ -234,6 +234,7 @@
 					});
 
 					var i = <?php echo (isset($ArrItems) && !empty($ArrItems)) ? count($ArrItems)+1 : '1' ?>;
+					$('#icnt').val(<?php echo (isset($ArrItems) && !empty($ArrItems)) ? count($ArrItems) : '0' ?>);
 					$('.btn-add-row').on('click', function(){
 						var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control" name="tank_type_'+i+'" value="'+$('#wtank_type option:selected').text()+'"></td><td><input type="text" class="form-control" name="tank_capacity_'+i+'" value="'+$('#wtank option:selected').text()+'"></td><td><input type="text" class="totalrows form-control" id="itemqty_'+i+'" name="tank_qty_'+i+'" value="'+$('#wtank_quantity').val()+'"></td></td></tr>';
 						$('#tanks_info_table').append(row);
@@ -254,6 +255,13 @@
 					items++;
 				});
 				$('#icnt').val(items);
+			});
+
+			$('.save-btn').on("click" , function () {
+				if($('#icnt').val() == 0) {
+					alert('Water Tanks Information cannot be blank. Please add Water Tanks Information.');
+					return false;
+				}
 			});
 		});
 	</script>

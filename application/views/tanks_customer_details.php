@@ -47,10 +47,6 @@
 									<td><?php echo $ObjCustomer->address; ?></td>
 								</tr>
 								<tr>
-									<th>Address</th>
-									<td><?php echo $ObjCustomer->address; ?></td>
-								</tr>
-								<tr>
 									<th>Contact </th>
 									<td><?php echo $ObjCustomer->contact_no; ?></td>
 								</tr>
@@ -63,7 +59,7 @@
 									<td><?php echo !empty($ObjCustomer->gstin) ? $ObjCustomer->gstin : 'NA'; ?></td>
 								</tr>
 							</table>
-							<?php endif ?>
+							<?php endif ?><hr>
 							<h4>Water Tanks Details</h4>
 							<?php if (isset($ArrCustTanks) && !empty($ArrCustTanks)): ?>
 							<table class="table table-bordered">
@@ -84,9 +80,11 @@
 									</tr>
 								<?php endforeach ?>
 							</table>
-							<?php endif ?>
+							<?php else: ?>
+								<h5>Water tanks data is not available. </h5>							
+							<?php endif; ?><hr>
 							<h4>AMC Details</h4>
-							<?php if (isset($ArrCustTanks) && !empty($ArrCustTanks)): ?>
+							<?php if (isset($ArrCustAMCs) && !empty($ArrCustAMCs)): ?>
 							<table class="table table-bordered">
 								<tr>
 									<th>Sr. No. </th>
@@ -107,6 +105,8 @@
 									</tr>
 								<?php endforeach ?>
 							</table>
+							<?php else: ?>
+								<h5>AMC data is not available. </h5>							
 							<?php endif ?>
 						</div>
 					</div><hr>

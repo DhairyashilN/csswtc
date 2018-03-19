@@ -104,6 +104,31 @@ class NonSujalCustomersController extends CI_Controller {
 			}
 		}
 	}
+
+	public function show_all_customers() {
+		if ($this->session->userdata('login')!=1) {
+			redirect(base_url());
+		} else {
+			$this->db->select('id,name,contact_no,email,cust_unique_id,gstin');
+			$this->db->from('non_sujal_customers');
+			$this->db->where('deleted', 0);
+			$this->db->order_by('id','desc');
+			$page_data['ArrNSCustomers'] = $this->db->get()->result_array();
+			$this->db->select('id,name,contact_no,email,cust_unique_id,gstin');
+			$this->db->from('water_tanks_customers');
+			$this->db->where('deleted', 0);
+			$this->db->order_by('id','desc');
+			$page_data['ArrWTCustomers'] = $this->db->get()->result_array();
+			$this->db->select('id,name,contact_no,email,cust_id,gstin');
+			$this->db->from('sujal_customers');
+			$this->db->where('deleted', 0);
+			$this->db->order_by('id','desc');
+			$page_data['ArrSCustomers'] = $this->db->get()->result_array();
+			$page_data['active_menu'] = 'customers';
+			$this->load->view('all_customers_list',$page_data);
+		}
+
+	}
 }
 /* End of file controllername.php */
 /* Location: ./application/controllers/controllername.php */ ?>

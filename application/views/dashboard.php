@@ -47,7 +47,7 @@
 								</span>
 							</div>
 							<div class="info-box-footer">
-								<a href="<?php echo site_url('#') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+								<a href="<?php echo site_url('view_customers') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>
@@ -86,7 +86,7 @@
 								<span class="info-box-number"><h3><?php echo $this->db->where('deleted',0)->from("water_tanks_customers")->count_all_results(); ?></h3></span>
 							</div>
 							<div class="info-box-footer">
-								<a href="<?php echo site_url('#') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+								<a href="<?php echo site_url('water_tank_cleaning_customers') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>
@@ -125,7 +125,7 @@
 								<span class="info-box-number"><h3><?php echo $this->db->where('deleted',0)->from("water_tanks_amcs")->count_all_results(); ?></h3></span>
 							</div>
 							<div class="info-box-footer">
-								<a href="<?php echo site_url('#') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+								<a href="<?php echo site_url('water_tank_cleaning_amcs') ?>">View More <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>

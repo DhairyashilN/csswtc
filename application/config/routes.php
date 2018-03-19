@@ -97,6 +97,7 @@ $route['save_non_sujal_customer'] = 'NonSujalCustomersController/store';
 $route['edit_non_sujal_customer/(:num)'] = 'NonSujalCustomersController/create/$1';
 $route['save_non_sujal_customer/(:num)'] = 'NonSujalCustomersController/store/$1';
 $route['delete_non_sujal_customer/(:num)'] = 'NonSujalCustomersController/destroy/$1';
+$route['view_customers'] = 'NonSujalCustomersController/show_all_customers';
 
 /*Sujal AMC Routes*/
 $route['sujals_amcs'] = 'SujalAmcController/index';
@@ -156,6 +157,7 @@ $route['getAmcDate'] = 'WTCustomerController/getAmcDate';
 $route['edit_water_tank_customer/(:num)'] = 'WTCustomerController/edit/$1';
 $route['save_water_tank_cleaning_customer/(:num)'] = 'WTCustomerController/update/$1';
 $route['view_tank_customer/(:num)'] = 'WTCustomerController/view/$1';
+$route['delete_water_tank_customer/(:num)'] = 'WTCustomerController/destroy/$1';
 
 /*Water Tank cleanig AMCS*/
 $route['water_tank_cleaning_amcs'] = 'WTAmcController/index';

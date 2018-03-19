@@ -348,7 +348,7 @@
 									<div class=" col-sm-offset-2 col-sm-10">
 										<input type="hidden" name="icnt" id="icnt" />
 										<button type="reset" class="btn btn-default">Cancel</button>	
-										<button type="submit" class="btn btn-primary">Add</button>	
+										<button type="submit" class="btn btn-primary save-btn">Add</button>	
 									</div>
 								</div>					
 							</div>
@@ -485,6 +485,12 @@
 					}
 				} else {
 					$('#date_block_1,#date_block_2,#date_block_3,#date_block_4').css('display','none');
+				}
+			});
+			$('.save-btn').on("click" , function () {
+				if($('#icnt').val() == 0) {
+					alert('Water Tanks Information cannot be blank. Please add Water Tanks Information.');
+					return false;
 				}
 			});
 		});

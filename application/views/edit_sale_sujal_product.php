@@ -187,7 +187,7 @@
 								<div class="form-group">
 									<div class=" col-sm-offset-2 col-sm-10">
 										<button type="reset" class="btn btn-default">Cancel</button>	
-										<button type="submit" class="btn btn-primary">Save Order</button>	
+										<button type="submit" class="btn btn-primary save-btn">Save Order</button>	
 									</div>
 								</div>					
 							</div>
@@ -245,6 +245,7 @@
 					});
 
 					var i = <?php echo (isset($ArrItems) && !empty($ArrItems)) ? count($ArrItems)+1 : '1' ?>;
+					$('#icnt').val(<?php echo (isset($ArrItems) && !empty($ArrItems)) ? count($ArrItems) : '0' ?>);
 					$('.btn-add-row').on('click', function(){
 						var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control" name="item_desc_'+i+'" value="'+$('#sproduct_name').val()+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="item_qty_'+i+'" value="'+$('#sproduct_quantity').val()+'"></td><td><input type="text" class="itemrate form-control" name="item_rate_'+i+'" id="itemrate_'+i+'" value="'+$('#sproduct_rate').val()+'"></td><td><input type="text" class="totalLinePrice form-control" id="itemamount_'+i+'" name="item_amount_'+i+'" value="'+$('#sproduct_amount').val()+'"></td></tr>';
 						$('#order_items_table').append(row);
@@ -304,6 +305,13 @@
 			$('#sale_date').datepicker({
 				format: "dd-mm-yyyy",
 				// startDate: "+0d"
+			});
+
+			$('.save-btn').on("click" , function () {
+				if($('#icnt').val() == 0) {
+					alert('Water Tanks Information cannot be blank. Please add Water Tanks Information.');
+					return false;
+				}
 			});
 			
 		});

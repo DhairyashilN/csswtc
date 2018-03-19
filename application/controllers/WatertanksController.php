@@ -69,9 +69,13 @@ class WatertanksController extends CI_Controller {
 		} else {
 			if (isset($id) && !empty($id)) {
 				$this->db->where('id', $id);
-				$this->db->update('water_tanks_types', ['deleted' => 1]);
-				$this->session->set_flashdata('success','Water tank type Deleted successfully.');
-				redirect('water_tank_types');
+				$query = $this->db->update('water_tanks_types', ['deleted' => 1]);
+				if ($query) {
+					$this->db->where('water_tank_type_id', $id);
+					$query = $this->db->update('water_tanks', ['deleted' => 1]);
+					$this->session->set_flashdata('success','Water tank type Deleted successfully.');
+					redirect('water_tank_types');
+				}
 			}
 		}
 	}
