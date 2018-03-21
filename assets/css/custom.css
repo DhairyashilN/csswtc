@@ -15,8 +15,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{ font-family: 'Open Sans' !
 	}*/
 	@media print {
 		.print-btn { display: none; }
-		body{color:#000;font-size: 22px !important;}
-		h3{ font-size: 28px; }
+		body{color:#000;font-size: 12px !important;}
+		h3{ font-size: 25px; }
+		h4{ font-size: 14px; }
+		h5{ font-size: 12px; }
 		.invoice-box{ margin: 10px auto; padding: 5px 5px; width: 100% !important;  }
 		.invoice-header-top ,.invoice-header-bottom{border-color: #000;}
 		.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { border: 1px solid #000 !important; }

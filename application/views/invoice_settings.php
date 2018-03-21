@@ -97,13 +97,7 @@
 							</table>
 						</div>
 					</div>
-					<div class="box-footer">
-						<div class="form-group">
-							<div class=" col-sm-offset-2 col-sm-10">
-								<button type="reset" class="btn btn-default">Cancel</button>	
-								<button type="submit" class="btn btn-primary">Add</button>	
-							</div>
-						</div>					
+					<div class="box-footer">					
 					</div>
 					<?php form_close(); ?>
 				</div>
