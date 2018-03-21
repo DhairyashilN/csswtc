@@ -443,10 +443,10 @@
 
 					var i = 1;
 					$('.btn-add-row').on('click', function(){
-						var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control" name="tank_type_'+i+'" value="'+$('#wtank_type option:selected').text()+'"></td><td><input type="text" class="itemrate form-control" name="tank_capacity_'+i+'" value="'+$('#wtank option:selected').text()+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="tank_qty_'+i+'" value="'+$('#wtank_quantity').val()+'"></td></td></tr>';
+						var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control" name="tank_type[]" value="'+$('#wtank_type option:selected').text()+'"></td><td><input type="text" class="itemrate form-control" name="tank_capacity[]" value="'+$('#wtank option:selected').text()+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="tank_qty[]" value="'+$('#wtank_quantity').val()+'"></td></td></tr>';
 						$('#tanks_info_table').append(row);
 						i++;
-						$('#icnt').val(i-1);
+						$('#icnt').val($('#tanks_info_table tr').length-1);
 						$('#wtank_type,#wtank_quantity,#wtank').val('');
 					});
 			//to check all checkboxes
@@ -454,14 +454,15 @@
 				$('input[class=case]:checkbox').prop("checked", $(this).is(':checked'));
 			});
 			//deletes the selected table rows
+			var items = <?php echo (isset($ArrItems) && !empty($ArrItems)) ? count($ArrItems)+1 : '1' ?>;
 			$(".delete").on("click", function () {
-				var items = 0;
 				$('.case:checkbox:checked').parents("tr").remove();
 				$('#check_all').prop("checked", false);
-				$('.totalLinePrice').each(function(){
-					items++;
-				});
-				$('#icnt').val(items);
+				// $('.totalrows').each(function(){
+				// 	items++;
+				// });
+				// $('#icnt').val(items-1);
+				$('#icnt').val($('#tanks_info_table tr').length-1);
 			});
 
 			$('#amc_type').on('change', function() {

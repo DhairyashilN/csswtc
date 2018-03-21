@@ -64,49 +64,49 @@
 										<input type="hidden" name="customer_name" id="customer_name">
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="inputCustomers" class="col-sm-2 control-label">Select Product</label>
-									<div class="col-sm-10">
-										<select class="form-control chosen-select" data-placeholder="Choose Product" name="product" id="product">
-											<option value="">Select Product </option>
-											<?php 
+							<div class="form-group">
+								<label for="inputCustomers" class="col-sm-2 control-label">Select Product</label>
+								<div class="col-sm-10">
+									<select class="form-control chosen-select" data-placeholder="Choose Product" name="product" id="product">
+										<option value="">Select Product </option>
+										<?php 
 											if (isset($ArrProducts) && !empty($ArrProducts)) {
 												foreach ($ArrProducts as $crow) {
 													?>
-													<option value="<?php echo $crow['id']; ?>"><?php echo $crow['name']; ?></option>
-													<?php }	} ?>
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label">Product Price</label>
-											<div class="col-sm-10">
-												<input type="hidden"  id="sproduct_name">
-												<input type="text" class="form-control" id="sproduct_price" name="sproduct_price" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Price">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label">Rate</label>
-											<div class="col-sm-2">
-												<input type="text" class="form-control price" id="sproduct_rate" name="sproduct_rate" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Rate">
-											</div>
-											<label for="inputEmail3" class="col-sm-2 control-label">Quantity</label>
-											<div class="col-sm-2">
-												<input type="text" class="form-control price" id="sproduct_quantity" name="sproduct_quantity" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Quantity">
-											</div>
-											<label for="inputEmail3" class="col-sm-2 control-label">Amount</label>
-											<div class="col-sm-2">
-												<input type="text" class="form-control" id="sproduct_amount" name="sproduct_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount">
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-offset-2 col-lg-10">
-												<button type="button" class="btn btn-primary btn-add-row" id="">Add Item</button>
-											</div>
-										</div>
-										<h4>Order Items</h4>
-										<hr>
-										<table class="table table-bordered" id="order_items_table">
+										<option value="<?php echo $crow['id']; ?>"><?php echo $crow['name']; ?></option>
+										<?php }	} ?>
+									</select>
+									</div>
+							</div>
+							<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">Product Price</label>
+							<div class="col-sm-10">
+								<input type="hidden"  id="sproduct_name">
+								<input type="text" class="form-control" id="sproduct_price" name="sproduct_price" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Price">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">Rate</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control price" id="sproduct_rate" name="sproduct_rate" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Rate">
+							</div>
+							<label for="inputEmail3" class="col-sm-2 control-label">Quantity</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control price" id="sproduct_quantity" name="sproduct_quantity" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Product Quantity">
+							</div>
+							<label for="inputEmail3" class="col-sm-2 control-label">Amount</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" id="sproduct_amount" name="sproduct_amount" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" placeholder="Amount">
+							</div>
+						</div>
+						<div class="form-group">
+						<div class="col-sm-offset-2 col-lg-10">
+							<button type="button" class="btn btn-primary btn-add-row" id="">Add Item</button>
+						</div>
+						</div>
+						<h4>Order Items</h4>
+						<hr>
+						<table class="table table-bordered" id="order_items_table">
 											<tr>
 												<th><input id="check_all" type="checkbox"></th>
 												<!-- <th style="width: 6%;">Sr.No</th> -->
@@ -115,14 +115,6 @@
 												<th style="width: 18%;">Rate</th>
 												<th style="width: 18%;">Amount</th>
 											</tr>
-							<!-- <tr>
-								<td><input type="checkbox" class="case"></td>
-								<td><input type="text" class="form-control" id="sr_no"></td>
-								<td><input type="text" class="form-control" name="item_desc_1" id="itemdesc_1"></td>
-								<td><input type="text" class="itemrate form-control" name="item_qty_1" id="itemqty_1"></td>
-								<td><input type="text" class="itemrate form-control" name="item_rate_1" id="itemrate_1"></td>
-								<td><input type="text" class="totalLinePrice form-control" name="item_amount_1" id="itemamount_1"></td>
-							</tr> -->
 						</table>
 						<button type="button" class="btn btn-danger delete btn-sm">- Remove</button>
 						<div class="form-group">
@@ -242,10 +234,10 @@
 
 			var i = 1;
 			$('.btn-add-row').on('click', function(){
-				var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control" name="item_desc_'+i+'" value="'+$('#sproduct_name').val()+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="item_qty_'+i+'" value="'+$('#sproduct_quantity').val()+'"></td><td><input type="text" class="itemrate form-control" name="item_rate_'+i+'" id="itemrate_'+i+'" value="'+$('#sproduct_rate').val()+'"></td><td><input type="text" class="totalLinePrice form-control" id="itemamount_'+i+'" name="item_amount_'+i+'" value="'+$('#sproduct_amount').val()+'"></td></tr>';
+				var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control" name="item_desc[]" value="'+$('#sproduct_name').val()+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="item_qty[]" value="'+$('#sproduct_quantity').val()+'"></td><td><input type="text" class="itemrate form-control" name="item_rate[]" id="itemrate_'+i+'" value="'+$('#sproduct_rate').val()+'"></td><td><input type="text" class="totalLinePrice form-control" id="itemamount_'+i+'" name="item_amount[]" value="'+$('#sproduct_amount').val()+'"></td></tr>';
 				$('#order_items_table').append(row);
 				i++;
-				$('#icnt').val(i-1);
+				$('#icnt').val($('#tanks_info_table tr').length-1);
 				calculateTotal();
 				$('#sproduct_name').val('');
 				$('#sproduct_price').val('');
@@ -274,7 +266,7 @@
 				$('.totalLinePrice').each(function(){
 					items++;
 				});
-				$('#icnt').val(items);
+				$('#icnt').val($('#tanks_info_table tr').length-1);
 				calculateTotal();
 			});
 			$('#tax_rate').on('keyup', function(){

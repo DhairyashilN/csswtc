@@ -170,16 +170,19 @@ class SujalProductsController extends CI_Controller {
 					$page_data['order_status'] = 'payment_due';
 				}
 				if ($this->db->insert('sujal_orders', $page_data)) {
-					$invoice_id = $this->db->insert_id();
-					$num = $this->input->post('icnt');
-					for($i=1; $i <= $num ; $i++) {
-						$order_item['sujal_order_id'] = $invoice_id;
-						$order_item['item_desc'] = $this->input->post('item_desc_'.$i);
-						$order_item['item_quantity'] = $this->input->post('item_qty_'.$i);
-						$order_item['item_rate'] = $this->input->post('item_rate_'.$i);
-						$order_item['item_amount'] = $this->input->post('item_amount_'.$i);
+					$order_id = $this->db->insert_id();
+					$item_desc = $this->input->post('item_desc');
+					$item_quantity = $this->input->post('item_qty');
+					$item_rate = $this->input->post('item_rate');
+					$item_amount = $this->input->post('item_amount');
+					foreach($item_quantity as $a => $b) {
+						$order_item['sujal_order_id'] = $order_id;
+						$order_item['item_desc'] = $item_desc[$a];
+						$order_item['item_quantity'] = $item_quantity[$a];
+						$order_item['item_rate'] = $item_rate[$a];
+						$order_item['item_amount'] = $item_amount[$a];
 						$this->db->insert('sujal_order_items', $order_item);
-					}
+					} 
 					$this->session->set_flashdata('success','Order Saved successfully.');
 					redirect('sale_product');
 				}
@@ -214,6 +217,7 @@ class SujalProductsController extends CI_Controller {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());
 		} else {
+			// echo '<pre>';print_r($_POST);die;
 			$this->form_validation->set_rules('sale_date','Sale Date','required');
 			$this->form_validation->set_rules('customer_name','Customer','required');
 			$this->form_validation->set_rules('order_total','Order Total','required|numeric');
@@ -244,15 +248,18 @@ class SujalProductsController extends CI_Controller {
 				if ($query) {
 					$this->db->where('sujal_order_id', $id);
 					$this->db->delete('sujal_order_items');
-					$num = $this->input->post('icnt');
-					for($i=1; $i <= $num ; $i++) {
+					$item_desc = $this->input->post('item_desc');
+					$item_quantity = $this->input->post('item_qty');
+					$item_rate = $this->input->post('item_rate');
+					$item_amount = $this->input->post('item_amount');
+					foreach($item_quantity as $a => $b) {
 						$order_item['sujal_order_id'] = $id;
-						$order_item['item_desc'] = $this->input->post('item_desc_'.$i);
-						$order_item['item_quantity'] = $this->input->post('item_qty_'.$i);
-						$order_item['item_rate'] = $this->input->post('item_rate_'.$i);
-						$order_item['item_amount'] = $this->input->post('item_amount_'.$i);
+						$order_item['item_desc'] = $item_desc[$a];
+						$order_item['item_quantity'] = $item_quantity[$a];
+						$order_item['item_rate'] = $item_rate[$a];
+						$order_item['item_amount'] = $item_amount[$a];
 						$this->db->insert('sujal_order_items', $order_item);
-					}
+					} 
 					$this->session->set_flashdata('success','Order Saved successfully.');
 					redirect('sale_product');
 				}

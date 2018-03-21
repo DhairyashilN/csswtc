@@ -78,12 +78,14 @@ class WTCustomerController extends CI_Controller {
 				$page_data['gstin'] = $this->input->post('cust_gstin');
 				if ($this->db->insert('water_tanks_customers', $page_data)) {
 					$customer_id = $this->db->insert_id();
-					$num = $this->input->post('icnt');
-					for($i=1; $i <= $num ; $i++) {
+					$tank_type = $this->input->post('tank_type');
+					$tank_quantity = $this->input->post('tank_qty');
+					$tank_capacity = $this->input->post('tank_capacity');
+					foreach($tank_quantity as $a => $b){
 						$tanks_data['cust_id'] = $customer_id;
-						$tanks_data['tank_type'] = $this->input->post('tank_type_'.$i);
-						$tanks_data['tank_capacity'] = $this->input->post('tank_capacity_'.$i);
-						$tanks_data['tank_quantity'] = $this->input->post('tank_qty_'.$i);
+						$tanks_data['tank_type'] = $tank_type[$a];
+						$tanks_data['tank_capacity'] = $tank_capacity[$a];
+						$tanks_data['tank_quantity'] = $tank_quantity[$a];
 						$this->db->insert('customers_tanks', $tanks_data);
 					}
 					$amc_data['cust_id'] = $customer_id;
@@ -180,15 +182,16 @@ class WTCustomerController extends CI_Controller {
 				if ($query) {
 					$this->db->where('cust_id', $id);
 					$this->db->delete('customers_tanks');
-					$num = $this->input->post('icnt');
-					for($i=1; $i <= $num ; $i++) {
+					$tank_type = $this->input->post('tank_type');
+					$tank_quantity = $this->input->post('tank_qty');
+					$tank_capacity = $this->input->post('tank_capacity');
+					foreach($tank_quantity as $a => $b){
 						$tanks_data['cust_id'] = $id;
-						$tanks_data['tank_type'] = $this->input->post('tank_type_'.$i);
-						$tanks_data['tank_capacity'] = $this->input->post('tank_capacity_'.$i);
-						$tanks_data['tank_quantity'] = $this->input->post('tank_qty_'.$i);
-						// print_r($tanks_data);
+						$tanks_data['tank_type'] = $tank_type[$a];
+						$tanks_data['tank_capacity'] = $tank_capacity[$a];
+						$tanks_data['tank_quantity'] = $tank_quantity[$a];
 						$this->db->insert('customers_tanks', $tanks_data);
-					}/*die;*/
+					}
 					$this->session->set_flashdata('success','Customer data updated successfully.');
 					redirect('water_tank_cleaning_customers');
 				}

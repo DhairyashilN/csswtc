@@ -98,10 +98,10 @@
 							<tr>
 								<td><input type="checkbox" class="case"></td>
 								<td><input type="text" class="form-control" id="sr_no"></td>
-								<td><input type="text" class="form-control" name="item_desc_1" id="itemdesc_1"></td>
-								<td><input type="text" class="itemrate form-control" name="item_qty_1" id="itemqty_1"></td>
-								<td><input type="text" class="itemrate form-control" name="item_rate_1" id="itemrate_1"></td>
-								<td><input type="text" class="totalLinePrice form-control" name="item_amount_1" id="itemamount_1"></td>
+								<td><input type="text" class="form-control" name="item_desc[]" id="itemdesc_1"></td>
+								<td><input type="text" class="itemrate form-control" name="item_qty[]" id="itemqty_1"></td>
+								<td><input type="text" class="itemrate form-control" name="item_rate[]" id="itemrate_1"></td>
+								<td><input type="text" class="totalLinePrice form-control" name="item_amount[]" id="itemamount_1"></td>
 							</tr>
 						</table>
 						<button type="button" class="btn btn-success btn-add-row btn-sm">+ Add New</button>
@@ -217,7 +217,7 @@
 		});
         var i = 2;
 		$('.btn-add-row').on('click', function(){
-			var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control" name="item_desc_'+i+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="item_qty_'+i+'"></td><td><input type="text" class="itemrate form-control" name="item_rate_'+i+'" id="itemrate_'+i+'"></td><td><input type="text" class="totalLinePrice form-control" id="itemamount_'+i+'" name="item_amount_'+i+'"></td></tr>';
+			var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control" name="item_desc[]'+i+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="item_qty[]'+i+'"></td><td><input type="text" class="itemrate form-control" name="item_rate[]'+i+'" id="itemrate_'+i+'"></td><td><input type="text" class="totalLinePrice form-control" id="itemamount_'+i+'" name="item_amount[]'+i+'"></td></tr>';
 			$('#invoice_items_table').append(row);
 			i++;
 			$('#icnt').val(i-1);

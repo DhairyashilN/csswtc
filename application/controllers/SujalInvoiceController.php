@@ -95,13 +95,16 @@ class SujalInvoiceController extends CI_Controller {
 				$page_data['payment_mode'] = $this->input->post('payment_mode');
 				if ($this->db->insert('sujal_invoices', $page_data)) {
 					$invoice_id = $this->db->insert_id();
-					$num = $this->input->post('icnt');
-					for($i=1; $i <= $num ; $i++) {
+					$item_desc = $this->input->post('item_desc');
+					$item_quantity = $this->input->post('item_qty');
+					$item_rate = $this->input->post('item_rate');
+					$item_amount = $this->input->post('item_amount');
+					foreach($item_quantity as $a => $b) {
 						$invoice_item['sujal_invoice_id'] = $invoice_id;
-						$invoice_item['item_desc'] = $this->input->post('item_desc_'.$i);
-						$invoice_item['item_quantity'] = $this->input->post('item_qty_'.$i);
-						$invoice_item['item_rate'] = $this->input->post('item_rate_'.$i);
-						$invoice_item['item_amount'] = $this->input->post('item_amount_'.$i);
+						$invoice_item['item_desc'] = $item_desc[$a];
+						$invoice_item['item_quantity'] = $item_quantity[$a];
+						$invoice_item['item_rate'] = $item_rate[$a];
+						$invoice_item['item_amount'] = $item_amount[$a];
 						$this->db->insert('sujal_invoice_items', $invoice_item);
 					}
 					$order_data['order_status'] = 'invoice_generated'; 
@@ -177,13 +180,12 @@ class SujalInvoiceController extends CI_Controller {
 				if ($query) {
 					$this->db->where('sujal_invoice_id', $id);
 					$this->db->delete('sujal_invoice_items');
-					$num = $this->input->post('icnt');
-					for($i=1; $i <= $num ; $i++) {
+					foreach($item_quantity as $a => $b) {
 						$invoice_item['sujal_invoice_id'] = $id;
-						$invoice_item['item_desc'] = $this->input->post('item_desc_'.$i);
-						$invoice_item['item_quantity'] = $this->input->post('item_qty_'.$i);
-						$invoice_item['item_rate'] = $this->input->post('item_rate_'.$i);
-						$invoice_item['item_amount'] = $this->input->post('item_amount_'.$i);
+						$invoice_item['item_desc'] = $item_desc[$a];
+						$invoice_item['item_quantity'] = $item_quantity[$a];
+						$invoice_item['item_rate'] = $item_rate[$a];
+						$invoice_item['item_amount'] = $item_amount[$a];
 						$this->db->insert('sujal_invoice_items', $invoice_item);
 					}
 					$this->session->set_flashdata('success','Invoice updated successfully.');

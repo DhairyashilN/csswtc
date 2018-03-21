@@ -103,10 +103,10 @@
 							<tr>
 								<td><input type="checkbox" class="case"></td>
 								<td><input type="text" class="form-control" id="sr_no" value="<?php echo $srcnt++; ?>"></td>
-								<td><input type="text" class="form-control" name="item_desc_<?php echo $itemdesc++; ?>" id="itemdesc_<?php echo $IDitemdesc++; ?>" value="<?php echo $row['item_desc']; ?>"></td>
-								<td><input type="text" class="itemrate form-control" name="item_qty_<?php echo $itemQty++; ?>" id="itemqty_<?php echo $IDitemQty++; ?>" value="<?php echo $row['item_quantity']; ?>"></td>
-								<td><input type="text" class="itemrate form-control" name="item_rate_<?php echo $itemRate++; ?>" id="itemrate_<?php echo $IDitemRate++; ?>" value="<?php echo $row['item_rate']; ?>"></td>
-								<td><input type="text" class="totalLinePrice form-control" name="item_amount_<?php echo $itemAmount++; ?>" id="itemamount_<?php echo $IDitemAmount++; ?>" value="<?php echo $row['item_amount']; ?>"></td>
+								<td><input type="text" class="form-control" name="item_desc[]" id="itemdesc_<?php echo $IDitemdesc++; ?>" value="<?php echo $row['item_desc']; ?>"></td>
+								<td><input type="text" class="itemrate form-control" name="item_qty[]" id="itemqty_<?php echo $IDitemQty++; ?>" value="<?php echo $row['item_quantity']; ?>"></td>
+								<td><input type="text" class="itemrate form-control" name="item_rate[]" id="itemrate_<?php echo $IDitemRate++; ?>" value="<?php echo $row['item_rate']; ?>"></td>
+								<td><input type="text" class="totalLinePrice form-control" name="item_amount[]" id="itemamount_<?php echo $IDitemAmount++; ?>" value="<?php echo $row['item_amount']; ?>"></td>
 							</tr>
 							<?php }} ?>
 						</table>
@@ -223,10 +223,10 @@
 		});
         var i = <?php echo (isset($ArrItems) && !empty($ArrItems)) ? count($ArrItems)+1 : '1' ?>;
 		$('.btn-add-row').on('click', function(){
-			var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control" name="item_desc_'+i+'"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="item_qty_'+i+'"></td><td><input type="text" class="itemrate form-control" name="item_rate_'+i+'" id="itemrate_'+i+'"></td><td><input type="text" class="totalLinePrice form-control" id="itemamount_'+i+'" name="item_amount_'+i+'"></td></tr>';
+			var row = '<tr><td><input type="checkbox" class="case"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control" name="item_desc[]"></td><td><input type="text" class=" itemrate form-control" id="itemqty_'+i+'" name="item_qty[]"></td><td><input type="text" class="itemrate form-control" name="item_rate[]" id="itemrate_'+i+'"></td><td><input type="text" class="totalLinePrice form-control" id="itemamount_'+i+'" name="item_amount[]"></td></tr>';
 			$('#invoice_items_table').append(row);
 			i++;
-			$('#icnt').val(i-1);
+			$('#icnt').val($('#tanks_info_table tr').length-1);
 		});
 		$("#invoice_items_table").on("keyup", ".itemrate", function () {
 			id = $(this).attr('id').split("_");
@@ -248,7 +248,7 @@
 			$('.totalLinePrice').each(function(){
 				items++;
 			});
-			$('#icnt').val(items);
+			$('#icnt').val($('#tanks_info_table tr').length-1);
 			calculateTotal();
 		});
 		$('#tax_rate').on('keyup', function(){
