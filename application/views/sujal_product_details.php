@@ -44,6 +44,10 @@
 									<th>Product Price  <i class="fa fa-inr"></i></th>
 									<td><?php echo (isset($ObjProduct->price) && !empty($ObjProduct->price)) ? round($ObjProduct->price, 2) : ''; ?></td>
 								</tr>
+								<tr>
+									<th>Product HSN Code </th>
+									<td><?php echo (isset($ObjProduct->hsn_code) && !empty($ObjProduct->hsn_code)) ? $ObjProduct->hsn_code : ''; ?></td>
+								</tr>
 							</table>
 						</div>
 					</div>

@@ -345,7 +345,7 @@
 					total = subTotal;
 				}
 				$('#order_net_amount').val(total.toFixed(2) );
-			}
-		</script>
-	</body>
-	</html>
+		}
+	</script>
+</body>
+</html>

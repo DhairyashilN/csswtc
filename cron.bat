@@ -1,1 +1,0 @@
-"E:\xampp\php\php.exe" -f "E:/xampp/htdocs/chintamani/test.php"

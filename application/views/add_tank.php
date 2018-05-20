@@ -60,13 +60,13 @@
 						<div class="form-group">
 							<label for="inputName" class="col-sm-2 control-label">Tank Capacity</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="tank_capacity" name="tank_capacity" required="" placeholder="Tank Capacity" value="<?php echo (isset($ObjTank) && !empty($ObjTank)) ? $ObjTank->capacity : ''; ?>">
+								<input type="text" class="form-control" id="tank_capacity" name="tank_capacity" required="" placeholder="Tank Capacity" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" value="<?php echo (isset($ObjTank) && !empty($ObjTank)) ? $ObjTank->capacity : ''; ?>">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputName" class="col-sm-2 control-label">Tank Cleaning Charges</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="tank_cleaning_charges" name="tank_cleaning_charges" required="" placeholder="Tank Cleaning Charges" value="<?php echo (isset($ObjTank) && !empty($ObjTank)) ? $ObjTank->charges : ''; ?>">
+								<input type="text" class="form-control" id="tank_cleaning_charges" name="tank_cleaning_charges" onkeyup="this.value=this.value.replace(/[^\d,]/g,'')" required="" placeholder="Tank Cleaning Charges" value="<?php echo (isset($ObjTank) && !empty($ObjTank)) ? $ObjTank->charges : ''; ?>">
 							</div>
 						</div>
 					</div>

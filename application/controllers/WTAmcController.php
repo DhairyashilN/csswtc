@@ -48,14 +48,14 @@ class WTAmcController extends CI_Controller {
 			redirect(base_url());
 		} else {
 			// echo '<pre/>'; print_r($_POST);die;
-			if (!empty($this->input->post('amc_type1')) && ($this->input->post('amc_type1') == 1)) {
+			if (($this->input->post('amc_type1')!='') && ($this->input->post('amc_type1') == 1)) {
 				$amc_item['amc_id'] = $this->input->post('amc_id');	
 				$amc_item['amc_date'] = $this->input->post('amc_date_1');	
 				$amc_item['amc_reminder_date'] = $this->input->post('amc_rem_date_1');	
 				$amc_item['next_amc_date'] = $this->input->post('next_amc_date_1');
 				$amc_item['amc_note'] = $this->input->post('amc_note_1');
 				$this->db->insert('water_tanks_amc_items', $amc_item);	
-			} if (!empty($this->input->post('amc_type2')) && ($this->input->post('amc_type2') == 2)) {
+			} if (($this->input->post('amc_type2')!='') && ($this->input->post('amc_type2') == 2)) {
 				for($i=1; $i<=2; $i++) {
 					$amc_item['amc_id'] = $this->input->post('amc_id');	
 					$amc_item['amc_date'] = $this->input->post('amc_date1_'.$i);	
@@ -64,7 +64,7 @@ class WTAmcController extends CI_Controller {
 					$amc_item['amc_note'] = $this->input->post('amc_note1_'.$i);
 					$this->db->insert('water_tanks_amc_items', $amc_item);
 				}	
-			} if (!empty($this->input->post('amc_type3')) && ($this->input->post('amc_type3') == 3)) {
+			} if (($this->input->post('amc_type3')!='') && ($this->input->post('amc_type3') == 3)) {
 				for($i=1; $i<=3; $i++) {
 					$amc_item['amc_id'] = $this->input->post('amc_id');	
 					$amc_item['amc_date'] = $this->input->post('amc_date2_'.$i);	
@@ -73,7 +73,7 @@ class WTAmcController extends CI_Controller {
 					$amc_item['amc_note'] = $this->input->post('amc_note2_'.$i);
 					$this->db->insert('water_tanks_amc_items', $amc_item);
 				}	
-			} if (!empty($this->input->post('amc_type4')) && ($this->input->post('amc_type4') == 4)) {
+			} if (($this->input->post('amc_type4')!='') && ($this->input->post('amc_type4') == 4)) {
 				for($i=1; $i<=4; $i++) {
 					$amc_item['amc_id'] = $this->input->post('amc_id');	
 					$amc_item['amc_date'] = $this->input->post('amc_date3_'.$i);	

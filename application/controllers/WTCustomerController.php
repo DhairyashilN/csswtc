@@ -92,14 +92,14 @@ class WTCustomerController extends CI_Controller {
 					$amc_data['customer_name'] = $this->input->post('cust_name');
 					if ($this->db->insert('water_tanks_amcs', $amc_data)) {
 						$amc_id = $this->db->insert_id();
-						if (!empty($this->input->post('amc_type1')) && ($this->input->post('amc_type1') == 1)) {
+						if (($this->input->post('amc_type1')!='') && ($this->input->post('amc_type1') == 1)) {
 							$amc_item['amc_id'] = $amc_id;	
 							$amc_item['amc_date'] = $this->input->post('amc_date_1');	
 							$amc_item['amc_reminder_date'] = $this->input->post('amc_rem_date_1');	
 							$amc_item['next_amc_date'] = $this->input->post('next_amc_date_1');
 							$amc_item['amc_note'] = $this->input->post('amc_note_1');
 							$this->db->insert('water_tanks_amc_items', $amc_item);	
-						} if (!empty($this->input->post('amc_type2')) && ($this->input->post('amc_type2') == 2)) {
+						} if (($this->input->post('amc_type2')!='') && ($this->input->post('amc_type2') == 2)) {
 							for($i=1; $i<=2; $i++) {
 								$amc_item['amc_id'] = $amc_id;	
 								$amc_item['amc_date'] = $this->input->post('amc_date1_'.$i);	
@@ -108,7 +108,7 @@ class WTCustomerController extends CI_Controller {
 								$amc_item['amc_note'] = $this->input->post('amc_note1_'.$i);
 								$this->db->insert('water_tanks_amc_items', $amc_item);
 							}	
-						} if (!empty($this->input->post('amc_type3')) && ($this->input->post('amc_type3') == 3)) {
+						} if (($this->input->post('amc_type3')!='') && ($this->input->post('amc_type3') == 3)) {
 							for($i=1; $i<=3; $i++) {
 								$amc_item['amc_id'] = $amc_id;	
 								$amc_item['amc_date'] = $this->input->post('amc_date2_'.$i);	
@@ -117,7 +117,7 @@ class WTCustomerController extends CI_Controller {
 								$amc_item['amc_note'] = $this->input->post('amc_note2_'.$i);
 								$this->db->insert('water_tanks_amc_items', $amc_item);
 							}	
-						} if (!empty($this->input->post('amc_type4')) && ($this->input->post('amc_type4') == 4)) {
+						} if (($this->input->post('amc_type4')!='') && ($this->input->post('amc_type4') == 4)) {
 							for($i=1; $i<=4; $i++) {
 								$amc_item['amc_id'] = $amc_id;	
 								$amc_item['amc_date'] = $this->input->post('amc_date3_'.$i);	
@@ -234,7 +234,17 @@ class WTCustomerController extends CI_Controller {
 				$query = $this->db->update('water_tanks_customers', ['deleted' => 1]);
 				if ($query) {
 					$this->db->where('cust_id', $id);
-					$this->db->update('water_tanks_amcs', ['deleted' => 1]);
+					$query1 = $this->db->update('water_tanks_amcs', ['deleted' => 1]);
+					if ($query1) {
+						$this->db->select('id');
+						$this->db->from('water_tanks_amcs');
+						$this->db->where('cust_id', $id);
+						$query2 = $this->db->get()->row();
+						if ($query2) {
+							$this->db->where('amc_id', $query2->id);
+							$this->db->update('water_tanks_amc_items', ['deleted' => 1]);		
+						}
+					}
 					$this->session->set_flashdata('success','Water tank customer deleted successfully.');
 					redirect('water_tank_cleaning_customers');
 				}

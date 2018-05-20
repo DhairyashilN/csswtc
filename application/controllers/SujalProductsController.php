@@ -8,6 +8,7 @@ class SujalProductsController extends CI_Controller {
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 		$this->output->set_header('Pragma: no-cache');
 	}
+	
 	public function index() {
 		if ($this->session->userdata('login')!=1){
 			redirect(base_url());

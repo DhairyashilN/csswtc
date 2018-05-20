@@ -30,7 +30,8 @@ class Cron extends CI_Controller {
 						$data['customer_name'] = $arow['customer_name'];  
 						$data['amc_date'] = $row['next_amc_date'];
 						$data['amc_reminder_date'] = $row["amc_reminder_date"];
-						$this->db->insert('notifications_tbl', $data);  
+						$this->db->insert('notifications_tbl', $data); 
+						echo 'Sujal AMC reminder notification added.'; 
 					}
 				} else {
 					echo 'Date Not Matched<br/>';
@@ -67,9 +68,10 @@ class Cron extends CI_Controller {
 						}
 						$data['amc_date'] = $row['next_amc_date'];
 						$data['amc_reminder_date'] = $row["amc_reminder_date"];
-						$this->db->insert('notifications_tbl', $data);  
+						$this->db->insert('notifications_tbl', $data); 
+						echo 'Other Customer AMC reminder notification added.'; 
 					}
-				} else{
+				} else {
 					echo 'Date Not Matched<br/>';
 				}
 			}
@@ -104,9 +106,10 @@ class Cron extends CI_Controller {
 						}
 						$data['amc_date'] = $row['next_amc_date'];
 						$data['amc_reminder_date'] = $row["amc_reminder_date"];
-						$this->db->insert('notifications_tbl', $data);  
+						$this->db->insert('notifications_tbl', $data);
+						echo 'Water tank AMC reminder notification added.';  
 					}
-				} else{
+				} else {
 					echo 'Date Not Matched<br/>';
 				}
 			}

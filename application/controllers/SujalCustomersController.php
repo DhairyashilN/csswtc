@@ -96,7 +96,21 @@ class SujalCustomersController extends CI_Controller {
 		} else {
 			if (isset($id) && !empty($id)) {
 				$this->db->where('id', $id);
-				$this->db->update('sujal_customers', ['deleted' => 1]);
+				$query = $this->db->update('sujal_customers', ['deleted' => 1]);
+				if ($query) {
+					$this->db->where('cust_id', $id);
+					$query1 = $this->db->update('sujal_amc', ['deleted' => 1]);	
+					if ($query1) {
+						$this->db->select('id');
+						$this->db->from('sujal_amc');
+						$this->db->where('cust_id', $id);
+						$query2 = $this->db->get()->row();
+						if ($query2) {
+							$this->db->where('sujal_amc_id', $query2->id);
+							$this->db->update('sujal_amc_items', ['deleted' => 1]);		
+						}
+					}
+				}
 				$this->session->set_flashdata('success','Customer Deleted successfully.');
 				redirect('sujal_customers');
 			}
